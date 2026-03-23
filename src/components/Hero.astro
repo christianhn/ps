@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import ofiImg from "../assets/img/ofi-ia.png";
+---
+
+<section class="hero-section">
+  <p class="hero-eyebrow">Psicología Clínica &amp; Bienestar · Zaragoza</p>
+  <h1 class="hero-title">
+    Psicología<br />adaptada <em>a ti.</em>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-sub">
+      Un espacio de terapia cercano y centrado en ti. Acompañándote en tu
+      proceso de cambio, sanación y crecimiento personal.
+    </p>
+    <div class="hero-actions">
+      <a href="#contacto" class="btn-dark">Reserva tu Cita</a>
+      <a href="#sobre-mi" class="btn-ghost">Sobre mí</a>
+    </div>
+  </div>
+</section>
+
+<div class="hero-img-section">
+  <div class="hero-img-card">
+    <div class="hero-img-bg">
+      <!-- Hero image -->
+      <Image
+        src={ofiImg}
+        alt="Consulta presencial"
+        style="width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;"
+      />
+      <div
+        style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(26, 25, 22, 0.95) 0%, rgba(26, 25, 22, 0.166) 45%); pointer-events: none;"
+      >
+      </div>
+    </div>
+    <div class="hero-img-caption">
+      <div class="caption-bar"></div>
+      <p class="caption-text">
+        Consulta presencial en Zaragoza, Camino de las Torres 27 · Sesiones
+        online disponibles.
+      </p>
+    </div>
+  </div>
+</div>

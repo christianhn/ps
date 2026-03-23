@@ -1,0 +1,234 @@
+---
+import { Image } from "astro:assets";
+import { servicesData as services } from "../data/services";
+---
+<section id="servicios" class="services-section">
+  <div class="services-top reveal">
+    <h2 class="services-title">Servicios especializados.</h2>
+    <p class="services-sub">Atención adaptada a tus necesidades a través de diferentes modalidades terapéuticas.</p>
+  </div>
+
+<services-tabs>
+  <div class="services-joby">
+    <!-- Left: list -->
+    <ul class="services-list reveal" role="tablist">
+      {services.map((s, i) => (
+        <li role="tab" aria-selected={i === 0 ? "true" : "false"} aria-controls={`service-panel-${i}`} class={i === 0 ? 'active' : ''} tabindex="0">{s.title}</li>
+      ))}
+    </ul>
+
+    <!-- Center: image -->
+    <div class="service-img-wrap reveal reveal-delay-1">
+      {services.map((s, i) => (
+        <div class={`service-img-panel${i === 0 ? ' active' : ''}`}
+             style={`position:${i === 0 ? 'relative' : 'absolute'};inset:0;width:100%;height:100%;display:${i === 0 ? 'flex' : 'none'};align-items:center;justify-content:center;background:${s.bg};`}>
+          <Image src={s.img} alt={s.title} style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;" loading={i === 0 ? 'eager' : 'lazy'} />
+          <span class="fig-label">Fig. {i + 1} — {s.title}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Right: description -->
+    <div class="service-desc-col reveal reveal-delay-2">
+      {services.map((s, i) => (
+        <div id={`service-panel-${i}`} role="tabpanel" tabindex="0" class={`service-panel${i === 0 ? ' active' : ''}`}>
+          <span class="svc-num">{s.num} / {s.title}</span>
+          <div class="svc-title">{s.title}.</div>
+          <p class="svc-body">{s.body}</p>
+          <a href="#contacto" data-service={s.svc} class="text-link" style="margin-top:1.5rem; display:inline-flex;">Reservar sesión →</a>
+        </div>
+      ))}
+    </div>
+  </services-tabs>
+</section>
+
+<style>
+/* ── SERVICES ── */
+.services-section {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 6rem 3rem;
+}
+
+.services-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 2.5rem;
+  border-bottom: 0.5px solid var(--pill-border);
+  margin-bottom: 3.75rem;
+}
+
+.services-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.25rem, 4vw, 3.375rem);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.services-sub {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--ink-mid);
+  max-width: 18.75rem;
+  text-align: right;
+  line-height: 1.7;
+}
+
+.services-joby {
+  display: grid;
+  grid-template-columns: 12.5rem 1fr 16.25rem;
+  gap: 3rem;
+  align-items: start;
+}
+
+.services-list { list-style: none; }
+.services-list li {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--ink-light);
+  padding: 0.75rem 0;
+  border-bottom: 0.5px solid var(--pill-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  transition: color 0.2s;
+}
+.services-list li::before {
+  content: '';
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.services-list li.active { color: var(--ink); font-weight: 500; }
+.services-list li.active::before { background: var(--ink); }
+.services-list li:hover:not(.active) { color: var(--ink-mid); }
+
+.service-img-wrap {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  position: relative;
+  max-height: 34rem;
+  width: 100%;
+}
+
+.service-img-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Service panels */
+.service-panel { display: none; }
+.service-panel.active { display: block; }
+
+.svc-num {
+  font-size: 0.6875rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  display: block;
+  margin-bottom: 1.125rem;
+}
+
+.svc-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.svc-body {
+  font-size: 0.875rem;
+  font-weight: 300;
+  color: var(--ink-mid);
+  line-height: 1.85;
+}
+
+@media (max-width: 64rem) {
+  .services-joby { grid-template-columns: 1fr; gap: 2rem; }
+  .services-list {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.75rem;
+    padding-bottom: 1rem;
+    scrollbar-width: none;
+  }
+  .services-list::-webkit-scrollbar { display: none; }
+  .services-list li {
+    flex-shrink: 0;
+    white-space: nowrap;
+    border-bottom: none;
+    padding: 0.625rem 1.25rem;
+    border: 0.5px solid var(--pill-border);
+    border-radius: 3.125rem;
+  }
+  .services-list li.active {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .services-list li::before { display: none; }
+  .services-top { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .services-sub { text-align: left; }
+}
+</style>
+
+<script>
+  class ServicesTabs extends HTMLElement {
+    constructor() {
+      super();
+      const tabs = this.querySelectorAll('.services-list li');
+      const panels = this.querySelectorAll('.service-panel');
+      const images = this.querySelectorAll('.service-img-panel');
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(p => p.classList.remove('active'));
+          
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+          
+          const panel = panels[index];
+          if (panel) panel.classList.add('active');
+
+          images.forEach((imgEl) => {
+            imgEl.classList.remove('active');
+            (imgEl as HTMLElement).style.display = 'none';
+            (imgEl as HTMLElement).style.position = 'absolute';
+          });
+          
+          const activeImg = images[index] as HTMLElement;
+          if (activeImg) {
+            activeImg.classList.add('active');
+            activeImg.style.display = 'flex';
+            activeImg.style.position = 'relative';
+          }
+        });
+        
+        tab.addEventListener('keydown', (e) => {
+          if ((e as KeyboardEvent).key === 'Enter' || (e as KeyboardEvent).key === ' ') {
+            e.preventDefault();
+            (tab as HTMLElement).click();
+          }
+        });
+      });
+    }
+  }
+
+  customElements.define('services-tabs', ServicesTabs);
+</script>

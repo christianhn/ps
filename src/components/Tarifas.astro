@@ -1,0 +1,366 @@
+---
+
+---
+
+<section id="tarifas" class="tarifas-section">
+  <div class="tarifas-inner">
+    <div class="tarifas-header reveal">
+      <h2 class="tarifas-title">Tarifas.</h2>
+      <p class="tarifas-sub">
+        Transparencia total. Sin letras pequeñas. Primera consulta de valoración
+        gratuita.
+      </p>
+    </div>
+
+    <div class="tarifas-grid">
+      <!-- Individual -->
+      <div class="tarifa-card reveal">
+        <div class="tarifa-tipo">Individual</div>
+        <div class="tarifa-nombre">Adultos y Adolescentes</div>
+        <div class="tarifa-precio">
+          <span class="tarifa-eur">€</span>
+          <span>60</span>
+        </div>
+        <p class="tarifa-duracion">Sesión única · Presencial u online</p>
+        <hr class="tarifa-rule" />
+        <ul class="tarifa-features">
+          <li><strong>Bono 4 sesiones:</strong> 200 € (Ahorras 40 €)</li>
+          <li><strong>Bono 8 sesiones:</strong> 380 € (Ahorras 100 €)</li>
+          <li>Primera consulta de valoración incluida</li>
+          <li>Metodología basada en evidencia científica</li>
+        </ul>
+        <a href="#contacto" data-service="individual" class="tarifa-btn"
+          >Reservar sesión</a
+        >
+      </div>
+
+      <!-- Pareja · Familia -->
+      <div class="tarifa-card featured reveal reveal-delay-1">
+        <div class="tarifa-badge">Más popular</div>
+        <div class="tarifa-tipo">Pareja · Familia</div>
+        <div class="tarifa-nombre">Sesión conjunta</div>
+        <div class="tarifa-precio">
+          <span class="tarifa-eur">€</span>
+          <span>90</span>
+        </div>
+        <p class="tarifa-duracion">85 minutos · Presencial u online</p>
+        <hr class="tarifa-rule" />
+        <ul class="tarifa-features">
+          <li><strong>Bono 4 sesiones:</strong> 280 € (Ahorras 80 €)</li>
+          <li><strong>Bono 8 sesiones:</strong> 540 € (Ahorras 180 €)</li>
+          <li>Enfoque sistémico y colaborativo</li>
+          <li>Herramientas de comunicación prácticas</li>
+        </ul>
+        <a href="#contacto" data-service="pareja" class="tarifa-btn"
+          >Reservar sesión</a
+        >
+      </div>
+
+      <!-- Técnicas de estudio -->
+      <div class="tarifa-card reveal reveal-delay-2">
+        <div class="tarifa-tipo">Estudiantes</div>
+        <div class="tarifa-nombre">Técnicas de estudio</div>
+        <div class="tarifa-precio">
+          <span class="tarifa-eur">€</span>
+          <span>45</span>
+        </div>
+        <p class="tarifa-duracion">Sesión única · Presencial u online</p>
+        <hr class="tarifa-rule" />
+        <ul class="tarifa-features">
+          <li><strong>Bono 4 sesiones:</strong> 150 € (Ahorras 30 €)</li>
+          <li><strong>Bono 8 sesiones:</strong> 285 € (Ahorras 75 €)</li>
+          <li>Organización y planificación del tiempo</li>
+          <li>Mejora de la memorización y atención</li>
+        </ul>
+        <a href="#contacto" data-service="estudio" class="tarifa-btn"
+          >Reservar sesión</a
+        >
+      </div>
+    </div>
+
+    <div class="tarifas-condiciones reveal reveal-delay-2">
+      <h3 class="condiciones-title">Condiciones generales</h3>
+      <ul class="condiciones-list">
+        <li>
+          Los descuentos por convenio se aplican solamente a sesiones únicas.
+        </li>
+        <li>Los bonos se abonan íntegramente en la primera sesión.</li>
+        <li>
+          La validez de los bonos es de 6 meses (4 sesiones) y 12 meses (8
+          sesiones).
+        </li>
+        <li>
+          Las cancelaciones deben realizarse con un mínimo de 24h de antelación.
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ── TARIFAS ── */
+  .tarifas-section {
+    background: var(--cream-mid);
+    padding: 6rem 3rem;
+  }
+
+  .tarifas-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+  }
+
+  .tarifas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 0.5px solid var(--pill-border);
+  }
+
+  .tarifas-title {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(2.25rem, 4vw, 3.375rem);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+
+  .tarifas-sub {
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    max-width: 17.5rem;
+    text-align: right;
+    line-height: 1.7;
+  }
+
+  .tarifas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .tarifa-card {
+    background: var(--cream);
+    border-radius: 1.25rem;
+    padding: 2.25rem 2rem;
+    border: 0.5px solid var(--pill-border);
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s;
+  }
+  .tarifa-card:hover {
+    transform: translateY(-0.25rem);
+    box-shadow: 0 1.25rem 3rem rgba(26, 25, 22, 0.07);
+  }
+
+  .tarifa-card.featured {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .tarifa-badge {
+    display: inline-block;
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sage);
+    background: var(--sage-pale);
+    padding: 0.25rem 0.75rem;
+    border-radius: 3.125rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .tarifa-card.featured .tarifa-badge {
+    color: var(--ink);
+    background: var(--sage-light);
+  }
+
+  .tarifa-tipo {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .tarifa-card.featured .tarifa-tipo {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .tarifa-nombre {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.375rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+    line-height: 1.2;
+  }
+  .tarifa-card.featured .tarifa-nombre {
+    color: white;
+  }
+
+  .tarifa-precio {
+    font-family: "DM Serif Display", serif;
+    font-size: 3.25rem;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  .tarifa-card.featured .tarifa-precio {
+    color: white;
+  }
+
+  .tarifa-eur {
+    font-size: 1.375rem;
+    padding-top: 0.5rem;
+    font-family: "DM Serif Display", serif;
+  }
+
+  .tarifa-duracion {
+    font-size: 0.8125rem;
+    color: var(--ink-light);
+    font-weight: 300;
+    margin: 0.625rem 0 1.5rem;
+  }
+  .tarifa-card.featured .tarifa-duracion {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .tarifa-rule {
+    border: none;
+    border-top: 0.5px solid var(--pill-border);
+    margin: 0 0 1.5rem;
+  }
+  .tarifa-card.featured .tarifa-rule {
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .tarifa-features {
+    list-style: none;
+    margin-bottom: 1.75rem;
+  }
+  .tarifa-features li {
+    font-size: 0.8125rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    padding: 0.5rem 0;
+    display: flex;
+    gap: 0.625rem;
+    align-items: flex-start;
+  }
+  .tarifa-card.featured .tarifa-features li {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .tarifa-features li::before {
+    content: "";
+    width: 0.3125rem;
+    height: 0.3125rem;
+    border-radius: 50%;
+    background: var(--sage);
+    flex-shrink: 0;
+    margin-top: 0.375rem;
+  }
+  .tarifa-card.featured .tarifa-features li::before {
+    background: var(--sage-light);
+  }
+
+  .tarifa-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8125rem;
+    border-radius: 3.125rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: "DM Sans", sans-serif;
+    border: 0.5px solid var(--pill-border);
+    background: transparent;
+    color: var(--ink);
+    transition:
+      background 0.2s,
+      color 0.2s;
+    text-align: center;
+  }
+  .tarifa-btn:hover {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .tarifa-card.featured .tarifa-btn {
+    background: white;
+    color: var(--ink);
+    border-color: white;
+  }
+  .tarifa-card.featured .tarifa-btn:hover {
+    opacity: 0.88;
+  }
+
+  .tarifas-condiciones {
+    margin-top: 3.5rem;
+    padding: 2rem 2.5rem;
+    background: white;
+    border-radius: 1.25rem;
+    border: 0.5px solid var(--pill-border);
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .condiciones-title {
+    font-family: "DM Serif Display", serif;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .condiciones-list {
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  .condiciones-list li {
+    position: relative;
+    padding-left: 1.125rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .condiciones-list li:last-child {
+    margin-bottom: 0;
+  }
+
+  .condiciones-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--ink-light);
+  }
+
+  @media (max-width: 64rem) {
+    .tarifas-grid {
+      grid-template-columns: 1fr;
+    }
+    .tarifas-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .tarifas-sub {
+      text-align: left;
+    }
+    .tarifas-condiciones {
+      padding: 1.5rem;
+    }
+  }
+</style>

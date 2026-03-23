@@ -1,0 +1,376 @@
+---
+import { Image } from "astro:assets";
+import profileImg from "../assets/img/profile.avif";
+import imgOnline from "../assets/img/img_terapia_online_1774217959139.png";
+---
+
+<section id="sobre-mi" class="sobre-section">
+  <!-- Statement -->
+  <div class="statement-section sobre-statement">
+    <h2 class="statement-title reveal">
+      La salud mental no es un lujo.<br />Es el punto de <em>partida.</em>
+    </h2>
+  </div>
+
+  <!-- Split: Foto + texto -->
+  <div class="split-section sobre-split">
+    <div
+      class="split-img sobre-img-split"
+    >
+      <div class="split-img-inner">
+        <!-- Portrait image -->
+        <Image
+          src={profileImg}
+          alt="Mario Catena, Psicólogo"
+          class="sobre-portrait"
+        />
+      </div>
+    </div>
+
+    <div class="split-content reveal">
+      <p class="split-eyebrow eyebrow">Sobre mí</p>
+      <h2 class="split-title">Psicología que va<br />a la <em>raíz.</em></h2>
+      <p class="split-body">
+        Soy Mario, psicólogo general sanitario, amante de los acertijos,
+        acariciador de perros y tarareador profesional.
+      </p>
+      <p class="split-body">
+        En consulta me especializo en terapias contextuales basadas en la
+        evidencia, con un toque integrador.
+      </p>
+      <p class="split-body">
+        ¿Y qué significa esto? Resumidamente, apuesto por lo que más se adapte a
+        ti en cada momento de tu proceso.
+      </p>
+      <p class="split-body">
+        Mi objetivo es acompañarte en esta etapa, brindándote herramientas y un
+        ambiente donde te sientas segurx y libre para afrontar tus dificultades.
+      </p>
+    </div>
+  </div>
+
+  <!-- Nueva Sección: Formación (Aislada de la columna) -->
+  <div class="formacion-section">
+    <div class="formacion-header reveal">
+      <p class="split-eyebrow eyebrow">Mi Experiencia</p>
+      <h2 class="split-title formacion-title">
+        Formación <em>Profesional.</em>
+      </h2>
+    </div>
+
+    <div class="formacion-grid reveal">
+      <!-- UNED -->
+      <div class="formacion-card">
+        <p class="eyebrow card-subtitle">
+          Universidad Nacional de Educación a Distancia
+        </p>
+        <h3 class="split-title card-title">
+          Grado en Psicología
+        </h3>
+        <p class="split-body card-body">
+          Menciones en Intervención Clínica en Trastornos Mentales y del
+          Comportamiento y Psicología de la Salud.
+        </p>
+      </div>
+
+      <!-- UEV -->
+      <div class="formacion-card">
+        <p class="eyebrow card-subtitle">
+          Universidad Europea de Valencia
+        </p>
+        <h3 class="split-title card-title">
+          Máster Universitario
+        </h3>
+        <p class="split-body card-body">
+          Psicología General Sanitaria.
+        </p>
+      </div>
+
+      <!-- ISIAS -->
+      <div class="formacion-card full-width">
+        <p class="eyebrow card-subtitle">
+          Instituto Superior de Intervención y Acción Social
+        </p>
+        <ul class="formicion-list-vertical">
+          <li>
+            <h3 class="split-title li-title">
+              Experto en Psicoterapia
+            </h3>
+            <p class="split-body li-body">
+              En Infancia y Adolescencia.
+            </p>
+          </li>
+          <li>
+            <h3 class="split-title li-title">
+              Experto en T.E.A
+            </h3>
+            <p class="split-body li-body">
+              Diagnóstico, intervención e inclusión social del Trastorno del
+              Espectro Autista.
+            </p>
+          </li>
+          <li>
+            <h3 class="split-title li-title">
+              Educación y Gestión Emocional
+            </h3>
+            <p class="split-body li-body">
+              Formación en Educación Emocional y Gestión Emocional en la
+              Infancia.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- AEPS -->
+      <div class="formacion-card full-width">
+        <p class="eyebrow card-subtitle">
+          Asociación Española de Psicología Sanitaria
+        </p>
+        <ul class="formacion-list-grid">
+          <li>Terapia de Aceptación y Compromiso ACT</li>
+          <li>Terapia Dialéctico-Conductual DBT</li>
+          <li>Intervención en Duelo</li>
+          <li>Tratamiento psicológico del dolor crónico</li>
+          <li>Terapia de Pareja Breve Estratégica</li>
+          <li>Adicción a las tecnologías</li>
+          <li>PAS. Personas altamente sensibles</li>
+          <li>Apego adulto: Modelo PARCUVE</li>
+        </ul>
+      </div>
+
+      <!-- Otras formaciones -->
+      <div class="formacion-card full-width">
+        <p class="eyebrow card-subtitle">
+          Otras formaciones
+        </p>
+        <div class="otras-grid">
+          <div>
+            <h3 class="split-title sub-card-title">
+              Modelo IFS
+            </h3>
+            <p class="split-body card-body">
+              Cómo trabajar las partes y reparar el apego. COPPA.
+            </p>
+          </div>
+          <div>
+            <h3 class="split-title sub-card-title">
+              Interpretación de la personalidad
+            </h3>
+            <p class="split-body card-body">
+              A través del dibujo y de la grafología. COPPA.
+            </p>
+          </div>
+          <div>
+            <h3 class="split-title sub-card-title">
+              Técnicas de estudio y soft skills
+            </h3>
+            <p class="split-body card-body">
+              Memorización avanzada SL.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formacion-footer reveal">
+      <p class="split-body footer-text">
+        Psicólogo Colegiado Nº Z-4567 <br /> Col·legi Oficial de Psicologia d'Aragó
+      </p>
+    </div>
+  </div>
+
+  <!-- Split: Online (reversed) -->
+  <div class="split-section reverse sobre-split-online">
+    <div class="split-content reveal">
+      <p class="split-eyebrow eyebrow">Terapia Online</p>
+      <h2 class="split-title">La misma calidad,<br />desde <em>casa.</em></h2>
+      <p class="split-body">
+        Las sesiones online ofrecen la misma profundidad terapéutica desde la
+        comodidad y privacidad de tu propio espacio. Sin desplazamientos, sin
+        barreras geográficas.
+      </p>
+      <p class="split-body">
+        Disponible para toda España. Plataforma segura, cifrada y 100%
+        confidencial.
+      </p>
+      <a
+        href="#contacto"
+        class="text-link online-link"
+        >Reservar sesión online →</a
+      >
+    </div>
+
+    <div
+      class="split-img online-img-split"
+    >
+      <div class="split-img-inner">
+        <Image
+          src={imgOnline}
+          alt="Sesión Online Segura"
+          class="sobre-portrait"
+        />
+      </div>
+      <span class="fig-label">Fig. 2 — Sesión online segura</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .sobre-statement {
+    padding-bottom: 5rem !important;
+  }
+  
+  .sobre-split {
+    padding-bottom: 5rem !important;
+    max-width: 100% !important;
+  }
+
+  .sobre-img-split {
+    background: linear-gradient(145deg, #C4CCBE 0%, #D4DCD0 50%, #B4C0AE 100%) !important;
+  }
+
+  .sobre-split-online {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .sobre-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .formacion-section {
+    padding: 2.5rem 1.25rem 6.25rem;
+    max-width: 68.75rem;
+    margin: 0 auto;
+  }
+
+  .formacion-header {
+    text-align: center;
+    margin-bottom: 4.5rem;
+  }
+
+  .formacion-title {
+    margin-top: 0.5rem;
+  }
+
+  .formacion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 3.5rem 4rem;
+    text-align: left;
+  }
+
+  .card-subtitle {
+    margin-bottom: 1rem;
+    color: var(--sage);
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .formacion-card {
+    padding-top: 1.5rem;
+    border-top: 1px solid #C4CCBE;
+  }
+
+  .formacion-card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .card-subtitle {
+    margin-bottom: 1rem;
+    color: var(--sage);
+  }
+
+  .card-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    font-style: normal;
+    line-height: 1.2;
+  }
+
+  .card-body {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .formicion-list-vertical {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .li-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+    font-style: normal;
+    line-height: 1.2;
+  }
+
+  .li-body {
+    font-size: 0.95rem;
+    margin: 0;
+  }
+
+  .formacion-list-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
+    gap: 1rem 2rem;
+  }
+
+  .formacion-list-grid li {
+    font-size: 0.95rem;
+    margin: 0;
+    position: relative;
+    padding-left: 1rem;
+    color: var(--ink-mid);
+    line-height: 1.85;
+    font-weight: 300;
+  }
+
+  .formacion-list-grid li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+  }
+
+  .otras-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
+    gap: 2rem 3rem;
+  }
+
+  .sub-card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-style: normal;
+    line-height: 1.2;
+  }
+
+  .formacion-footer {
+    margin-top: 5rem;
+    text-align: center;
+  }
+
+  .footer-text {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .online-link {
+    margin-top: 1.75rem;
+    display: inline-flex;
+  }
+
+  .online-img-split {
+    background: linear-gradient(145deg, #B4C4C8 0%, #C8D8DC 50%, #A4B4B8 100%) !important;
+  }
+</style>

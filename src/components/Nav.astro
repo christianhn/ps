@@ -1,0 +1,258 @@
+---
+
+---
+
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <div class="nav-inner-top">
+      <a href="/" class="nav-logo">Mario Catena</a>
+      <button
+        class="mobile-menu-btn"
+        aria-label="Abrir menú"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <line class="line-top" x1="4" y1="8" x2="20" y2="8"></line>
+          <line class="line-bot" x1="4" y1="16" x2="20" y2="16"></line>
+        </svg>
+      </button>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#ayuda">Cómo puedo ayudarte</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#tarifas">Tarifas</a></li>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#contacto" class="btn-dark">Pedir Cita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<script>
+  const nav = document.querySelector(".nav-inner") as HTMLElement;
+  const darkElements = document.querySelectorAll(
+    ".ayuda-section, .stats-section, .cta-card",
+  );
+
+  if (nav && darkElements.length > 0) {
+    let ticking = false;
+
+    function updateTheme() {
+      const navRect = nav.getBoundingClientRect();
+      const navCenterY = navRect.top + navRect.height / 2;
+
+      let isOverDark = false;
+      for (const el of darkElements) {
+        const rect = el.getBoundingClientRect();
+        if (navCenterY >= rect.top && navCenterY <= rect.bottom) {
+          isOverDark = true;
+          break;
+        }
+      }
+
+      if (isOverDark) {
+        nav.classList.add("nav-dark");
+      } else {
+        nav.classList.remove("nav-dark");
+      }
+      ticking = false;
+    }
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(updateTheme);
+          ticking = true;
+        }
+      },
+      { passive: true },
+    );
+
+    // Initial check
+    updateTheme();
+  }
+
+  // Mobile menu toggle
+  const menuBtn = document.querySelector(".mobile-menu-btn");
+  const navLinksList = document.querySelector(".nav-links");
+
+  if (menuBtn && navLinksList) {
+    menuBtn.addEventListener("click", () => {
+      navLinksList.classList.toggle("nav-open");
+      menuBtn.classList.toggle("is-open");
+    });
+
+    // Close menu when clicking a link
+    navLinksList.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinksList.classList.remove("nav-open");
+        menuBtn.classList.remove("is-open");
+      });
+    });
+  }
+</script>
+
+<style>
+/* ── NAV ── */
+.nav-wrap {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: calc(100% - 3rem);
+  max-width: 80rem;
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(249, 247, 243, 0.85);
+  backdrop-filter: blur(1.125rem);
+  -webkit-backdrop-filter: blur(1.125rem);
+  border: 0.5px solid var(--pill-border);
+  border-radius: 3.125rem;
+  padding: 0.625rem 0.75rem 0.625rem 1.75rem;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+.nav-inner.nav-dark {
+  background: rgba(26, 25, 22, 0.85);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.nav-inner-top {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.0625rem;
+  font-weight: 400;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.4s ease;
+}
+
+.nav-inner.nav-dark .nav-logo {
+  color: var(--cream);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-inner.nav-dark .nav-links a {
+  color: rgba(255, 255, 255, 0.65);
+}
+.nav-inner.nav-dark .nav-links a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+.nav-inner.nav-dark .btn-dark {
+  background: var(--cream);
+  color: var(--ink) !important;
+}
+
+/* ── MOBILE MENU ── */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: color 0.3s;
+}
+.nav-inner.nav-dark .mobile-menu-btn {
+  color: white;
+}
+.mobile-menu-btn .line-top,
+.mobile-menu-btn .line-bot {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mobile-menu-btn .line-top {
+  transform-origin: 0.75rem 0.5rem;
+}
+.mobile-menu-btn .line-bot {
+  transform-origin: 0.75rem 1rem;
+}
+.mobile-menu-btn.is-open .line-top {
+  transform: translateY(0.25rem) rotate(45deg);
+}
+.mobile-menu-btn.is-open .line-bot {
+  transform: translateY(-0.25rem) rotate(-45deg);
+}
+
+@media (max-width: 42.5rem) {
+  .nav-inner { 
+    padding: 0.75rem 0.75rem;
+    flex-direction: column;
+    align-items: stretch;
+    border-radius: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-inner-top {
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+  .mobile-menu-btn { display: flex; }
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: static;
+    background: transparent;
+    padding: 0 0.5rem;
+    gap: 1.25rem;
+    margin: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .nav-links.nav-open {
+    max-height: 25rem;
+    opacity: 1;
+    pointer-events: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+  .nav-inner.nav-dark .nav-links {
+    background: transparent;
+    border-color: transparent;
+  }
+  .nav-inner.nav-dark .nav-links a {
+    color: white;
+  }
+}
+</style>
