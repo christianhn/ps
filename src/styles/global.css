@@ -57,7 +57,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
   align-items: center;
   gap: 0.5rem;
   background: var(--ink);
-  color: var(--cream) !important;
+  color: var(--cream);
   border: none;
   padding: 0.875rem 1.75rem;
   border-radius: 3.125rem;
@@ -430,7 +430,7 @@ footer {
   .split-section { grid-template-columns: 1fr; gap: 2.5rem; }
   .split-section.reverse .split-img { order: 0; }
   .split-section.reverse .split-content { order: 0; }
-  .split-img { aspect-ratio: 16/9; }
+  .split-img { aspect-ratio: 16/19; }
   .stats-inner { grid-template-columns: repeat(3,1fr); }
 }
 

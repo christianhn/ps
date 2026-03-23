@@ -5,285 +5,441 @@ import imgPareja from "../assets/img/img_terapia_pareja_1774217931393.png";
 import imgFamilia from "../assets/img/img_terapia_familia_1774217945434.png";
 import imgAdolescentes from "../assets/img/img_servicio_crecimiento_1774218015199.png";
 ---
+
 <section id="ayuda" class="ayuda-section">
   <div class="ayuda-inner">
     <div class="ayuda-header reveal">
       <p class="eyebrow ayuda-eyebrow">Cómo puedo ayudarte</p>
-      <h2 class="ayuda-title">El trabajo psicológico,<br><em>un camino hacia ti.</em></h2>
+      <h2 class="ayuda-title">
+        El trabajo psicológico,<br /><em>un camino hacia ti.</em>
+      </h2>
       <p class="ayuda-subtitle">
-        Como individuo atravesando dificultades personales o como pareja afrontando momentos complejos, buscar ayuda es un paso adelante.
+        Como individuo atravesando dificultades personales o como pareja
+        afrontando momentos complejos, buscar ayuda es un paso adelante.
       </p>
     </div>
 
     <ayuda-tabs class="ayuda-tabs" role="tablist">
-      <button class="ayuda-tab active" data-tab="individual" role="tab" aria-selected="true" aria-controls="panel-individual">Adultos</button>
-      <button class="ayuda-tab" data-tab="adolescentes" role="tab" aria-selected="false" aria-controls="panel-adolescentes">Adolescentes</button>
-      <button class="ayuda-tab" data-tab="pareja" role="tab" aria-selected="false" aria-controls="panel-pareja">Pareja</button>
-      <button class="ayuda-tab" data-tab="familia" role="tab" aria-selected="false" aria-controls="panel-familia">Familia</button>
+      <button
+        class="ayuda-tab active"
+        data-tab="individual"
+        role="tab"
+        aria-selected="true"
+        aria-controls="panel-individual">Adultos</button
+      >
+      <button
+        class="ayuda-tab"
+        data-tab="adolescentes"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-adolescentes">Adolescentes</button
+      >
+      <button
+        class="ayuda-tab"
+        data-tab="pareja"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-pareja">Pareja</button
+      >
+      <button
+        class="ayuda-tab"
+        data-tab="familia"
+        role="tab"
+        aria-selected="false"
+        aria-controls="panel-familia">Familia</button
+      >
     </ayuda-tabs>
 
     <!-- INDIVIDUAL -->
-    <div id="panel-individual" class="ayuda-panel active" data-panel="individual" role="tabpanel">
+    <div
+      id="panel-individual"
+      class="ayuda-panel active"
+      data-panel="individual"
+      role="tabpanel"
+    >
       <div class="ayuda-img">
-        <Image src={imgIndividual} alt="Terapia Individual" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;" />
+        <Image
+          src={imgIndividual}
+          alt="Terapia Individual"
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
+        />
       </div>
       <div class="ayuda-content">
         <p class="ayuda-intro">
-          "Sientes que algo no encaja pero no sabes exactamente qué. Cada día es un esfuerzo y la fatiga emocional se ha vuelto tu estado habitual."
+          "Sientes que algo no encaja pero no sabes exactamente qué. Cada día es
+          un esfuerzo y la fatiga emocional se ha vuelto tu estado habitual."
         </p>
         <ul class="ayuda-list">
-          <li>Sientes un agotamiento emocional que no se quita con el descanso físico.</li>
-          <li>Te cuesta gestionar el estrés y tus reacciones te sorprenden negativamente.</li>
-          <li>Has perdido el interés por actividades que antes te hacían disfrutar.</li>
-          <li>Sientes un vacío o falta de propósito a pesar de tenerlo "todo".</li>
+          <li>
+            Sientes un agotamiento emocional que no se quita con el descanso
+            físico.
+          </li>
+          <li>
+            Te cuesta gestionar el estrés y tus reacciones te sorprenden
+            negativamente.
+          </li>
+          <li>
+            Has perdido el interés por actividades que antes te hacían
+            disfrutar.
+          </li>
+          <li>
+            Sientes un vacío o falta de propósito a pesar de tenerlo "todo".
+          </li>
           <li>Estás cansadx de esperar a que las cosas cambien solas.</li>
         </ul>
         <div class="ayuda-ctas">
-          <a href="#contacto" data-service="individual" class="btn-light">Pedir cita</a>
-          <a href="#contacto" data-service="individual" class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a>
+          <a href="#contacto" data-service="individual" class="btn-light"
+            >Pedir cita</a
+          >
+          <a
+            href="#contacto"
+            data-service="individual"
+            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
+          >
         </div>
       </div>
     </div>
 
     <!-- ADOLESCENTES -->
-    <div id="panel-adolescentes" class="ayuda-panel" data-panel="adolescentes" role="tabpanel">
+    <div
+      id="panel-adolescentes"
+      class="ayuda-panel"
+      data-panel="adolescentes"
+      role="tabpanel"
+    >
       <div class="ayuda-img">
-        <Image src={imgAdolescentes} alt="Terapia para Adolescentes" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;" />
+        <Image
+          src={imgAdolescentes}
+          alt="Terapia para Adolescentes"
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
+        />
       </div>
       <div class="ayuda-content">
         <p class="ayuda-intro">
-          "La adolescencia es una etapa de grandes cambios. A veces las emociones se desbordan, y la comunicación en casa puede volverse muy difícil."
+          "La adolescencia es una etapa de grandes cambios. A veces las
+          emociones se desbordan, y la comunicación en casa puede volverse muy
+          difícil."
         </p>
         <ul class="ayuda-list">
           <li>Ansiedad, estrés académico o presión social contínua.</li>
-          <li>Dificultades de autoestima, identidad o manejo de emociones intensas.</li>
+          <li>
+            Dificultades de autoestima, identidad o manejo de emociones
+            intensas.
+          </li>
           <li>Conductas de riesgo (autolesiones, consumos) o aislamiento.</li>
-          <li>Dificultades de comunicación en casa y orientación vocacional.</li>
-          <li>Técnicas de estudio (método completo propio) para mejorar su rendimiento escolar.</li>
+          <li>
+            Dificultades de comunicación en casa y orientación vocacional.
+          </li>
+          <li>
+            Técnicas de estudio (método completo propio) para mejorar su
+            rendimiento escolar.
+          </li>
         </ul>
         <div class="ayuda-ctas">
-          <a href="#contacto" data-service="adolescentes" class="btn-light">Pedir cita</a>
-          <a href="#contacto" data-service="adolescentes" class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a>
+          <a href="#contacto" data-service="adolescentes" class="btn-light"
+            >Pedir cita</a
+          >
+          <a
+            href="#contacto"
+            data-service="adolescentes"
+            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
+          >
         </div>
       </div>
     </div>
 
     <!-- PAREJA -->
-    <div id="panel-pareja" class="ayuda-panel" data-panel="pareja" role="tabpanel">
+    <div
+      id="panel-pareja"
+      class="ayuda-panel"
+      data-panel="pareja"
+      role="tabpanel"
+    >
       <div class="ayuda-img">
-        <Image src={imgPareja} alt="Terapia de Pareja" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;" />
+        <Image
+          src={imgPareja}
+          alt="Terapia de Pareja"
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
+        />
       </div>
       <div class="ayuda-content">
         <p class="ayuda-intro">
-          "Las discusiones son siempre por lo mismo y ninguno de los dos sabe ya cómo salir del ciclo. La distancia crece aunque convivís."
+          "Las discusiones son siempre por lo mismo y ninguno de los dos sabe ya
+          cómo salir del ciclo. La distancia crece aunque convivís."
         </p>
         <ul class="ayuda-list">
-          <li>Las discusiones suelen ser por los mismos temas una y otra vez.</li>
+          <li>
+            Las discusiones suelen ser por los mismos temas una y otra vez.
+          </li>
           <li>Sientes que hablas con tu pareja pero no te escucha.</li>
-          <li>La comunicación se ha convertido en un ciclo de reproches y defensiva.</li>
-          <li>Os habéis convertido más en "compañerxs de piso" que en una pareja.</li>
-          <li>Queréis salvar la relación, pero ya no sabéis qué más intentar.</li>
+          <li>
+            La comunicación se ha convertido en un ciclo de reproches y
+            defensiva.
+          </li>
+          <li>
+            Os habéis convertido más en "compañerxs de piso" que en una pareja.
+          </li>
+          <li>
+            Queréis salvar la relación, pero ya no sabéis qué más intentar.
+          </li>
         </ul>
         <div class="ayuda-ctas">
-          <a href="#contacto" data-service="pareja" class="btn-light">Pedir cita</a>
-          <a href="#contacto" data-service="pareja" class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a>
+          <a href="#contacto" data-service="pareja" class="btn-light"
+            >Pedir cita</a
+          >
+          <a
+            href="#contacto"
+            data-service="pareja"
+            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
+          >
         </div>
       </div>
     </div>
 
     <!-- FAMILIA -->
-    <div id="panel-familia" class="ayuda-panel" data-panel="familia" role="tabpanel">
+    <div
+      id="panel-familia"
+      class="ayuda-panel"
+      data-panel="familia"
+      role="tabpanel"
+    >
       <div class="ayuda-img">
-        <Image src={imgFamilia} alt="Terapia Familiar" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;" />
+        <Image
+          src={imgFamilia}
+          alt="Terapia Familiar"
+          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
+        />
       </div>
       <div class="ayuda-content">
         <p class="ayuda-intro">
-          "En casa hay tensión constante. Un cambio o una crisis ha desestabilizado la dinámica familiar y nadie sabe cómo recomponerse."
+          "En casa hay tensión constante. Un cambio o una crisis ha
+          desestabilizado la dinámica familiar y nadie sabe cómo recomponerse."
         </p>
         <ul class="ayuda-list">
-          <li>El ambiente en casa es tenso y/o "explotáis" por cualquier detalle.</li>
+          <li>
+            El ambiente en casa es tenso y/o "explotáis" por cualquier detalle.
+          </li>
           <li>Veis dificultades para poner límites claros y respetuosos.</li>
-          <li>Un miembro de la familia lo está pasando mal y afecta a todo el núcleo.</li>
-          <li>Un cambio reciente (duelo, mudanza, separación) ha desestabilizado a la familia.</li>
-          <li>Buscáis un espacio neutral para sanar heridas y mejorar la convivencia.</li>
+          <li>
+            Un miembro de la familia lo está pasando mal y afecta a todo el
+            núcleo.
+          </li>
+          <li>
+            Un cambio reciente (duelo, mudanza, separación) ha desestabilizado a
+            la familia.
+          </li>
+          <li>
+            Buscáis un espacio neutral para sanar heridas y mejorar la
+            convivencia.
+          </li>
         </ul>
         <div class="ayuda-ctas">
-          <a href="#contacto" data-service="pareja" class="btn-light">Pedir cita</a>
-          <a href="#contacto" data-service="pareja" class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a>
+          <a href="#contacto" data-service="pareja" class="btn-light"
+            >Pedir cita</a
+          >
+          <a
+            href="#contacto"
+            data-service="pareja"
+            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
+          >
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
 <style>
-/* ── AYUDA SECTION ── */
-.ayuda-section {
-  background: var(--ink);
-  padding: 6rem 0;
-}
+  /* ── AYUDA SECTION ── */
+  .ayuda-section {
+    background: var(--ink);
+    padding: 6rem 0;
+  }
 
-.ayuda-inner {
-  max-width: 80rem;
-  margin: 0 auto;
-  padding: 0 3rem;
-}
+  .ayuda-inner {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
 
-.ayuda-header {
-  text-align: center;
-  margin-bottom: 4.5rem;
-}
+  .ayuda-header {
+    text-align: center;
+    margin-bottom: 4.5rem;
+  }
 
-.ayuda-eyebrow { color: var(--sage-light); }
+  .ayuda-eyebrow {
+    color: var(--sage-light);
+  }
 
-.ayuda-title {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(2.25rem, 4.5vw, 3.75rem);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: white;
-  margin-top: 1rem;
-  line-height: 1.1;
-}
-.ayuda-title em { font-style: italic; color: var(--sage-light); }
+  .ayuda-title {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: white;
+    margin-top: 1rem;
+    line-height: 1.1;
+  }
+  .ayuda-title em {
+    font-style: italic;
+    color: var(--sage-light);
+  }
 
-.ayuda-subtitle {
-  font-size: 0.9375rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.5);
-  margin-top: 1rem;
-  line-height: 1.7;
-  max-width: 31.25rem;
-  margin-left: auto;
-  margin-right: auto;
-}
+  .ayuda-subtitle {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 1rem;
+    line-height: 1.7;
+    max-width: 31.25rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.ayuda-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 3.25rem;
-}
+  .ayuda-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 3.25rem;
+  }
 
-.ayuda-tab {
-  padding: 0.625rem 1.5rem;
-  border-radius: 3.125rem;
-  font-size: 0.875rem;
-  font-weight: 400;
-  background: transparent;
-  color: rgba(255,255,255,0.45);
-  border: 0.5px solid rgba(255,255,255,0.15);
-  transition: all 0.25s;
-}
-.ayuda-tab.active {
-  background: white;
-  color: var(--ink);
-  border-color: white;
-  font-weight: 500;
-}
-.ayuda-tab:hover:not(.active) {
-  color: rgba(255,255,255,0.8);
-  border-color: rgba(255,255,255,0.3);
-}
+  .ayuda-tab {
+    padding: 0.625rem 1.5rem;
+    border-radius: 3.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.45);
+    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.25s;
+  }
+  .ayuda-tab.active {
+    background: white;
+    color: var(--ink);
+    border-color: white;
+    font-weight: 500;
+  }
+  .ayuda-tab:hover:not(.active) {
+    color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
 
-.ayuda-panel { display: none; }
-.ayuda-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .ayuda-panel {
+    display: none;
+  }
+  .ayuda-panel.active {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
 
-.ayuda-img {
-  border-radius: var(--radius-card);
-  overflow: hidden;
-  aspect-ratio: 4/5;
-  background: #2a3528;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+  .ayuda-img {
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    background: #2a3528;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.ayuda-content { padding: 0.5rem 0; }
+  .ayuda-content {
+    padding: 0.5rem 0;
+  }
 
-.ayuda-intro {
-  font-family: 'DM Serif Display', serif;
-  font-size: clamp(1.125rem, 2vw, 1.5rem);
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(255,255,255,0.85);
-  line-height: 1.5;
-  margin-bottom: 2rem;
-  padding-bottom: 1.75rem;
-  border-bottom: 0.5px solid rgba(255,255,255,0.12);
-}
+  .ayuda-intro {
+    font-family: "DM Serif Display", serif;
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+  }
 
-.ayuda-list { list-style: none; }
+  .ayuda-list {
+    list-style: none;
+  }
 
-.ayuda-list li {
-  font-size: 0.875rem;
-  font-weight: 300;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.7;
-  padding: 0.875rem 0;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08);
-  display: flex;
-  gap: 0.875rem;
-  align-items: flex-start;
-}
+  .ayuda-list li {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.7;
+    padding: 0.875rem 0;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    gap: 0.875rem;
+    align-items: flex-start;
+  }
 
-.ayuda-list li::before {
-  content: '';
-  width: 0.3125rem;
-  height: 0.3125rem;
-  border-radius: 50%;
-  background: var(--sage-light);
-  flex-shrink: 0;
-  margin-top: 0.5rem;
-}
+  .ayuda-list li::before {
+    content: "";
+    width: 0.3125rem;
+    height: 0.3125rem;
+    border-radius: 50%;
+    background: var(--sage-light);
+    flex-shrink: 0;
+    margin-top: 0.5rem;
+  }
 
-.ayuda-ctas {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-}
+  .ayuda-ctas {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
 
-.ayuda-ghost-btn {
-  color: rgba(255,255,255,0.6) !important;
-  border-color: rgba(255,255,255,0.2) !important;
-}
+  .ayuda-ctas .ayuda-ghost-btn {
+    color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
 
-@media (max-width: 64rem) {
-  .ayuda-panel.active { grid-template-columns: 1fr; }
-  .ayuda-img { aspect-ratio: 16/9; }
-  .ayuda-tabs { flex-wrap: wrap; justify-content: center; }
-}
+  @media (max-width: 64rem) {
+    .ayuda-panel.active {
+      grid-template-columns: 1fr;
+    }
+    .ayuda-img {
+      aspect-ratio: 16/18;
+    }
+    .ayuda-tabs {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
 </style>
 
 <script>
   class AyudaTabs extends HTMLElement {
     constructor() {
       super();
-      const tabs = this.querySelectorAll('.ayuda-tab');
-      const panels = document.querySelectorAll('.ayuda-panel');
+      const tabs = this.querySelectorAll(".ayuda-tab");
+      const panels = document.querySelectorAll(".ayuda-panel");
 
-      tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
           const target = (tab as HTMLElement).dataset.tab;
-          
-          tabs.forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
+
+          tabs.forEach((t) => {
+            t.classList.remove("active");
+            t.setAttribute("aria-selected", "false");
           });
-          panels.forEach(p => p.classList.remove('active'));
-          
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected', 'true');
-          
-          const panel = document.querySelector(`.ayuda-panel[data-panel="${target}"]`);
-          if (panel) panel.classList.add('active');
+          panels.forEach((p) => p.classList.remove("active"));
+
+          tab.classList.add("active");
+          tab.setAttribute("aria-selected", "true");
+
+          const panel = document.querySelector(
+            `.ayuda-panel[data-panel="${target}"]`,
+          );
+          if (panel) panel.classList.add("active");
         });
       });
     }
   }
 
-  customElements.define('ayuda-tabs', AyudaTabs);
+  customElements.define("ayuda-tabs", AyudaTabs);
 </script>
