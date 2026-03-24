@@ -6,10 +6,7 @@
   <div class="tarifas-inner">
     <div class="tarifas-header reveal">
       <h2 class="tarifas-title">Tarifas.</h2>
-      <p class="tarifas-sub">
-        Transparencia total. Sin letras pequeñas. Primera consulta de valoración
-        gratuita.
-      </p>
+      <p class="tarifas-sub">Transparencia total. Sin letras pequeñas.</p>
     </div>
 
     <div class="tarifas-grid">
@@ -26,8 +23,6 @@
         <ul class="tarifa-features">
           <li><strong>Bono 4 sesiones:</strong> 200 € (Ahorras 40 €)</li>
           <li><strong>Bono 8 sesiones:</strong> 380 € (Ahorras 100 €)</li>
-          <li>Primera consulta de valoración incluida</li>
-          <li>Metodología basada en evidencia científica</li>
         </ul>
         <a href="#contacto" data-service="individual" class="tarifa-btn"
           >Reservar sesión</a
@@ -36,7 +31,7 @@
 
       <!-- Pareja · Familia -->
       <div class="tarifa-card">
-        <h3 class="tarifa-title">Pareja · Familia</h3>
+        <div class="tarifa-tipo">Pareja · Familia</div>
         <div class="tarifa-nombre">Sesión conjunta</div>
         <div class="tarifa-precio">
           <span class="tarifa-eur">€</span>
@@ -47,8 +42,6 @@
         <ul class="tarifa-features">
           <li><strong>Bono 4 sesiones:</strong> 280 € (Ahorras 80 €)</li>
           <li><strong>Bono 8 sesiones:</strong> 540 € (Ahorras 180 €)</li>
-          <li>Enfoque sistémico y colaborativo</li>
-          <li>Herramientas de comunicación prácticas</li>
         </ul>
         <a href="#contacto" data-service="pareja" class="tarifa-btn"
           >Reservar sesión</a
@@ -68,8 +61,6 @@
         <ul class="tarifa-features">
           <li><strong>Bono 4 sesiones:</strong> 150 € (Ahorras 30 €)</li>
           <li><strong>Bono 8 sesiones:</strong> 285 € (Ahorras 75 €)</li>
-          <li>Organización y planificación del tiempo</li>
-          <li>Mejora de la memorización y atención</li>
         </ul>
         <a href="#contacto" data-service="estudio" class="tarifa-btn"
           >Reservar sesión</a
@@ -109,9 +100,6 @@
   }
 
   .tarifas-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
     margin-bottom: 3.5rem;
     padding-bottom: 2.5rem;
     border-bottom: 0.5px solid var(--pill-border);
@@ -130,7 +118,7 @@
     color: var(--ink-mid);
     font-weight: 300;
     max-width: 17.5rem;
-    text-align: right;
+    text-align: left;
     line-height: 1.7;
   }
 
@@ -349,11 +337,6 @@
   @media (max-width: 64rem) {
     .tarifas-grid {
       grid-template-columns: 1fr;
-    }
-    .tarifas-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
     }
     .tarifas-sub {
       text-align: left;
