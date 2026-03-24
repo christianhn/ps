@@ -1,9 +1,9 @@
-import imgAnsiedad from "../assets/img/img_servicio_ansiedad_1774217986717.png";
-import imgAutoestima from "../assets/img/img_servicio_autoestima_1774217997984.png";
-import imgCrecimiento from "../assets/img/img_servicio_crecimiento_1774218015199.png";
-import imgPareja from "../assets/img/img_terapia_pareja_1774217931393.png";
-import imgFamilia from "../assets/img/img_terapia_familia_1774217945434.png";
-import imgOnline from "../assets/img/img_terapia_online_1774217959139.png";
+import imgAnsiedad from "../assets/img/ansiedad.png";
+import imgAutoestima from "../assets/img/autoestima.png";
+import imgCrecimiento from "../assets/img/crecimiento.png";
+import imgPareja from "../assets/img/pareja.png";
+import imgFamilia from "../assets/img/familia.png";
+import imgOnline from "../assets/img/online.png";
 
 export const servicesData = [
   {
