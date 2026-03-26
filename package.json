@@ -9,8 +9,11 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.1",
+    "@astrojs/sitemap": "^3.6.0",
     "astro": "^4.15.0",
     "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.98.0"
   }
 }

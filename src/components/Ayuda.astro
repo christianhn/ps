@@ -4,442 +4,414 @@ import imgIndividual from "../assets/img/individual.png";
 import imgPareja from "../assets/img/pareja.png";
 import imgFamilia from "../assets/img/familia.png";
 import imgAdolescentes from "../assets/img/crecimiento.png";
+
+const services = [
+  {
+    id: "individual",
+    label: "Adultos",
+    title: "Terapia individual en Zaragoza",
+    image: imgIndividual,
+    intro:
+      '"Sientes que algo no encaja pero no sabes exactamente qué. Cada día es un esfuerzo y la fatiga emocional se ha vuelto tu estado habitual."',
+    list: [
+      "Sientes un agotamiento emocional que no se quita con el descanso físico.",
+      "Te cuesta gestionar el estrés y tus reacciones te sorprenden negativamente.",
+      "Has perdido el interés por actividades que antes te hacían disfrutar.",
+      'Sientes un vacío o falta de propósito a pesar de tenerlo "todo".',
+      "Estás cansadx de esperar a que las cosas cambien solas.",
+    ],
+  },
+  {
+    id: "adolescentes",
+    label: "Adolescentes",
+    title: "Terapia para adolescentes en Zaragoza",
+    image: imgAdolescentes,
+    intro:
+      '"La adolescencia es una etapa de grandes cambios. A veces las emociones se desbordan, y la comunicación en casa puede volverse muy difícil."',
+    list: [
+      "Ansiedad, estrés académico o presión social contínua.",
+      "Dificultades de autoestima, identidad o manejo de emociones intensas.",
+      "Conductas de riesgo (autolesiones, consumos) o aislamiento.",
+      "Dificultades de comunicación en casa y orientación vocacional.",
+      "Técnicas de estudio (método completo propio) para mejorar su rendimiento escolar.",
+    ],
+  },
+  {
+    id: "pareja",
+    label: "Pareja",
+    title: "Terapia de pareja en Zaragoza",
+    image: imgPareja,
+    intro:
+      '"Las discusiones son siempre por lo mismo y ninguno de los dos sabe ya cómo salir del ciclo. La distancia crece aunque convivís."',
+    list: [
+      "Las discusiones suelen ser por los mismos temas una y otra vez.",
+      "Sientes que hablas con tu pareja pero no te escucha.",
+      "La comunicación se ha convertido en un ciclo de reproches y defensiva.",
+      'Os habéis convertido más en "compañerxs de piso" que en una pareja.',
+      "Queréis salvar la relación, pero ya no sabéis qué más intentar.",
+    ],
+  },
+  {
+    id: "familia",
+    label: "Familia",
+    title: "Terapia familiar en Zaragoza",
+    image: imgFamilia,
+    intro:
+      '"En casa hay tensión constante. Un cambio o una crisis ha desestabilizado la dinámica familiar y nadie sabe cómo recomponerse."',
+    list: [
+      'El ambiente en casa es tenso y/o "explotáis" por cualquier detalle.',
+      "Veis dificultades para poner límites claros y respetuosos.",
+      "Un miembro de la familia lo está pasando mal y afecta a todo el núcleo.",
+      "Un cambio reciente (duelo, mudanza, separación) ha desestabilizado a la familia.",
+      "Buscáis un espacio neutral para sanar heridas y mejorar la convivencia.",
+    ],
+  },
+];
 ---
 
-<section id="ayuda" class="ayuda-section">
-  <div class="ayuda-inner">
-    <div class="ayuda-header reveal">
-      <p class="eyebrow ayuda-eyebrow">Cómo puedo ayudarte</p>
-      <h2 class="ayuda-title">
+<section id="ayuda" class="ayuda">
+  <div class="ayuda__container">
+    <header class="ayuda__header reveal">
+      <p class="eyebrow ayuda__eyebrow">Cómo puedo ayudarte</p>
+      <h2 class="ayuda__title">
         El trabajo psicológico,<br /><em>un camino hacia ti.</em>
       </h2>
-      <p class="ayuda-subtitle">
+      <p class="ayuda__subtitle">
         Como individuo atravesando dificultades personales o como pareja
         afrontando momentos complejos, buscar ayuda es un paso adelante.
       </p>
-    </div>
+    </header>
 
-    <ayuda-tabs class="ayuda-tabs" role="tablist">
-      <button
-        class="ayuda-tab active"
-        data-tab="individual"
-        role="tab"
-        aria-selected="true"
-        aria-controls="panel-individual">Adultos</button
+    <ayuda-tabs class="ayuda-tabs">
+      <div
+        class="ayuda-tabs__list"
+        role="tablist"
+        aria-label="Servicios de terapia"
       >
-      <button
-        class="ayuda-tab"
-        data-tab="adolescentes"
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-adolescentes">Adolescentes</button
-      >
-      <button
-        class="ayuda-tab"
-        data-tab="pareja"
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-pareja">Pareja</button
-      >
-      <button
-        class="ayuda-tab"
-        data-tab="familia"
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-familia">Familia</button
-      >
+        {
+          services.map((service, index) => (
+            <button
+              class={`ayuda-tabs__button ${index === 0 ? "is-active" : ""}`}
+              data-tab={service.id}
+              id={`tab-${service.id}`}
+              role="tab"
+              aria-selected={index === 0 ? "true" : "false"}
+              aria-controls={`panel-${service.id}`}
+              tabindex={index === 0 ? 0 : -1}
+            >
+              {service.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="ayuda-tabs__panels">
+        {
+          services.map((service, index) => (
+            <div
+              id={`panel-${service.id}`}
+              class={`ayuda-panel ${index === 0 ? "is-active" : ""}`}
+              data-panel={service.id}
+              role="tabpanel"
+              aria-labelledby={`tab-${service.id}`}
+              hidden={index !== 0}
+            >
+              <div class="ayuda-panel__image">
+                <Image src={service.image} alt={service.title} />
+              </div>
+              <div class="ayuda-panel__content">
+                <p class="ayuda-panel__intro">{service.intro}</p>
+                <ul class="ayuda-panel__list">
+                  {service.list.map((item) => (
+                    <li class="ayuda-panel__item">{item}</li>
+                  ))}
+                </ul>
+                <div class="ayuda-panel__actions">
+                  <a
+                    href="#contacto"
+                    data-service={service.id}
+                    class="btn-light"
+                  >
+                    Pedir cita
+                  </a>
+                  <a
+                    href="#contacto"
+                    data-service={service.id}
+                    class="btn-ghost ayuda-panel__ghost-btn"
+                  >
+                    Sesión online disponible
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
     </ayuda-tabs>
-
-    <!-- INDIVIDUAL -->
-    <div
-      id="panel-individual"
-      class="ayuda-panel active"
-      data-panel="individual"
-      role="tabpanel"
-    >
-      <div class="ayuda-img">
-        <Image
-          src={imgIndividual}
-          alt="Terapia individual en Zaragoza"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
-        />
-      </div>
-      <div class="ayuda-content">
-        <p class="ayuda-intro">
-          "Sientes que algo no encaja pero no sabes exactamente qué. Cada día es
-          un esfuerzo y la fatiga emocional se ha vuelto tu estado habitual."
-        </p>
-        <ul class="ayuda-list">
-          <li>
-            Sientes un agotamiento emocional que no se quita con el descanso
-            físico.
-          </li>
-          <li>
-            Te cuesta gestionar el estrés y tus reacciones te sorprenden
-            negativamente.
-          </li>
-          <li>
-            Has perdido el interés por actividades que antes te hacían
-            disfrutar.
-          </li>
-          <li>
-            Sientes un vacío o falta de propósito a pesar de tenerlo "todo".
-          </li>
-          <li>Estás cansadx de esperar a que las cosas cambien solas.</li>
-        </ul>
-        <div class="ayuda-ctas">
-          <a href="#contacto" data-service="individual" class="btn-light"
-            >Pedir cita</a
-          >
-          <a
-            href="#contacto"
-            data-service="individual"
-            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- ADOLESCENTES -->
-    <div
-      id="panel-adolescentes"
-      class="ayuda-panel"
-      data-panel="adolescentes"
-      role="tabpanel"
-    >
-      <div class="ayuda-img">
-        <Image
-          src={imgAdolescentes}
-          alt="Terapia para adolescentes en Zaragoza"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
-        />
-      </div>
-      <div class="ayuda-content">
-        <p class="ayuda-intro">
-          "La adolescencia es una etapa de grandes cambios. A veces las
-          emociones se desbordan, y la comunicación en casa puede volverse muy
-          difícil."
-        </p>
-        <ul class="ayuda-list">
-          <li>Ansiedad, estrés académico o presión social contínua.</li>
-          <li>
-            Dificultades de autoestima, identidad o manejo de emociones
-            intensas.
-          </li>
-          <li>Conductas de riesgo (autolesiones, consumos) o aislamiento.</li>
-          <li>
-            Dificultades de comunicación en casa y orientación vocacional.
-          </li>
-          <li>
-            Técnicas de estudio (método completo propio) para mejorar su
-            rendimiento escolar.
-          </li>
-        </ul>
-        <div class="ayuda-ctas">
-          <a href="#contacto" data-service="adolescentes" class="btn-light"
-            >Pedir cita</a
-          >
-          <a
-            href="#contacto"
-            data-service="adolescentes"
-            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- PAREJA -->
-    <div
-      id="panel-pareja"
-      class="ayuda-panel"
-      data-panel="pareja"
-      role="tabpanel"
-    >
-      <div class="ayuda-img">
-        <Image
-          src={imgPareja}
-          alt="Terapia de pareja en Zaragoza"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
-        />
-      </div>
-      <div class="ayuda-content">
-        <p class="ayuda-intro">
-          "Las discusiones son siempre por lo mismo y ninguno de los dos sabe ya
-          cómo salir del ciclo. La distancia crece aunque convivís."
-        </p>
-        <ul class="ayuda-list">
-          <li>
-            Las discusiones suelen ser por los mismos temas una y otra vez.
-          </li>
-          <li>Sientes que hablas con tu pareja pero no te escucha.</li>
-          <li>
-            La comunicación se ha convertido en un ciclo de reproches y
-            defensiva.
-          </li>
-          <li>
-            Os habéis convertido más en "compañerxs de piso" que en una pareja.
-          </li>
-          <li>
-            Queréis salvar la relación, pero ya no sabéis qué más intentar.
-          </li>
-        </ul>
-        <div class="ayuda-ctas">
-          <a href="#contacto" data-service="pareja" class="btn-light"
-            >Pedir cita</a
-          >
-          <a
-            href="#contacto"
-            data-service="pareja"
-            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- FAMILIA -->
-    <div
-      id="panel-familia"
-      class="ayuda-panel"
-      data-panel="familia"
-      role="tabpanel"
-    >
-      <div class="ayuda-img">
-        <Image
-          src={imgFamilia}
-          alt="Terapia familiar en Zaragoza"
-          style="width: 100%; height: 100%; object-fit: cover; border-radius: 1.25rem; opacity: 0.85;"
-        />
-      </div>
-      <div class="ayuda-content">
-        <p class="ayuda-intro">
-          "En casa hay tensión constante. Un cambio o una crisis ha
-          desestabilizado la dinámica familiar y nadie sabe cómo recomponerse."
-        </p>
-        <ul class="ayuda-list">
-          <li>
-            El ambiente en casa es tenso y/o "explotáis" por cualquier detalle.
-          </li>
-          <li>Veis dificultades para poner límites claros y respetuosos.</li>
-          <li>
-            Un miembro de la familia lo está pasando mal y afecta a todo el
-            núcleo.
-          </li>
-          <li>
-            Un cambio reciente (duelo, mudanza, separación) ha desestabilizado a
-            la familia.
-          </li>
-          <li>
-            Buscáis un espacio neutral para sanar heridas y mejorar la
-            convivencia.
-          </li>
-        </ul>
-        <div class="ayuda-ctas">
-          <a href="#contacto" data-service="pareja" class="btn-light"
-            >Pedir cita</a
-          >
-          <a
-            href="#contacto"
-            data-service="pareja"
-            class="btn-ghost ayuda-ghost-btn">Sesión online disponible</a
-          >
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 
-<style>
-  /* ── AYUDA SECTION ── */
-  .ayuda-section {
+<style lang="scss">
+  .ayuda {
     background: var(--ink);
     padding: 6rem 0;
-  }
 
-  .ayuda-inner {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 3rem;
-  }
+    &__container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
 
-  .ayuda-header {
-    text-align: center;
-    margin-bottom: 4.5rem;
-  }
+    &__header {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
 
-  .ayuda-eyebrow {
-    color: var(--sage-light);
-  }
+    &__eyebrow {
+      color: var(--sage-light);
+    }
 
-  .ayuda-title {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(2.25rem, 4.5vw, 3.75rem);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    color: white;
-    margin-top: 1rem;
-    line-height: 1.1;
-  }
-  .ayuda-title em {
-    font-style: italic;
-    color: var(--sage-light);
-  }
+    &__title {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-top: 1rem;
+      line-height: 1.1;
 
-  .ayuda-subtitle {
-    font-size: 0.9375rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.5);
-    margin-top: 1rem;
-    line-height: 1.7;
-    max-width: 31.25rem;
-    margin-left: auto;
-    margin-right: auto;
+      em {
+        font-style: italic;
+        color: var(--sage-light);
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      color: var(--white-50);
+      margin-top: 1rem;
+      line-height: 1.7;
+      max-width: 31.25rem;
+      margin-inline: auto;
+    }
   }
 
   .ayuda-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 3.25rem;
-  }
+    &__list {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 3.25rem;
+    }
 
-  .ayuda-tab {
-    padding: 0.625rem 1.5rem;
-    border-radius: 3.125rem;
-    font-size: 0.875rem;
-    font-weight: 400;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.45);
-    border: 0.5px solid rgba(255, 255, 255, 0.15);
-    transition: all 0.25s;
-  }
-  .ayuda-tab.active {
-    background: white;
-    color: var(--ink);
-    border-color: white;
-    font-weight: 500;
-  }
-  .ayuda-tab:hover:not(.active) {
-    color: rgba(255, 255, 255, 0.8);
-    border-color: rgba(255, 255, 255, 0.3);
+    &__button {
+      padding: 0.625rem 1.5rem;
+      border-radius: 3.125rem;
+      font-size: 0.875rem;
+      font-weight: 400;
+      background: transparent;
+      color: var(--white-45);
+      border: 0.5px solid var(--white-15);
+      transition: all 0.25s ease;
+      cursor: pointer;
+
+      &:hover:not(.is-active) {
+        color: var(--white-80);
+        border-color: var(--white-30);
+      }
+
+      &.is-active {
+        background: var(--white);
+        color: var(--ink);
+        border-color: var(--white);
+        font-weight: 500;
+      }
+    }
   }
 
   .ayuda-panel {
     display: none;
-  }
-  .ayuda-panel.active {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
-  }
+    opacity: 0;
+    transform: translateY(10px);
+    transition:
+      opacity 0.4s ease,
+      transform 0.4s ease;
 
-  .ayuda-img {
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    aspect-ratio: 4/5;
-    background: #2a3528;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    &.is-active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .ayuda-content {
-    padding: 0.5rem 0;
-  }
+    &__image {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      background: var(--ink-bg-dark);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-  .ayuda-intro {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(1.125rem, 2vw, 1.5rem);
-    font-style: italic;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.85);
-    line-height: 1.5;
-    margin-bottom: 2rem;
-    padding-bottom: 1.75rem;
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
-  }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 1.25rem;
+        opacity: 0.85;
+      }
+    }
 
-  .ayuda-list {
-    list-style: none;
-  }
+    &__content {
+      padding: 0.5rem 0;
+    }
 
-  .ayuda-list li {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.7;
-    padding: 0.875rem 0;
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.08);
-    display: flex;
-    gap: 0.875rem;
-    align-items: flex-start;
-  }
+    &__intro {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(1.125rem, 2vw, 1.5rem);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--white-85);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 0.5px solid var(--white-12);
+    }
 
-  .ayuda-list li::before {
-    content: "";
-    width: 0.3125rem;
-    height: 0.3125rem;
-    border-radius: 50%;
-    background: var(--sage-light);
-    flex-shrink: 0;
-    margin-top: 0.5rem;
-  }
+    &__list {
+      list-style: none;
+      padding: 0;
+    }
 
-  .ayuda-ctas {
-    display: flex;
-    gap: 0.75rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-  }
+    &__item {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--white-60);
+      line-height: 1.7;
+      padding: 0.875rem 0;
+      border-bottom: 0.5px solid var(--white-08);
+      display: flex;
+      gap: 0.875rem;
+      align-items: flex-start;
 
-  .ayuda-ctas .ayuda-ghost-btn {
-    color: rgba(255, 255, 255, 0.6);
-    border-color: rgba(255, 255, 255, 0.15);
+      &::before {
+        content: "";
+        width: 0.3125rem;
+        height: 0.3125rem;
+        border-radius: 50%;
+        background: var(--sage-light);
+        flex-shrink: 0;
+        margin-top: 0.5rem;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    &__ghost-btn {
+      color: var(--white-60);
+      border-color: var(--white-15);
+    }
   }
 
   @media (max-width: 64rem) {
-    .ayuda-panel.active {
+    .ayuda {
+      &__container {
+        padding: 0 1.5rem;
+      }
+    }
+
+    .ayuda-panel.is-active {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
-    .ayuda-img {
-      aspect-ratio: 16/18;
+
+    .ayuda-panel__image {
+      aspect-ratio: 16 / 10;
     }
-    .ayuda-tabs {
+
+    .ayuda-tabs__list {
       flex-wrap: wrap;
-      justify-content: center;
     }
   }
 </style>
 
 <script>
   class AyudaTabs extends HTMLElement {
+    private tabs: HTMLButtonElement[];
+    private panels: HTMLElement[];
+
     constructor() {
       super();
-      const tabs = this.querySelectorAll(".ayuda-tab");
-      const panels = document.querySelectorAll(".ayuda-panel");
+      this.tabs = Array.from(this.querySelectorAll('[role="tab"]'));
+      this.panels = Array.from(this.querySelectorAll('[role="tabpanel"]'));
+    }
 
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const target = (tab as HTMLElement).dataset.tab;
-
-          tabs.forEach((t) => {
-            t.classList.remove("active");
-            t.setAttribute("aria-selected", "false");
-          });
-          panels.forEach((p) => p.classList.remove("active"));
-
-          tab.classList.add("active");
-          tab.setAttribute("aria-selected", "true");
-
-          const panel = document.querySelector(
-            `.ayuda-panel[data-panel="${target}"]`,
-          );
-          if (panel) panel.classList.add("active");
-        });
+    connectedCallback() {
+      this.tabs.forEach((tab) => {
+        tab.addEventListener("click", () => this.switchTab(tab));
+        tab.addEventListener("keydown", (e) => this.handleKeyDown(e));
       });
+    }
+
+    private switchTab(newTab: HTMLButtonElement) {
+      const targetPanelId = newTab.getAttribute("aria-controls");
+
+      this.tabs.forEach((t) => {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-selected", "false");
+        t.setAttribute("tabindex", "-1");
+      });
+
+      this.panels.forEach((p) => {
+        p.classList.remove("is-active");
+        p.hidden = true;
+      });
+
+      newTab.classList.add("is-active");
+      newTab.setAttribute("aria-selected", "true");
+      newTab.setAttribute("tabindex", "0");
+      newTab.focus();
+
+      const panel = this.querySelector(`#${targetPanelId}`) as HTMLElement;
+      if (panel) {
+        panel.hidden = false;
+        requestAnimationFrame(() => {
+          panel.classList.add("is-active");
+        });
+      }
+    }
+
+    private handleKeyDown(e: KeyboardEvent) {
+      const index = this.tabs.indexOf(e.currentTarget as HTMLButtonElement);
+      let newIndex: number | null = null;
+
+      if (e.key === "ArrowRight") {
+        newIndex = (index + 1) % this.tabs.length;
+      } else if (e.key === "ArrowLeft") {
+        newIndex = (index - 1 + this.tabs.length) % this.tabs.length;
+      } else if (e.key === "Home") {
+        newIndex = 0;
+      } else if (e.key === "End") {
+        newIndex = this.tabs.length - 1;
+      }
+
+      if (newIndex !== null) {
+        e.preventDefault();
+        this.switchTab(this.tabs[newIndex]);
+      }
     }
   }
 
-  customElements.define("ayuda-tabs", AyudaTabs);
+  if (!customElements.get("ayuda-tabs")) {
+    customElements.define("ayuda-tabs", AyudaTabs);
+  }
 </script>

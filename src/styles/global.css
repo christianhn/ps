@@ -14,6 +14,23 @@
   --pill-border: rgba(26,25,22,0.14);
   --radius-card: 1.75rem;
   --radius-lg: 2rem;
+
+  /* Transparents for dark backgrounds */
+  --white: #ffffff;
+  --white-90: rgba(255, 255, 255, 0.9);
+  --white-85: rgba(255, 255, 255, 0.85);
+  --white-80: rgba(255, 255, 255, 0.8);
+  --white-60: rgba(255, 255, 255, 0.6);
+  --white-50: rgba(255, 255, 255, 0.5);
+  --white-45: rgba(255, 255, 255, 0.45);
+  --white-30: rgba(255, 255, 255, 0.3);
+  --white-15: rgba(255, 255, 255, 0.15);
+  --white-12: rgba(255, 255, 255, 0.12);
+  --white-10: rgba(255, 255, 255, 0.1);
+  --white-08: rgba(255, 255, 255, 0.08);
+
+  /* Specific theme colors */
+  --ink-bg-dark: #2a3528;
 }
 
 html { scroll-behavior: smooth; font-size: 1rem; }
