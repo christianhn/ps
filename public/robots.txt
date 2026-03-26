@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://christianhn.github.io/ps/sitemap-index.xml

@@ -3,54 +3,103 @@ export interface Props {
   title?: string;
   description?: string;
 }
-const { 
-  title = 'Mario Catena · Psicólogo en Zaragoza',
-  description = 'Psicólogo en Zaragoza especializado en ansiedad, estrés, autoestima y crecimiento personal. Terapia individual, de pareja y familiar. Sesiones presenciales y online.'
+const {
+  title = "Mario Catena · Psicólogo en Zaragoza",
+  description = "Psicólogo en Zaragoza especializado en ansiedad, estrés, autoestima y crecimiento personal. Terapia individual, de pareja y familiar. Sesiones presenciales y online.",
 } = Astro.props;
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
-  <meta name="robots" content="index, follow" />
-  <title>{title}</title>
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content={Astro.url} />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content="https://www.mariocatena.com/hero-social.avif" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <title>{title}</title>
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content={Astro.url} />
-  <meta property="twitter:title" content={title} />
-  <meta property="twitter:description" content={description} />
-  <meta property="twitter:image" content="https://www.mariocatena.com/hero-social.avif" />
+    <!-- Canonical URL -->
+    <link rel="canonical" href={Astro.url} />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-</head>
-<body>
-  <slot />
-  <script>
-    // ── Scroll reveal ──
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.12 });
+    <!-- Datos Estructurados JSON-LD (SEO Local) -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        name: "Mario Catena · Psicólogo en Zaragoza",
+        description:
+          "Psicólogo en Zaragoza especializado en ansiedad, estrés, autoestima y terapia individual o de pareja.",
+        image: "https://www.mariocatena.com/hero-social.avif",
+        url: "https://www.mariocatena.com",
+        telephone: "+34696734906",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Camino de las Torres 27",
+          addressLocality: "Zaragoza",
+          postalCode: "50008",
+          addressCountry: "ES",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 41.6444,
+          longitude: -0.8756,
+        },
+        openingHours: "Mo-Fr 09:00-20:00",
+      })}
+    />
 
-    document.querySelectorAll('.reveal, .stat-block, .testi-card, .cta-card, .tarifa-card').forEach(el => {
-      revealObserver.observe(el);
-    });
-  </script>
-</body>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta
+      property="og:image"
+      content="https://www.mariocatena.com/hero-social.avif"
+    />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta
+      property="twitter:image"
+      content="https://www.mariocatena.com/hero-social.avif"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      // ── Scroll reveal ──
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(
+          ".reveal, .stat-block, .testi-card, .cta-card, .tarifa-card",
+        )
+        .forEach((el) => {
+          revealObserver.observe(el);
+        });
+    </script>
+  </body>
 </html>
