@@ -1,63 +1,203 @@
 ---
 import { Image } from "astro:assets";
+import { heroData as data } from "../data/hero";
 import ofiImg from "../assets/img/ofi-ia.png";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
-<section class="hero-section">
-  <p class="hero-eyebrow">Psicología Clínica &amp; Bienestar · Zaragoza</p>
-  <h1 class="hero-title">
-    Psicología<br />adaptada <em>a ti.</em>
-  </h1>
-  <div class="hero-bottom">
-    <p class="hero-sub">
-      Un espacio de terapia cercano y centrado en ti. Acompañándote en tu
-      proceso de cambio, sanación y crecimiento personal.
-    </p>
-    <div class="hero-actions">
-      <a href="#contacto" class="btn-dark">Reserva tu Cita</a>
-      <a href="#sobre-mi" class="btn-ghost">Sobre mí</a>
+<section class="hero">
+  <div class="hero__intro">
+    <p class="hero__eyebrow">{data.eyebrow}</p>
+    <h1 class="hero__title" set:html={data.title} />
+    <div class="hero__bottom">
+      <p class="hero__subtitle">{data.subtitle}</p>
+      <div class="hero__actions">
+        {data.actions.map(action => (
+          <a 
+            href={action.href.startsWith("#") ? `${baseUrl}${action.href}` : action.href} 
+            class={`btn-${action.variant}`}
+          >
+            {action.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__visual">
+    <div class="hero__card">
+      <div class="hero__image-wrapper">
+        <Image
+          src={ofiImg}
+          alt="Consulta de psicología de Mario Catena en Zaragoza"
+          class="hero__image"
+          loading="eager"
+        />
+        <div class="hero__overlay"></div>
+      </div>
+      <div class="hero__caption">
+        <div class="hero__caption-bar"></div>
+        <p class="hero__caption-text">{data.caption}</p>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="hero-img-section">
-  <div class="hero-img-card">
-    <div class="hero-img-bg">
-      <Image
-        src={ofiImg}
-        alt="Consulta de psicología de Mario Catena en Zaragoza"
-        class="hero-image"
-      />
-      <div class="hero-img-overlay"></div>
-    </div>
-    <div class="hero-img-caption">
-      <div class="caption-bar"></div>
-      <p class="caption-text">
-        Consulta presencial en Zaragoza, Camino de las Torres 27 · Sesiones
-        online disponibles.
-      </p>
-    </div>
-  </div>
-</div>
+<style lang="scss">
+  .hero {
+    &__intro {
+      padding: 8.75rem 3rem 4.5rem;
+      max-width: 80rem;
+      margin: 0 auto;
 
-<style>
-  .hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: left;
-    position: absolute;
-    inset: 0;
+      @media (max-width: 64rem) {
+        padding: 8.75rem 1.75rem 4.5rem;
+      }
+    }
+
+    &__eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      transform: translateY(1rem);
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+
+    &__title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3.75rem, 8.5vw, 7.375rem);
+      font-weight: 400;
+      line-height: 0.94;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      max-width: 59.375rem;
+      opacity: 0;
+      transform: translateY(1.5rem);
+      animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+
+      :global(em) {
+        font-style: italic;
+        color: var(--sage);
+      }
+    }
+
+    &__bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 3rem;
+      margin-top: 3.25rem;
+      opacity: 0;
+      transform: translateY(1rem);
+      animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
+
+      @media (max-width: 42.5rem) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.75rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 0.9375rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      max-width: 23.75rem;
+    }
+
+    &__actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    &__visual {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 3rem 6.25rem;
+      opacity: 0;
+      animation: fadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+
+      @media (max-width: 64rem) {
+        padding: 0 1.75rem 4.5rem;
+      }
+    }
+
+    &__card {
+      width: 100%;
+      height: 68vh;
+      min-height: 28.75rem;
+      max-height: 42.5rem;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #222B20;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &__image-wrapper {
+      position: absolute;
+      inset: 0;
+    }
+
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left;
+      position: absolute;
+      inset: 0;
+    }
+
+    &__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(26, 25, 22, 0.95) 0%,
+        rgba(26, 25, 22, 0.166) 45%
+      );
+      pointer-events: none;
+    }
+
+    &__caption {
+      position: relative;
+      z-index: 2;
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 1.125rem;
+
+      @media (max-width: 42.5rem) {
+        padding: 1.5rem;
+      }
+    }
+
+    &__caption-bar {
+      width: 0.125rem;
+      height: 3.75rem;
+      background: rgba(255, 255, 255, 0.3);
+      flex-shrink: 0;
+    }
+
+    &__caption-text {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.65;
+      max-width: 23.75rem;
+    }
   }
 
-  .hero-img-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to top,
-      rgba(26, 25, 22, 0.95) 0%,
-      rgba(26, 25, 22, 0.166) 45%
-    );
-    pointer-events: none;
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(1.5rem); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
