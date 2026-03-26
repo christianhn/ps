@@ -1,19 +1,82 @@
 ---
-
+import { footerData as data } from "../data/footer";
+const currentYear = new Date().getFullYear();
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
-<footer>
-  <a href={import.meta.env.BASE_URL} class="footer-logo">Mario Catena</a>
-  <div class="footer-links">
-    <a href={`${import.meta.env.BASE_URL}politica-privacidad/`}
-      >Política de Privacidad</a
-    >
-    <a href={`${import.meta.env.BASE_URL}politica-privacidad/#aviso-legal`}
-      >Aviso Legal</a
-    >
-    <a href={`${import.meta.env.BASE_URL}#contacto`}>Contacto</a>
+<footer class="footer">
+  <div class="footer__container">
+    <a href={`${baseUrl}/`} class="footer__logo">{data.logo}</a>
+    
+    <nav class="footer__nav" aria-label="Enlaces legales">
+      {data.links.map(link => (
+        <a href={link.href.startsWith("http") ? link.href : `${baseUrl}${link.href}`} class="footer__link">
+          {link.label}
+        </a>
+      ))}
+    </nav>
+    
+    <span class="footer__copy">
+      © {currentYear} {data.copy}
+    </span>
   </div>
-  <span class="footer-copy"
-    >© {new Date().getFullYear()} Mario Catena Psicología · Todos los derechos reservados</span
-  >
 </footer>
+
+<style lang="scss">
+  .footer {
+    border-top: 0.5px solid var(--pill-border);
+    padding: 2rem 0;
+
+    &__container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+
+      @media (max-width: 42.5rem) {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 1.5rem;
+      }
+    }
+
+    &__logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 0.9375rem;
+      color: var(--ink);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    &__link {
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+
+    &__copy {
+      font-size: 0.6875rem;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+  }
+</style>
