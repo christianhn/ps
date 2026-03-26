@@ -302,9 +302,6 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
   align-items: center;
 }
 
-.split-section.reverse {
-  /* grid-template-columns: 1fr 56%; */
-}
 .split-section.reverse .split-img { order: 2; }
 .split-section.reverse .split-content { order: 1; }
 
