@@ -1,12 +1,18 @@
 ---
-
+import { navData } from "../data/nav";
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
-<nav class="nav-wrap">
-  <div class="nav-inner">
-    <div class="nav-inner-top">
-      <a href={import.meta.env.BASE_URL} class="nav-logo">Mario Catena</a>
-      <button class="mobile-menu-btn" aria-label="Abrir menú">
+<nav class="nav" id="main-nav">
+  <div class="nav__inner">
+    <div class="nav__header">
+      <a href={`${baseUrl}/`} class="nav__logo">{navData.logo}</a>
+      <button
+        class="nav__toggle mobile-menu-btn"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="nav-list"
+      >
         <svg
           width="24"
           height="24"
@@ -20,84 +26,99 @@
         </svg>
       </button>
     </div>
-    <ul class="nav-links">
-      <li><a href="#ayuda">Cómo puedo ayudarte</a></li>
-      <li><a href="#servicios">Servicios</a></li>
-      <li><a href="#tarifas">Tarifas</a></li>
-      <li><a href="#sobre-mi">Sobre mí</a></li>
-      <li><a href="#contacto" class="btn-dark">Pedir Cita</a></li>
+
+    <ul class="nav__list" id="nav-list">
+      {
+        navData.links.map((link) => (
+          <li class="nav__item">
+            <a
+              href={`${baseUrl}${link.href}`}
+              class:list={[
+                "nav__link",
+                { "btn-dark": link.variant === "primary" },
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </nav>
 
 <script>
-  const nav = document.querySelector(".nav-inner") as HTMLElement;
-  const darkElements = document.querySelectorAll(
-    ".ayuda-section, .stats-section, .cta-card",
-  );
+  const setupNav = () => {
+    const navInner = document.querySelector(".nav__inner") as HTMLElement;
+    const navList = document.querySelector(".nav__list") as HTMLElement;
+    const menuBtn = document.querySelector(
+      ".mobile-menu-btn",
+    ) as HTMLButtonElement;
 
-  if (nav && darkElements.length > 0) {
-    let ticking = false;
+    if (!navInner || !menuBtn || !navList) return;
 
-    function updateTheme() {
-      const navRect = nav.getBoundingClientRect();
+    // 1. Theme Switcher (Adapts to dark backgrounds)
+    // We target refactored classes and common dark containers
+    const darkSections = document.querySelectorAll(
+      ".ayuda, .contacto__card, .stats-section",
+    );
+
+    const updateTheme = () => {
+      const navRect = navInner.getBoundingClientRect();
       const navCenterY = navRect.top + navRect.height / 2;
 
       let isOverDark = false;
-      for (const el of darkElements) {
-        const rect = el.getBoundingClientRect();
+      for (const section of darkSections) {
+        const rect = section.getBoundingClientRect();
+        // Check if nav center is within section vertical bounds
         if (navCenterY >= rect.top && navCenterY <= rect.bottom) {
           isOverDark = true;
           break;
         }
       }
 
-      if (isOverDark) {
-        nav.classList.add("nav-dark");
-      } else {
-        nav.classList.remove("nav-dark");
+      navInner.classList.toggle("nav__inner--dark", isOverDark);
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateTheme();
+          ticking = false;
+        });
+        ticking = true;
       }
-      ticking = false;
-    }
+    };
 
-    window.addEventListener(
-      "scroll",
-      () => {
-        if (!ticking) {
-          window.requestAnimationFrame(updateTheme);
-          ticking = true;
-        }
-      },
-      { passive: true },
-    );
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateTheme(); // Initial check
 
-    // Initial check
-    updateTheme();
-  }
+    // 2. Mobile Menu Toggle
+    const toggleMenu = () => {
+      const isOpen = navList.classList.toggle("nav__list--open");
+      menuBtn.classList.toggle("nav__toggle--open", isOpen);
+      menuBtn.setAttribute("aria-expanded", isOpen.toString());
+    };
 
-  // Mobile menu toggle
-  const menuBtn = document.querySelector(".mobile-menu-btn");
-  const navLinksList = document.querySelector(".nav-links");
+    menuBtn.addEventListener("click", toggleMenu);
 
-  if (menuBtn && navLinksList) {
-    menuBtn.addEventListener("click", () => {
-      navLinksList.classList.toggle("nav-open");
-      menuBtn.classList.toggle("is-open");
-    });
-
-    // Close menu when clicking a link
-    navLinksList.querySelectorAll("a").forEach((link) => {
+    // Close menu when clicking links
+    navList.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
-        navLinksList.classList.remove("nav-open");
-        menuBtn.classList.remove("is-open");
+        navList.classList.remove("nav__list--open");
+        menuBtn.classList.remove("nav__toggle--open");
+        menuBtn.setAttribute("aria-expanded", "false");
       });
     });
-  }
+  };
+
+  // Run on first load and on every page navigation (View Transitions)
+  document.addEventListener("astro:page-load", setupNav);
 </script>
 
-<style>
-  /* ── NAV ── */
-  .nav-wrap {
+<style lang="scss">
+  .nav {
     position: fixed;
     top: 1rem;
     left: 50%;
@@ -105,153 +126,161 @@
     z-index: 100;
     width: calc(100% - 3rem);
     max-width: 80rem;
-  }
 
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(249, 247, 243, 0.85);
-    backdrop-filter: blur(1.125rem);
-    -webkit-backdrop-filter: blur(1.125rem);
-    border: 0.5px solid var(--pill-border);
-    border-radius: 3.125rem;
-    padding: 0.625rem 0.75rem 0.625rem 1.75rem;
-    transition:
-      background-color 0.4s ease,
-      border-color 0.4s ease;
-  }
-
-  .nav-inner.nav-dark {
-    background: rgba(26, 25, 22, 0.85);
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-
-  .nav-inner-top {
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-logo {
-    font-family: "DM Serif Display", serif;
-    font-size: 1.0625rem;
-    font-weight: 400;
-    color: var(--ink);
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.4s ease;
-  }
-
-  .nav-inner.nav-dark .nav-logo {
-    color: var(--cream);
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 1.75rem;
-    list-style: none;
-  }
-
-  .nav-links a {
-    font-size: 0.8125rem;
-    font-weight: 400;
-    text-decoration: none;
-    transition: color 0.4s ease;
-  }
-
-  .nav-inner.nav-dark .nav-links a {
-    color: rgba(255, 255, 255, 0.65);
-  }
-  .nav-inner.nav-dark .nav-links a:hover {
-    color: rgba(255, 255, 255, 1);
-  }
-
-  .nav-inner.nav-dark .btn-dark {
-    background: var(--cream);
-    color: var(--ink) !important;
-  }
-
-  /* ── MOBILE MENU ── */
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--ink);
-    cursor: pointer;
-    padding: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    transition: color 0.3s;
-  }
-  .nav-inner.nav-dark .mobile-menu-btn {
-    color: white;
-  }
-  .mobile-menu-btn .line-top,
-  .mobile-menu-btn .line-bot {
-    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .mobile-menu-btn .line-top {
-    transform-origin: 0.75rem 0.5rem;
-  }
-  .mobile-menu-btn .line-bot {
-    transform-origin: 0.75rem 1rem;
-  }
-  .mobile-menu-btn.is-open .line-top {
-    transform: translateY(0.25rem) rotate(45deg);
-  }
-  .mobile-menu-btn.is-open .line-bot {
-    transform: translateY(-0.25rem) rotate(-45deg);
-  }
-
-  @media (max-width: 42.5rem) {
-    .nav-inner {
-      padding: 0.75rem 0.75rem;
-      flex-direction: column;
-      align-items: stretch;
-      border-radius: 1.5rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .nav-inner-top {
+    &__inner {
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      width: 100%;
-      padding: 0 0.5rem;
-    }
-    .mobile-menu-btn {
-      display: flex;
-    }
-    .nav-links {
-      display: flex;
-      flex-direction: column;
-      position: static;
-      background: transparent;
-      padding: 0 0.5rem;
-      gap: 1.25rem;
-      margin: 0;
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      pointer-events: none;
+      background: rgba(249, 247, 243, 0.85);
+      backdrop-filter: blur(1.125rem);
+      -webkit-backdrop-filter: blur(1.125rem);
+      border: 0.5px solid var(--pill-border);
+      border-radius: 3.125rem;
+      padding: 0.625rem 0.75rem 0.625rem 1.75rem;
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+      // Normal mode (Light Nav)
+      .btn-dark {
+        background: var(--ink);
+        color: var(--cream);
+        padding: 0.625rem 1.25rem;
+        font-size: 0.75rem;
+        border-radius: 2rem;
+
+        &:hover {
+          background: var(--ink-mid);
+          color: var(--white);
+        }
+      }
+
+      &--dark {
+        background: rgba(26, 25, 22, 0.85);
+        border-color: rgba(255, 255, 255, 0.15);
+
+        .nav__logo {
+          color: var(--white);
+        }
+        .nav__link {
+          color: var(--white-60);
+          &:hover {
+            color: var(--white);
+          }
+        }
+        .nav__toggle {
+          color: var(--white);
+        }
+
+        // Button in Dark Nav
+        .btn-dark {
+          background: var(--white);
+          color: var(--ink);
+
+          &:hover {
+            background: var(--cream);
+            color: var(--ink);
+          }
+        }
+      }
+
+      @media (max-width: 50rem) {
+        padding: 0.75rem;
+        flex-direction: column;
+        align-items: stretch;
+        border-radius: 1.5rem;
+      }
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__logo {
+      font-family: "DM Serif Display", serif;
+      font-size: 1.0625rem;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.4s ease;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+
+    &__list {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      list-style: none;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+      @media (max-width: 50rem) {
+        flex-direction: column;
+        gap: 1.25rem;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        padding: 0;
+
+        &--open {
+          max-height: 25rem;
+          opacity: 1;
+          pointer-events: auto;
+          padding: 1.5rem 0.5rem 0.75rem;
+        }
+      }
+    }
+
+    &__link {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--ink-mid);
+      text-decoration: none;
+      transition: color 0.4s ease;
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+
+    &__toggle {
+      display: none;
+      background: none;
       border: none;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-    .nav-links.nav-open {
-      max-height: 25rem;
-      opacity: 1;
-      pointer-events: auto;
-      padding-top: 1.5rem;
-      padding-bottom: 0.75rem;
-    }
-    .nav-inner.nav-dark .nav-links {
-      background: transparent;
-      border-color: transparent;
-    }
-    .nav-inner.nav-dark .nav-links a {
-      color: white;
+      color: var(--ink);
+      cursor: pointer;
+      padding: 0.5rem;
+      transition: color 0.3s;
+
+      @media (max-width: 50rem) {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .line-top,
+      .line-bot {
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .line-top {
+        transform-origin: 12px 8px;
+      }
+      .line-bot {
+        transform-origin: 12px 16px;
+      }
+
+      &--open {
+        .line-top {
+          transform: translateY(4px) rotate(45deg);
+        }
+        .line-bot {
+          transform: translateY(-4px) rotate(-45deg);
+        }
+      }
     }
   }
 </style>
