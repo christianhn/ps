@@ -2,7 +2,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --cream: #fcfcfc;
+  --cream: #fbfbfb;
   --cream-dark: #E5E5E5;
   --cream-mid: #EDEDED;
   --white: #ffffff;
@@ -68,6 +68,8 @@ h1, h2, h3 { font-family: "Helvetica", "Arial", sans-serif; font-weight: 700; }
   margin: 0 auto;
   padding: 0 3rem;
 }
+
+.no-wrap { white-space: nowrap; }
 
 /* ── BUTTONS ── */
 .btn-dark {

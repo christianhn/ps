@@ -13,14 +13,20 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="hero__bottom">
       <p class="hero__subtitle">{data.subtitle}</p>
       <div class="hero__actions">
-        {data.actions.map(action => (
-          <a 
-            href={action.href.startsWith("#") ? `${baseUrl}${action.href}` : action.href} 
-            class={`btn-${action.variant}`}
-          >
-            {action.label}
-          </a>
-        ))}
+        {
+          data.actions.map((action) => (
+            <a
+              href={
+                action.href.startsWith("#")
+                  ? `${baseUrl}/${action.href}`
+                  : action.href
+              }
+              class={`btn-${action.variant}`}
+            >
+              {action.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -47,12 +53,16 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 <style lang="scss">
   .hero {
     &__intro {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 8.75rem 3rem 4.5rem;
       max-width: 80rem;
       margin: 0 auto;
 
       @media (max-width: 64rem) {
-        padding: 8.75rem 1.75rem 4.5rem;
+        padding: 4.5rem 1.75rem;
       }
     }
 
@@ -66,6 +76,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       opacity: 0;
       transform: translateY(1rem);
       animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      text-align: center;
+
+      @media (max-width: 42.5rem) {
+        text-align: left;
+      }
     }
 
     &__title {
@@ -75,29 +90,31 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       line-height: 0.94;
       letter-spacing: -0.025em;
       color: var(--ink);
-      max-width: 59.375rem;
       opacity: 0;
       transform: translateY(1.5rem);
       animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+      color: var(--sage);
+      text-align: center;
 
-      :global(em) {
-        font-style: italic;
-        color: var(--sage);
+      @media (max-width: 42.5rem) {
+        text-align: left;
+        max-width: 59.375rem;
       }
     }
 
     &__bottom {
       display: flex;
       align-items: flex-end;
-      justify-content: space-between;
+      justify-content: center;
       gap: 3rem;
-      margin-top: 3.25rem;
+      margin-top: 2rem;
       opacity: 0;
       transform: translateY(1rem);
       animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
 
       @media (max-width: 42.5rem) {
         flex-direction: column;
+        justify-content: space-between;
         align-items: flex-start;
         gap: 1.75rem;
       }
@@ -112,9 +129,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     &__actions {
-      display: flex;
+      display: none;
       gap: 0.75rem;
       flex-shrink: 0;
+
+      @media (max-width: 42.5rem) {
+        display: flex;
+      }
     }
 
     &__visual {
@@ -136,7 +157,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       max-height: 42.5rem;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #222B20;
+      background: #222b20;
       position: relative;
       display: flex;
       align-items: flex-end;
@@ -197,7 +218,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(1.5rem); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>

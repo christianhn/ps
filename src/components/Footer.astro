@@ -7,17 +7,27 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 <footer class="footer">
   <div class="footer__container">
     <a href={`${baseUrl}/`} class="footer__logo">{data.logo}</a>
-    
+
     <nav class="footer__nav" aria-label="Enlaces legales">
-      {data.links.map(link => (
-        <a href={link.href.startsWith("http") ? link.href : `${baseUrl}${link.href}`} class="footer__link">
-          {link.label}
-        </a>
-      ))}
+      {
+        data.links.map((link) => (
+          <a
+            href={
+              link.href.startsWith("http")
+                ? link.href
+                : `${baseUrl}/${link.href}`
+            }
+            class="footer__link"
+          >
+            {link.label}
+          </a>
+        ))
+      }
     </nav>
-    
+
     <span class="footer__copy">
-      © {currentYear} {data.copy}
+      © {currentYear}
+      {data.copy}
     </span>
   </div>
 </footer>
