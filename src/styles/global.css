@@ -2,13 +2,14 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --cream: #f9f7f3;
-  --cream-dark: #EAE6DE;
-  --cream-mid: #F2EFE8;
+  --cream: #fcfcfc;
+  --cream-dark: #E5E5E5;
+  --cream-mid: #EDEDED;
+  --white: #ffffff;
   --ink: #1A1916;
-  --ink-mid: #4A4844;
-  --ink-light: #9A9690;
-  --sage: #008AFC;
+  --ink-mid: #4D4D4D;
+  --ink-light: #666666;
+  --sage: #0084FF;
   --sage-light: #66BFFF;
   --sage-pale: #E5F3FF;
   --pill-border: rgba(26,25,22,0.14);
@@ -36,7 +37,7 @@
 html { scroll-behavior: smooth; font-size: 1rem; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   background: var(--cream);
   color: var(--ink);
   overflow-x: hidden;
@@ -48,9 +49,9 @@ a { color: inherit; }
 button { cursor: pointer; font-family: inherit; }
 
 /* ── TYPOGRAPHY ── */
-.serif { font-family: 'DM Serif Display', serif; }
+.serif { font-family: "Helvetica", "Arial", sans-serif; }
 
-h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
+h1, h2, h3 { font-family: "Helvetica", "Arial", sans-serif; font-weight: 700; }
 
 /* ── UTILITIES ── */
 .eyebrow {
@@ -159,7 +160,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
 }
 
 .statement-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: clamp(2.75rem, 6.5vw, 6rem);
   font-weight: 400;
   line-height: 1.0;
@@ -216,7 +217,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
 .split-content { padding: 1rem 0; }
 
 .split-title {
-  font-family: 'DM Serif Display', serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: clamp(1.875rem, 3.2vw, 2.875rem);
   font-weight: 400;
   line-height: 1.1;
@@ -256,7 +257,7 @@ h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; }
 .stat-block:last-child { border-right: none; }
 
 .stat-num {
-  font-family: 'DM Serif Display', serif;
+  font-family: "Helvetica", "Arial", sans-serif;
   font-size: clamp(3.5rem, 6vw, 5rem);
   font-weight: 400;
   color: white;
