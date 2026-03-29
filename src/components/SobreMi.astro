@@ -1,350 +1,404 @@
 ---
 import { Image } from "astro:assets";
-import profileImg from "../assets/img/profile.avif";
-import imgOnline from "../assets/img/online.png";
+import { sobreMiData as data } from "../data/sobreMi";
 ---
 
-<section id="sobre-mi" class="sobre-section">
+<section id="sobre-mi" class="sobre">
   <!-- Statement -->
-  <div class="statement-section sobre-statement">
-    <h2 class="statement-title reveal">
-      La salud mental no es un lujo.<br />Es el punto de <em>partida.</em>
-    </h2>
+  <div class="sobre__statement reveal">
+    <h2 class="sobre__statement-title" set:html={data.statement.title} />
   </div>
 
-  <!-- Split: Foto + texto -->
-  <div class="split-section sobre-split">
-    <div class="split-img sobre-img-split">
-      <div class="split-img-inner">
-        <!-- Portrait image -->
+  <!-- Bio Section -->
+  <div class="sobre__split sobre__split--bio">
+    <div class="sobre__img-wrapper">
+      <div class="sobre__img-inner">
         <Image
-          src={profileImg}
-          alt="Mario Catena, Psicólogo"
-          class="sobre-portrait"
+          src={data.bio.image}
+          alt={data.bio.alt}
+          class="sobre__portrait"
         />
       </div>
     </div>
 
-    <div class="split-content reveal">
-      <p class="split-eyebrow eyebrow">Sobre mí</p>
-      <h2 class="split-title">Psicología que va<br />a la <em>raíz.</em></h2>
-      <p class="split-body">
-        Soy Mario, psicólogo general sanitario, amante de los acertijos,
-        acariciador de perros y tarareador profesional.
-      </p>
-      <p class="split-body">
-        En consulta me especializo en terapias contextuales basadas en la
-        evidencia, con un toque integrador.
-      </p>
-      <p class="split-body">
-        ¿Y qué significa esto? Resumidamente, apuesto por lo que más se adapte a
-        ti en cada momento de tu proceso.
-      </p>
-      <p class="split-body">
-        Mi objetivo es acompañarte en esta etapa, brindándote herramientas y un
-        ambiente donde te sientas segurx y libre para afrontar tus dificultades.
-      </p>
+    <div class="sobre__content reveal">
+      <p class="sobre__eyebrow">{data.bio.eyebrow}</p>
+      <h2 class="sobre__title" set:html={data.bio.title} />
+      {data.bio.paragraphs.map((text) => <p class="sobre__body">{text}</p>)}
     </div>
   </div>
 
-  <!-- Nueva Sección: Formación (Aislada de la columna) -->
-  <div class="formacion-section">
-    <div class="formacion-header reveal">
-      <p class="split-eyebrow eyebrow">Mi Experiencia</p>
-      <h2 class="split-title formacion-title">
-        Formación <em>Profesional.</em>
-      </h2>
-    </div>
+  <!-- Formacion -->
+  <article class="sobre__experience">
+    <header class="sobre__experience-header reveal">
+      <p class="sobre__eyebrow">{data.formacion.eyebrow}</p>
+      <h2
+        class="sobre__title sobre__title--experience"
+        set:html={data.formacion.title}
+      />
+    </header>
 
-    <div class="formacion-grid reveal">
-      <!-- UNED -->
-      <div class="formacion-card">
-        <p class="eyebrow card-subtitle">
-          Universidad Nacional de Educación a Distancia
-        </p>
-        <h3 class="split-title card-title">Grado en Psicología</h3>
-        <p class="split-body card-body">
-          Menciones en Intervención Clínica en Trastornos Mentales y del
-          Comportamiento y Psicología de la Salud.
-        </p>
-      </div>
-
-      <!-- UEV -->
-      <div class="formacion-card">
-        <p class="eyebrow card-subtitle">Universidad Europea de Valencia</p>
-        <h3 class="split-title card-title">Máster Universitario</h3>
-        <p class="split-body card-body">Psicología General Sanitaria.</p>
-      </div>
+    <div class="sobre__experience-grid reveal">
+      {
+        data.formacion.cards.map((card) => (
+          <div class="sobre__experience-card">
+            <p class="sobre__eyebrow sobre__eyebrow--institution">
+              {card.institution}
+            </p>
+            <h3 class="sobre__card-title">{card.title}</h3>
+            <p class="sobre__card-description">{card.description}</p>
+          </div>
+        ))
+      }
 
       <!-- ISIAS -->
-      <div class="formacion-card full-width">
-        <p class="eyebrow card-subtitle">
-          Instituto Superior de Intervención y Acción Social
+      <div class="sobre__experience-card sobre__experience-card--full">
+        <p class="sobre__eyebrow sobre__eyebrow--institution">
+          {data.formacion.isias.institution}
         </p>
-        <ul class="formicion-list-vertical">
-          <li>
-            <h3 class="split-title li-title">Experto en Psicoterapia</h3>
-            <p class="split-body li-body">En Infancia y Adolescencia.</p>
-          </li>
-          <li>
-            <h3 class="split-title li-title">Experto en T.E.A</h3>
-            <p class="split-body li-body">
-              Diagnóstico, intervención e inclusión social del Trastorno del
-              Espectro Autista.
-            </p>
-          </li>
-          <li>
-            <h3 class="split-title li-title">Educación y Gestión Emocional</h3>
-            <p class="split-body li-body">
-              Formación en Educación Emocional y Gestión Emocional en la
-              Infancia.
-            </p>
-          </li>
+        <ul class="sobre__list-vertical">
+          {
+            data.formacion.isias.items.map((item) => (
+              <li class="sobre__list-item">
+                <h3 class="sobre__list-title">{item.title}</h3>
+                <p class="sobre__list-description">{item.description}</p>
+              </li>
+            ))
+          }
         </ul>
       </div>
 
       <!-- AEPS -->
-      <div class="formacion-card full-width">
-        <p class="eyebrow card-subtitle">
-          Asociación Española de Psicología Sanitaria
+      <div class="sobre__experience-card sobre__experience-card--full">
+        <p class="sobre__eyebrow sobre__eyebrow--institution">
+          {data.formacion.aeps.institution}
         </p>
-        <ul class="formacion-list-grid">
-          <li>Terapia de Aceptación y Compromiso ACT</li>
-          <li>Terapia Dialéctico-Conductual DBT</li>
-          <li>Intervención en Duelo</li>
-          <li>Tratamiento psicológico del dolor crónico</li>
-          <li>Terapia de Pareja Breve Estratégica</li>
-          <li>Adicción a las tecnologías</li>
-          <li>PAS. Personas altamente sensibles</li>
-          <li>Apego adulto: Modelo PARCUVE</li>
+        <ul class="sobre__list-grid">
+          {data.formacion.aeps.list.map((item) => <li>{item}</li>)}
         </ul>
       </div>
 
-      <!-- Otras formaciones -->
-      <div class="formacion-card full-width">
-        <p class="eyebrow card-subtitle">Otras formaciones</p>
-        <div class="otras-grid">
-          <div>
-            <h3 class="split-title sub-card-title">Modelo IFS</h3>
-            <p class="split-body card-body">
-              Cómo trabajar las partes y reparar el apego. COPPA.
-            </p>
-          </div>
-          <div>
-            <h3 class="split-title sub-card-title">
-              Interpretación de la personalidad
-            </h3>
-            <p class="split-body card-body">
-              A través del dibujo y de la grafología. COPPA.
-            </p>
-          </div>
-          <div>
-            <h3 class="split-title sub-card-title">
-              Técnicas de estudio y soft skills
-            </h3>
-            <p class="split-body card-body">Memorización avanzada SL.</p>
-          </div>
+      <!-- Otras -->
+      <div class="sobre__experience-card sobre__experience-card--full">
+        <p class="sobre__eyebrow sobre__eyebrow--institution">
+          {data.formacion.otras.institution}
+        </p>
+        <div class="sobre__otras-grid">
+          {
+            data.formacion.otras.items.map((item) => (
+              <div class="sobre__subcard">
+                <h3 class="sobre__subcard-title">{item.title}</h3>
+                <p class="sobre__subcard-description">{item.description}</p>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>
 
-    <div class="formacion-footer reveal">
-      <p class="split-body footer-text">
-        Psicólogo Colegiado Nº Z-4567 <br /> Col·legi Oficial de Psicologia d'Aragó
-      </p>
-    </div>
-  </div>
+    <footer class="sobre__experience-footer reveal">
+      <p
+        class="sobre__experience-footer-text"
+        set:html={data.formacion.footer}
+      />
+    </footer>
+  </article>
 
-  <!-- Split: Online (reversed) -->
-  <div class="split-section reverse sobre-split-online">
-    <div class="split-content reveal">
-      <p class="split-eyebrow eyebrow">Terapia Online</p>
-      <h2 class="split-title">La misma calidad,<br />desde <em>casa.</em></h2>
-      <p class="split-body">
-        Las sesiones online ofrecen la misma profundidad terapéutica desde la
-        comodidad y privacidad de tu propio espacio. Sin desplazamientos, sin
-        barreras geográficas.
-      </p>
-      <p class="split-body">
-        Disponible para toda España. Plataforma segura, cifrada y 100%
-        confidencial.
-      </p>
-      <a href="#contacto" class="text-link online-link"
-        >Reservar sesión online →</a
-      >
+  <!-- Online Split -->
+  <div class="sobre__split sobre__split--online sobre__split--reverse">
+    <div class="sobre__content reveal">
+      <p class="sobre__eyebrow">{data.online.eyebrow}</p>
+      <h2 class="sobre__title" set:html={data.online.title} />
+      {data.online.paragraphs.map((text) => <p class="sobre__body">{text}</p>)}
+      <a href={data.online.cta.href} class="text-link sobre__online-link">
+        {data.online.cta.text} →
+      </a>
     </div>
 
-    <div class="split-img online-img-split">
-      <div class="split-img-inner">
+    <div class="sobre__img-wrapper sobre__img-wrapper--online">
+      <div class="sobre__img-inner">
         <Image
-          src={imgOnline}
-          alt="Sesión Online Segura"
-          class="sobre-portrait"
+          src={data.online.image}
+          alt={data.online.alt}
+          class="sobre__portrait"
         />
       </div>
-      <span class="fig-label">Fig. 2 — Sesión online segura</span>
+      <span class="sobre__fig-label">Fig. 2 — Sesión online segura</span>
     </div>
   </div>
 </section>
 
-<style>
-  .sobre-section .sobre-statement {
-    padding-bottom: 5rem;
-  }
+<style lang="scss">
+  .sobre {
+    padding: 6rem 0;
 
-  .sobre-section .split-section {
-    max-width: 100%;
-  }
+    &__container {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 3rem;
+    }
 
-  .sobre-section .sobre-split {
-    padding-bottom: 5rem;
-  }
+    // --- Typography Bases ---
+    &__eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
 
-  .sobre-section .sobre-img-split {
-    background: linear-gradient(145deg, #c4ccbe 0%, #d4dcd0 50%, #b4c0ae 100%);
-  }
+      &--institution {
+        margin-bottom: 1rem;
+        color: var(--sage);
+        overflow-wrap: break-word;
+        word-break: break-word;
+      }
+    }
 
-  .sobre-section .sobre-split-online {
-    padding: 0;
-  }
+    &__title {
+      font-family: inherit;
+      font-size: clamp(1.875rem, 3.2vw, 2.875rem);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+      margin: 1rem 0 1.25rem;
 
-  .sobre-portrait {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+      :global(em) {
+        font-style: italic;
+        color: var(--sage);
+      }
+      &--experience {
+        margin-top: 0.25rem;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
 
-  .formacion-section {
-    padding: 2.5rem 1.25rem 6.25rem;
-    max-width: 68.75rem;
-    margin: 0 auto;
-  }
+    &__body {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      & + & {
+        margin-top: 0.875rem;
+      }
+    }
 
-  .formacion-header {
-    text-align: center;
-    margin-bottom: 4.5rem;
-  }
+    // --- Layout Patterns ---
+    &__statement {
+      padding: 0 3rem 5rem;
+      text-align: center;
+      max-width: 80rem;
+      margin: 0 auto;
 
-  .formacion-title {
-    margin-top: 0.5rem;
-  }
+      &-title {
+        @extend .sobre__title;
+        font-size: clamp(2.75rem, 6.5vw, 6rem);
+        line-height: 1;
+        letter-spacing: -0.025em;
+        max-width: 65.625rem;
+        margin: 0 auto;
+      }
+    }
 
-  .formacion-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
-    gap: 3.5rem 4rem;
-    text-align: left;
-  }
+    &__split {
+      max-width: 80rem;
+      margin: 0 auto;
+      padding: 0 3rem 6rem;
+      display: grid;
+      grid-template-columns: 56% 1fr;
+      gap: 3.75rem;
+      align-items: center;
 
-  .card-subtitle {
-    margin-bottom: 1rem;
-    color: var(--sage);
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
+      &--bio {
+        padding-bottom: 5rem;
+      }
+      &--online {
+        padding-bottom: 0;
+      }
+      &--reverse {
+        .sobre__img-wrapper {
+          order: 2;
+        }
+        .sobre__content {
+          order: 1;
+        }
+      }
+    }
 
-  .formacion-card {
-    padding-top: 1.5rem;
-    border-top: 1px solid #c4ccbe;
-  }
+    &__img-wrapper {
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      position: relative;
+      background: linear-gradient(
+        145deg,
+        #c4ccbe 0%,
+        #d4dcd0 50%,
+        #b4c0ae 100%
+      );
 
-  .formacion-card.full-width {
-    grid-column: 1 / -1;
-  }
+      &--online {
+        background: linear-gradient(
+          145deg,
+          #b4c4c8 0%,
+          #c8d8dc 50%,
+          #a4b4b8 100%
+        );
+      }
+    }
 
-  .card-subtitle {
-    margin-bottom: 1rem;
-    color: var(--sage);
-  }
+    &__img-inner,
+    &__portrait {
+      width: 100%;
+      height: 100%;
+    }
+    &__portrait {
+      object-fit: cover;
+    }
 
-  .card-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.75rem;
-    font-style: normal;
-    line-height: 1.2;
-  }
+    &__fig-label {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      font-size: 0.6875rem;
+      color: var(--ink-light);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
 
-  .card-body {
-    font-size: 0.95rem;
-    margin: 0;
-  }
+    &__content {
+      padding: 1rem 0;
+    }
 
-  .formicion-list-vertical {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
+    // --- Experience Section ---
+    &__experience {
+      padding: 2.5rem 3rem 6.25rem;
+      max-width: 80rem;
+      margin: 0 auto;
 
-  .li-title {
-    font-size: 1.2rem;
-    margin-bottom: 0.25rem;
-    font-style: normal;
-    line-height: 1.2;
-  }
+      &-header {
+        text-align: center;
+        margin-bottom: 4.5rem;
+      }
+      &-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3.5rem 4rem;
+        text-align: left;
+      }
+      &-card {
+        padding-top: 1rem;
+        border-top: 1px solid #c4ccbe;
+        &--full {
+          grid-column: 1 / -1;
+        }
+      }
+      &-footer {
+        margin-top: 5rem;
+        text-align: center;
+        &-text {
+          font-size: 0.875rem;
+          font-style: italic;
+          color: var(--sage);
+          line-height: 1.6;
+        }
+      }
+    }
 
-  .li-body {
-    font-size: 0.95rem;
-    margin: 0;
-  }
+    &__card-title,
+    &__list-title,
+    &__subcard-title {
+      font-size: 1.3rem;
+      font-weight: 400;
+      line-height: 1.2;
+      letter-spacing: -0.015em;
+      margin: 1rem 0 0.75rem;
+      color: var(--ink);
+    }
 
-  .formacion-list-grid {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
-    gap: 1rem 2rem;
-  }
+    &__list-title,
+    &__subcard-title {
+      margin: 0 0 0.5rem;
+    }
 
-  .formacion-list-grid li {
-    font-size: 0.95rem;
-    margin: 0;
-    position: relative;
-    padding-left: 1rem;
-    color: var(--ink-mid);
-    line-height: 1.85;
-    font-weight: 300;
-  }
+    &__card-description,
+    &__list-description,
+    &__subcard-description {
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+      line-height: 1.7;
+      font-weight: 300;
+    }
 
-  .formacion-list-grid li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--sage);
-  }
+    &__list-vertical,
+    &__list-grid,
+    &__otras-grid {
+      list-style: none;
+      display: grid;
+    }
+    &__list-vertical {
+      gap: 2.25rem;
+    }
+    &__otras-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
+      gap: 2.25rem 3rem;
+    }
+    &__list-grid {
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
+      gap: 1rem 2rem;
+      li {
+        font-size: 0.95rem;
+        color: var(--ink-mid);
+        font-weight: 300;
+        position: relative;
+        padding-left: 1rem;
+        line-height: 1.85;
+        &::before {
+          content: "•";
+          position: absolute;
+          left: 0;
+          color: var(--sage);
+        }
+      }
+    }
 
-  .otras-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
-    gap: 2rem 3rem;
-  }
+    &__online-link {
+      margin-top: 1.75rem;
+      display: inline-flex;
+    }
 
-  .sub-card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-    font-style: normal;
-    line-height: 1.2;
-  }
+    // --- Global Media Queries ---
+    @media (max-width: 64rem) {
+      &__statement,
+      &__split,
+      &__experience {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+      &__split {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        &--reverse {
+          .sobre__img-wrapper {
+            order: 0;
+          }
+          .sobre__content {
+            order: 0;
+          }
+        }
+      }
+      &__img-wrapper {
+        aspect-ratio: 16/19;
+      }
+    }
 
-  .formacion-footer {
-    margin-top: 5rem;
-    text-align: center;
-  }
-
-  .footer-text {
-    font-style: italic;
-    color: var(--sage);
-  }
-
-  .online-link {
-    margin-top: 1.75rem;
-    display: inline-flex;
-  }
-
-  .sobre-section .online-img-split {
-    background: linear-gradient(145deg, #b4c4c8 0%, #c8d8dc 50%, #a4b4b8 100%);
+    @media (max-width: 50rem) {
+      &__experience-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   }
 </style>

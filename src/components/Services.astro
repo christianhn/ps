@@ -3,131 +3,176 @@ import { Image } from "astro:assets";
 import { servicesData as services } from "../data/services";
 ---
 
-<section id="servicios" class="services-section">
-  <div class="services-top reveal">
-    <h2 class="services-title">Servicios especializados.</h2>
-    <p class="services-sub">
-      Atención adaptada a tus necesidades a través de diferentes modalidades
-      terapéuticas.
-    </p>
-  </div>
+<section id="servicios" class="services">
+  <div class="services__container">
+    <header class="services__header reveal">
+      <p class="services__eyebrow">Especialidades</p>
+      <h2 class="services__title">Servicios <em>especializados.</em></h2>
+      <p class="services__subtitle">
+        Atención adaptada a tus necesidades a través de diferentes modalidades
+        terapéuticas.
+      </p>
+    </header>
 
-  <services-tabs>
-    <div class="services-joby">
-      <!-- Left: list -->
-      <ul class="services-list reveal" role="tablist">
-        {
-          services.map((s, i) => (
-            <li
-              role="tab"
-              aria-selected={i === 0 ? "true" : "false"}
-              aria-controls={`service-panel-${i}`}
-              class={i === 0 ? "active" : ""}
-              tabindex="0"
-            >
-              {s.title}
-            </li>
-          ))
-        }
-      </ul>
-
-      <!-- Center: image -->
-      <div class="service-img-wrap reveal reveal-delay-1">
-        {
-          services.map((s, i) => (
-            <div
-              class={`service-img-panel${i === 0 ? " active" : ""}`}
-              style={`position:${i === 0 ? "relative" : "absolute"};inset:0;width:100%;height:100%;display:${i === 0 ? "flex" : "none"};align-items:center;justify-content:center;background:${s.bg};`}
-            >
-              <Image
-                src={s.img}
-                alt={s.title}
-                style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9;"
-                loading={i === 0 ? "eager" : "lazy"}
-              />
-              <span class="fig-label">
-                Fig. {i + 1} — {s.title}
-              </span>
-            </div>
-          ))
-        }
-      </div>
-
-      <!-- Right: description -->
-      <div class="service-desc-col reveal reveal-delay-2">
-        {
-          services.map((s, i) => (
-            <div
-              id={`service-panel-${i}`}
-              role="tabpanel"
-              tabindex="0"
-              class={`service-panel${i === 0 ? " active" : ""}`}
-            >
-              <span class="svc-num">
-                {s.num} / {s.title}
-              </span>
-              <div class="svc-title">{s.title}.</div>
-              <p class="svc-body">{s.body}</p>
-              <a
-                href="#contacto"
-                data-service={s.svc}
-                class="text-link"
-                style="margin-top:1.5rem; display:inline-flex;"
+    <services-tabs class="services__tabs">
+      <div class="services__layout">
+        <!-- Left: list -->
+        <ul class="services__list reveal" role="tablist">
+          {
+            services.map((s, i) => (
+              <li
+                role="tab"
+                aria-selected={i === 0 ? "true" : "false"}
+                aria-controls={`service-panel-${i}`}
+                class={`services__item ${i === 0 ? "services__item--active" : ""}`}
+                tabindex="0"
               >
-                Reservar sesión →
-              </a>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </services-tabs>
+                {s.title}
+              </li>
+            ))
+          }
+        </ul>
 
-  <style>
-    /* ── SERVICES ── */
-    .services-section {
+        <!-- Center: image -->
+        <div class="services__image-col reveal">
+          <div class="services__image-wrapper">
+            {
+              services.map((s, i) => (
+                <div
+                  class={`services__image-panel ${i === 0 ? "services__image-panel--active" : ""}`}
+                  id={`service-img-${i}`}
+                  style={`background: ${s.bg}`}
+                >
+                  <Image
+                    src={s.img}
+                    alt={s.title}
+                    class="services__image"
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                  <span class="services__fig-label">
+                    Fig. {i + 1} — {s.title}
+                  </span>
+                </div>
+              )
+              )
+            }
+          </div>
+        </div>
+
+        <!-- Right: description -->
+        <div class="services__content-col reveal">
+          {
+            services.map((s, i) => (
+              <div
+                id={`service-panel-${i}`}
+                role="tabpanel"
+                tabindex="0"
+                class={`services__panel ${i === 0 ? "services__panel--active" : ""}`}
+              >
+                <p class="services__num">
+                  {s.num} / {s.title}
+                </p>
+                <h3 class="services__panel-title">{s.title}.</h3>
+                <p class="services__panel-body">{s.body}</p>
+                <a
+                  href="#contacto"
+                  data-service={s.svc}
+                  class="text-link services__cta"
+                >
+                  Reservar sesión →
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </services-tabs>
+  </div>
+</section>
+
+<style lang="scss">
+  .services {
+    padding: 6rem 0;
+
+    &__container {
       max-width: 80rem;
       margin: 0 auto;
-      padding: 6rem 3rem;
+      padding: 0 3rem;
     }
 
-    .services-top {
+    &__header {
+      text-align: center;
+      margin-bottom: 4.5rem;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding-bottom: 2.5rem;
-      border-bottom: 0.5px solid var(--pill-border);
-      margin-bottom: 3.75rem;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .services-title {
-      font-family: "Helvetica", "Arial", sans-serif;
-      font-size: clamp(2.25rem, 4vw, 3.375rem);
-      font-weight: 700;
+    &__eyebrow {
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+    }
+
+    &__title {
+      font-family: inherit;
+      font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+      font-weight: 400;
       letter-spacing: -0.015em;
       color: var(--ink);
+      line-height: 1.1;
+
+      em {
+        font-style: italic;
+        color: var(--sage);
+      }
     }
 
-    .services-sub {
-      font-size: 0.875rem;
+    &__subtitle {
+      font-size: 0.9375rem;
       font-weight: 300;
       color: var(--ink-mid);
-      max-width: 18.75rem;
-      text-align: right;
+      margin-top: 1rem;
       line-height: 1.7;
+      max-width: 31.25rem;
     }
 
-    .services-joby {
+    &__layout {
       display: grid;
-      grid-template-columns: 12.5rem 1fr 16.25rem;
-      gap: 3rem;
+      grid-template-columns: 10rem 1fr 16.25rem;
+      gap: 4rem;
       align-items: start;
+
+      @media (max-width: 75rem) {
+        gap: 3rem;
+        grid-template-columns: 12.5rem 1fr 16.25rem;
+      }
+
+      @media (max-width: 64rem) {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
     }
 
-    .services-list {
+    &__list {
       list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      @media (max-width: 64rem) {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+        scrollbar-width: none;
+        &::-webkit-scrollbar { display: none; }
+      }
     }
-    .services-list li {
+
+    &__item {
       font-size: 0.875rem;
       font-weight: 300;
       color: var(--ink-light);
@@ -136,164 +181,169 @@ import { servicesData as services } from "../data/services";
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.625rem;
-      transition: color 0.2s;
-    }
-    .services-list li::before {
-      content: "";
-      width: 0.3125rem;
-      height: 0.3125rem;
-      border-radius: 50%;
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-    .services-list li.active {
-      color: var(--ink);
-      font-weight: 500;
-    }
-    .services-list li.active::before {
-      background: var(--ink);
-    }
-    .services-list li:hover:not(.active) {
-      color: var(--ink-mid);
+      gap: 0.75rem;
+      transition: all 0.25s ease;
+
+      &::before {
+        content: "";
+        width: 0.3125rem;
+        height: 0.3125rem;
+        border-radius: 50%;
+        background: transparent;
+        flex-shrink: 0;
+        transition: background 0.25s ease;
+      }
+
+      &:hover:not(&--active) {
+        color: var(--ink-mid);
+      }
+
+      &--active {
+        color: var(--ink);
+        font-weight: 400;
+        border-color: var(--ink);
+
+        &::before {
+          background: var(--sage);
+        }
+      }
+
+      @media (max-width: 64rem) {
+        border: 0.5px solid var(--pill-border);
+        border-radius: 3.125rem;
+        padding: 0.625rem 1.25rem;
+        white-space: nowrap;
+
+        &::before { display: none; }
+
+        &--active {
+          background: var(--ink);
+          color: var(--white);
+          border-color: var(--ink);
+        }
+      }
     }
 
-    .service-img-wrap {
+    &__image-wrapper {
       border-radius: var(--radius-card);
       overflow: hidden;
-      aspect-ratio: 3/4;
+      aspect-ratio: 4 / 5;
       position: relative;
-      max-height: 34rem;
       width: 100%;
+      background: var(--cream-mid);
+
+      @media (max-width: 64rem) {
+        aspect-ratio: 16/11;
+      }
     }
 
-    .service-img-inner {
+    &__image-panel {
+      display: none;
       width: 100%;
       height: 100%;
-      display: flex;
+      position: absolute;
+      inset: 0;
       align-items: center;
       justify-content: center;
+
+      &--active {
+        display: flex;
+        position: relative;
+      }
     }
 
-    /* Service panels */
-    .service-panel {
-      display: none;
-    }
-    .service-panel.active {
-      display: block;
+    &__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.94;
     }
 
-    .svc-num {
+    &__fig-label {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
       font-size: 0.6875rem;
-      letter-spacing: 0.13em;
+      color: var(--ink-light);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+    }
+
+    &__panel {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+
+      &--active {
+        display: block;
+      }
+    }
+
+    &__num {
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--ink-light);
-      display: block;
-      margin-bottom: 1.125rem;
+      margin-bottom: 1.25rem;
     }
 
-    .svc-title {
-      font-family: "Helvetica", "Arial", sans-serif;
-      font-size: clamp(1.375rem, 2.4vw, 1.875rem);
-      font-weight: 700;
+    &__panel-title {
+      font-family: inherit;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 400;
+      letter-spacing: -0.015em;
       color: var(--ink);
-      letter-spacing: -0.01em;
-      margin-bottom: 1rem;
-      line-height: 1.15;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
     }
 
-    .svc-body {
+    &__panel-body {
       font-size: 0.875rem;
       font-weight: 300;
       color: var(--ink-mid);
-      line-height: 1.85;
+      line-height: 1.8;
     }
 
-    @media (max-width: 64rem) {
-      .services-joby {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-      .services-list {
-        display: flex;
-        overflow-x: auto;
-        gap: 0.75rem;
-        padding-bottom: 1rem;
-        scrollbar-width: none;
-        -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent 100%);
-        mask-image: linear-gradient(90deg, #000 85%, transparent 100%);
-      }
-      .services-list::-webkit-scrollbar {
-        display: none;
-      }
-      .services-list li {
-        flex-shrink: 0;
-        white-space: nowrap;
-        border-bottom: none;
-        padding: 0.625rem 1.25rem;
-        border: 0.5px solid var(--pill-border);
-        border-radius: 3.125rem;
-      }
-      .services-list li.active {
-        background: var(--ink);
-        color: var(--cream);
-        border-color: var(--ink);
-      }
-      .services-list li::before {
-        display: none;
-      }
-      .services-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-      }
-      .services-sub {
-        text-align: left;
-      }
+    &__cta {
+      margin-top: 2rem;
+      display: inline-flex;
     }
-  </style>
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(0.5rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
 
   <script>
     class ServicesTabs extends HTMLElement {
-      constructor() {
-        super();
-        const tabs = this.querySelectorAll(".services-list li");
-        const panels = this.querySelectorAll(".service-panel");
-        const images = this.querySelectorAll(".service-img-panel");
+      connectedCallback() {
+        const tabs = this.querySelectorAll(".services__item");
+        const panels = this.querySelectorAll(".services__panel");
+        const images = this.querySelectorAll(".services__image-panel");
 
         tabs.forEach((tab, index) => {
           tab.addEventListener("click", () => {
             tabs.forEach((t) => {
-              t.classList.remove("active");
+              t.classList.remove("services__item--active");
               t.setAttribute("aria-selected", "false");
             });
-            panels.forEach((p) => p.classList.remove("active"));
+            panels.forEach((p) =>
+              p.classList.remove("services__panel--active")
+            );
+            images.forEach((img) =>
+              img.classList.remove("services__image-panel--active")
+            );
 
-            tab.classList.add("active");
+            tab.classList.add("services__item--active");
             tab.setAttribute("aria-selected", "true");
-
-            const panel = panels[index];
-            if (panel) panel.classList.add("active");
-
-            images.forEach((imgEl) => {
-              imgEl.classList.remove("active");
-              (imgEl as HTMLElement).style.display = "none";
-              (imgEl as HTMLElement).style.position = "absolute";
-            });
-
-            const activeImg = images[index] as HTMLElement;
-            if (activeImg) {
-              activeImg.classList.add("active");
-              activeImg.style.display = "flex";
-              activeImg.style.position = "relative";
-            }
+            panels[index].classList.add("services__panel--active");
+            images[index].classList.add("services__image-panel--active");
           });
 
-          tab.addEventListener("keydown", (e) => {
-            if (
-              (e as KeyboardEvent).key === "Enter" ||
-              (e as KeyboardEvent).key === " "
-            ) {
+          tab.addEventListener("keydown", (e: any) => {
+            if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
               (tab as HTMLElement).click();
             }
@@ -302,6 +352,8 @@ import { servicesData as services } from "../data/services";
       }
     }
 
-    customElements.define("services-tabs", ServicesTabs);
+    if (!customElements.get("services-tabs")) {
+      customElements.define("services-tabs", ServicesTabs);
+    }
   </script>
 </section>
