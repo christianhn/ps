@@ -53,8 +53,7 @@ import { servicesData as services } from "../data/services";
                     Fig. {i + 1} — {s.title}
                   </span>
                 </div>
-              )
-              )
+              ))
             }
           </div>
         </div>
@@ -168,7 +167,9 @@ import { servicesData as services } from "../data/services";
         overflow-x: auto;
         padding-bottom: 1rem;
         scrollbar-width: none;
-        &::-webkit-scrollbar { display: none; }
+        &::-webkit-scrollbar {
+          display: none;
+        }
       }
     }
 
@@ -214,7 +215,9 @@ import { servicesData as services } from "../data/services";
         padding: 0.625rem 1.25rem;
         white-space: nowrap;
 
-        &::before { display: none; }
+        &::before {
+          display: none;
+        }
 
         &--active {
           background: var(--ink);
@@ -231,6 +234,7 @@ import { servicesData as services } from "../data/services";
       position: relative;
       width: 100%;
       background: var(--cream-mid);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 
       @media (max-width: 64rem) {
         aspect-ratio: 16/11;
@@ -311,49 +315,52 @@ import { servicesData as services } from "../data/services";
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(0.5rem); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
 
-  <script>
-    class ServicesTabs extends HTMLElement {
-      connectedCallback() {
-        const tabs = this.querySelectorAll(".services__item");
-        const panels = this.querySelectorAll(".services__panel");
-        const images = this.querySelectorAll(".services__image-panel");
+<script>
+  class ServicesTabs extends HTMLElement {
+    connectedCallback() {
+      const tabs = this.querySelectorAll(".services__item");
+      const panels = this.querySelectorAll(".services__panel");
+      const images = this.querySelectorAll(".services__image-panel");
 
-        tabs.forEach((tab, index) => {
-          tab.addEventListener("click", () => {
-            tabs.forEach((t) => {
-              t.classList.remove("services__item--active");
-              t.setAttribute("aria-selected", "false");
-            });
-            panels.forEach((p) =>
-              p.classList.remove("services__panel--active")
-            );
-            images.forEach((img) =>
-              img.classList.remove("services__image-panel--active")
-            );
-
-            tab.classList.add("services__item--active");
-            tab.setAttribute("aria-selected", "true");
-            panels[index].classList.add("services__panel--active");
-            images[index].classList.add("services__image-panel--active");
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => {
+            t.classList.remove("services__item--active");
+            t.setAttribute("aria-selected", "false");
           });
+          panels.forEach((p) => p.classList.remove("services__panel--active"));
+          images.forEach((img) =>
+            img.classList.remove("services__image-panel--active"),
+          );
 
-          tab.addEventListener("keydown", (e: any) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              (tab as HTMLElement).click();
-            }
-          });
+          tab.classList.add("services__item--active");
+          tab.setAttribute("aria-selected", "true");
+          panels[index].classList.add("services__panel--active");
+          images[index].classList.add("services__image-panel--active");
         });
-      }
-    }
 
-    if (!customElements.get("services-tabs")) {
-      customElements.define("services-tabs", ServicesTabs);
+        tab.addEventListener("keydown", (e: any) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            (tab as HTMLElement).click();
+          }
+        });
+      });
     }
-  </script>
-</section>
+  }
+
+  if (!customElements.get("services-tabs")) {
+    customElements.define("services-tabs", ServicesTabs);
+  }
+</script>
