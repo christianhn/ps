@@ -68,26 +68,18 @@ h1, h2, h3 { font-family: "Helvetica", "Arial", sans-serif; font-weight: 700; }
 .btn-dark {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  background: linear-gradient(180deg, #2b2a2a 0%, #000000 100%);
-  color: var(--white);
+  gap: 0.5rem;
+  background: var(--ink);
+  color: var(--cream);
   border: none;
-  padding: 0.9375rem 2.25rem;
+  padding: 0.875rem 1.75rem;
   border-radius: 3.125rem;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s, transform 0.2s, background-color 0.4s ease, color 0.4s ease;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
-
-.btn-dark:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-  filter: brightness(1.1);
-}
+.btn-dark:hover { opacity: 0.82; transform: translateY(-1px); }
 
 .btn-ghost {
   display: inline-flex;
@@ -98,36 +90,28 @@ h1, h2, h3 { font-family: "Helvetica", "Arial", sans-serif; font-weight: 700; }
   border: 0.5px solid var(--pill-border);
   padding: 0.875rem 1.75rem;
   border-radius: 3.125rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  transition: all 0.2s;
+  font-size: 0.875rem;
+  font-weight: 400;
+  transition: background 0.2s;
   text-decoration: none;
 }
-.btn-ghost:hover { background: rgba(0,0,0,0.04); }
+.btn-ghost:hover { background: rgba(26,25,22,0.06); }
 
 .btn-light {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.625rem;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f4f4 100%);
+  gap: 0.5rem;
+  background: var(--cream);
   color: var(--ink);
-  border: 0.5px solid rgba(0, 0, 0, 0.05);
-  padding: 0.9375rem 2.25rem;
+  border: none;
+  padding: 0.875rem 1.75rem;
   border-radius: 3.125rem;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.02em;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s, transform 0.2s;
   text-decoration: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
-
-.btn-light:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(180deg, #ffffff 0%, #ffffff 100%);
-}
+.btn-light:hover { opacity: 0.88; transform: translateY(-1px); }
 
 .text-link {
   display: inline-flex;
