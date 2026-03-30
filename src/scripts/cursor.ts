@@ -22,16 +22,21 @@ let circleWrapper: HTMLElement | null = null;
 
 const update = () => {
   if (isStarted && dotWrapper && circleWrapper) {
-    // Dot follows mouse fast (leading) - LERP: 0.35
-    dotX += (mouseX - dotX) * 0.35;
-    dotY += (mouseY - dotY) * 0.35;
+    // Dot follows mouse fast (leading) - LERP: 0.65
+    dotX += (mouseX - dotX) * 0.65;
+    dotY += (mouseY - dotY) * 0.65;
     
-    // Circle follows mouse with more lag - LERP: 0.12
-    circleX += (mouseX - circleX) * 0.12;
-    circleY += (mouseY - circleY) * 0.12;
+    // Circle follows mouse with more lag - LERP: 0.15
+    circleX += (mouseX - circleX) * 0.15;
+    circleY += (mouseY - circleY) * 0.15;
 
     dotWrapper.style.transform = `translate3d(${dotX}px, ${dotY}px, 0)`;
     circleWrapper.style.transform = `translate3d(${circleX}px, ${circleY}px, 0)`;
+
+    // Fluid Spotlight effect (synchronized with the leading dot)
+    const root = document.documentElement;
+    root.style.setProperty("--mx", `${(dotX / window.innerWidth) * 100}%`);
+    root.style.setProperty("--my", `${(dotY / window.innerHeight) * 100}%`);
   }
   requestAnimationFrame(update);
 };
@@ -55,10 +60,6 @@ export const initCursor = () => {
   const setPosition = (e: MouseEvent) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    
-    // Noise mask/Spotlight effect (immediate for background mask)
-    root.style.setProperty("--mx", `${(mouseX / window.innerWidth) * 100}%`);
-    root.style.setProperty("--my", `${(mouseY / window.innerHeight) * 100}%`);
 
     if (!isStarted) {
       dotX = circleX = mouseX;
