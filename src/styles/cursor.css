@@ -60,25 +60,30 @@
     opacity: 0;
   }
 
-  /* Progressive Background Spotlight Mask */
-  /* Reveals noise/texture where the mouse is */
-  body::after {
-    content: "";
+  .cursor-spotlight {
     position: fixed;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 60rem;
+    height: 60rem;
     pointer-events: none;
-    z-index: 1000; /* Behind actual cursor, above content */
+    z-index: 1000;
+    /* Noise texture inside the light */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     opacity: 0.12;
-    mix-blend-mode: multiply; /* Ensures visibility on light backgrounds */
-    mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), black 0%, transparent 40%);
-    -webkit-mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), black 0%, transparent 40%);
+    mix-blend-mode: multiply;
+    /* The mask itself is now a simple gradient on this smaller div */
+    mask-image: radial-gradient(circle at center, black 0%, transparent 60%);
+    -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 60%);
+    will-change: transform;
+    margin-left: -30rem; /* Center the 60rem div */
+    margin-top: -30rem;
   }
 }
 
-/* Hide the cursor element completely on touch devices */
+/* Hide the cursor and spotlight completely on touch devices */
 @media (hover: none), (pointer: coarse) {
-  .cursor {
+  .cursor, .cursor-spotlight {
     display: none !important;
   }
 }
