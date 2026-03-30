@@ -1,168 +1,122 @@
 ---
-
+import { procesoData } from "../data/proceso";
 ---
 
-<section id="proceso" class="proceso-section">
-  <div class="proceso-inner">
-    <div class="proceso-header reveal">
-      <h2 class="proceso-title">Te escucho.</h2>
-      <p class="proceso-sub">
-        El proceso terapéutico paso a paso, desde el primer contacto hasta el
-        final del recorrido.
-      </p>
+<section id="proceso" class="proceso">
+  <div class="proceso__container">
+    <div class="proceso__header reveal">
+      <h2 class="proceso__title">{procesoData.header.title}</h2>
+      <p class="proceso__subtitle">{procesoData.header.subtitle}</p>
     </div>
 
-    <div class="proceso-grid">
-      <!-- 1 -->
-      <div class="proceso-card reveal">
-        <div class="proceso-num">01</div>
-        <h3 class="proceso-step">Da el primer paso</h3>
-        <p class="proceso-desc">
-          Rellena el formulario de contacto para compartir qué te trae a la
-          sesión y cómo puedo ayudarte.
-        </p>
-      </div>
-      <!-- 2 -->
-      <div class="proceso-card reveal reveal-delay-1">
-        <div class="proceso-num">02</div>
-        <h3 class="proceso-step">Nos conocemos</h3>
-        <p class="proceso-desc">
-          Desde aquí, podemos programar una breve llamada telefónica o aclarar
-          cualquier duda vía email.
-        </p>
-      </div>
-      <!-- 3 -->
-      <div class="proceso-card reveal reveal-delay-2">
-        <div class="proceso-num">03</div>
-        <h3 class="proceso-step">Empezamos el trabajo</h3>
-        <p class="proceso-desc">
-          Exploramos qué quieres conseguir. Nos aseguramos de que trabajar
-          juntos sea el encaje adecuado para ti.
-        </p>
-      </div>
-      <!-- 4 -->
-      <div class="proceso-card reveal">
-        <div class="proceso-num">04</div>
-        <h3 class="proceso-step">Profundizamos</h3>
-        <p class="proceso-desc">
-          Mediante estrategias y técnicas que se adapten a ti, incidimos en
-          aquello que compromete tu bienestar.
-        </p>
-      </div>
-      <!-- 5 -->
-      <div class="proceso-card reveal reveal-delay-1">
-        <div class="proceso-num">05</div>
-        <h3 class="proceso-step">Afianzamos</h3>
-        <p class="proceso-desc">
-          En esta fase más avanzada, valoraremos espaciar las sesiones según tu
-          situación para consolidar lo aprendido.
-        </p>
-      </div>
-      <!-- 6 -->
-      <div class="proceso-card reveal reveal-delay-2">
-        <div class="proceso-num">06</div>
-        <h3 class="proceso-step">Nos despedimos</h3>
-        <p class="proceso-desc">
-          Mi objetivo es dotarte de herramientas para que puedas afrontar de
-          forma independiente tus siguientes retos vitales.
-        </p>
-      </div>
+    <div class="proceso__grid">
+      {
+        procesoData.steps.map((step) => (
+          <div class={`proceso__card reveal ${step.delay || ""}`}>
+            <div class="proceso__num">{step.num}</div>
+            <h3 class="proceso__step-title">{step.title}</h3>
+            <p class="proceso__description">{step.description}</p>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
 
-<style>
-  /* ── PROCESO ── */
-  .proceso-section {
+<style lang="scss">
+  .proceso {
     padding: 6rem 3rem;
-  }
 
-  .proceso-inner {
-    max-width: 80rem;
-    margin: 0 auto;
-  }
-
-  .proceso-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-bottom: 2.5rem;
-    border-bottom: 0.5px solid var(--pill-border);
-    margin-bottom: 3.75rem;
-  }
-
-  .proceso-title {
-    font-family: "DM Serif Display", serif;
-    font-size: clamp(2.25rem, 4vw, 3.375rem);
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-  }
-
-  .proceso-sub {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    max-width: 20rem;
-    text-align: right;
-    line-height: 1.7;
-  }
-
-  .proceso-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-  }
-
-  .proceso-card {
-    padding: 2rem;
-    background: white;
-    border-radius: 1.25rem;
-    border: 0.5px solid var(--pill-border);
-    transition:
-      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.3s;
-  }
-
-  .proceso-card:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0 1.25rem 3rem rgba(26, 25, 22, 0.07);
-  }
-
-  .proceso-num {
-    font-size: 0.6875rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    margin-bottom: 1.25rem;
-    color: var(--sage);
-  }
-
-  .proceso-step {
-    font-family: "DM Serif Display", serif;
-    font-size: 1.375rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin-bottom: 0.75rem;
-  }
-
-  .proceso-desc {
-    font-size: 0.875rem;
-    font-weight: 300;
-    color: var(--ink-mid);
-    line-height: 1.7;
-  }
-
-  @media (max-width: 64rem) {
-    .proceso-grid {
-      grid-template-columns: 1fr;
+    &__container {
+      max-width: 80rem;
+      margin: 0 auto;
     }
-    .proceso-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 2.5rem;
+      border-bottom: 0.5px solid var(--pill-border);
+      margin-bottom: 3.75rem;
+
+      @media (max-width: 64rem) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
     }
-    .proceso-sub {
-      text-align: left;
+
+    &__title {
+      font-size: clamp(2.25rem, 4vw, 3.375rem);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    &__subtitle {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      max-width: 20rem;
+      text-align: right;
+      line-height: 1.7;
+
+      @media (max-width: 64rem) {
+        text-align: left;
+      }
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+
+      @media (max-width: 64rem) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    &__card {
+      padding: 2.25rem;
+      background: var(--white);
+      border-radius: 1.25rem;
+      border: 0.5px solid var(--pill-border);
+      transition:
+        transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s;
+
+      &:hover {
+        transform: translateY(-0.35rem);
+        box-shadow: 0 1.25rem 3rem rgba(26, 25, 22, 0.07);
+      }
+
+      @media (max-width: 64rem) {
+        box-shadow: 0 1.25rem 3rem rgba(26, 25, 22, 0.07);
+      }
+    }
+
+    &__num {
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      margin-bottom: 1.25rem;
+      color: var(--sage);
+    }
+
+    &__step-title {
+      font-size: 1.375rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    &__description {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.7;
     }
   }
 </style>
+

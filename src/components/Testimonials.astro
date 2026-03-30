@@ -50,6 +50,10 @@ const testimonials = [
   .testi-section {
     background: var(--cream-mid);
     padding: 6rem 3rem;
+
+    @media (max-width: 64rem) {
+      padding: 6rem 1.75rem;
+    }
   }
   .testi-inner {
     max-width: 80rem;
@@ -66,7 +70,7 @@ const testimonials = [
   }
 
   .testi-top-title {
-    font-family: "DM Serif Display", serif;
+    font-family: "Helvetica", "Arial", sans-serif;
     font-size: clamp(2rem, 3.8vw, 3.125rem);
     font-weight: 400;
     letter-spacing: -0.015em;
@@ -103,7 +107,7 @@ const testimonials = [
   }
 
   .testi-quote {
-    font-family: "DM Serif Display", serif;
+    font-family: "Helvetica", "Arial", sans-serif;
     font-size: 1rem;
     font-style: italic;
     font-weight: 400;

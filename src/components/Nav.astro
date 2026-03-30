@@ -21,8 +21,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           stroke="currentColor"
           stroke-width="2"
         >
-          <line class="line-top" x1="4" y1="8" x2="20" y2="8"></line>
-          <line class="line-bot" x1="4" y1="16" x2="20" y2="16"></line>
+          <line class="line-top" x1="4" y1="9" x2="20" y2="9"></line>
+          <line class="line-bot" x1="4" y1="15" x2="20" y2="15"></line>
         </svg>
       </button>
     </div>
@@ -32,7 +32,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         navData.links.map((link) => (
           <li class="nav__item">
             <a
-              href={`${baseUrl}${link.href}`}
+              href={`${baseUrl}/${link.href}`}
               class:list={[
                 "nav__link",
                 { "btn-dark": link.variant === "primary" },
@@ -49,42 +49,45 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 <script>
   const setupNav = () => {
+    const nav = document.querySelector(".nav") as HTMLElement;
     const navInner = document.querySelector(".nav__inner") as HTMLElement;
     const navList = document.querySelector(".nav__list") as HTMLElement;
     const menuBtn = document.querySelector(
       ".mobile-menu-btn",
     ) as HTMLButtonElement;
 
-    if (!navInner || !menuBtn || !navList) return;
+    if (!nav || !navInner || !menuBtn || !navList) return;
 
-    // 1. Theme Switcher (Adapts to dark backgrounds)
-    // We target refactored classes and common dark containers
+    // 1. Theme Switcher & Scroll Toggle
     const darkSections = document.querySelectorAll(
       ".ayuda, .contacto__card, .stats-section",
     );
 
-    const updateTheme = () => {
+    const updateNav = () => {
+      // Theme
       const navRect = navInner.getBoundingClientRect();
       const navCenterY = navRect.top + navRect.height / 2;
 
       let isOverDark = false;
       for (const section of darkSections) {
         const rect = section.getBoundingClientRect();
-        // Check if nav center is within section vertical bounds
         if (navCenterY >= rect.top && navCenterY <= rect.bottom) {
           isOverDark = true;
           break;
         }
       }
-
       navInner.classList.toggle("nav__inner--dark", isOverDark);
+
+      // Scroll Class
+      const isScrolled = window.scrollY > 20;
+      nav.classList.toggle("nav--scrolled", isScrolled);
     };
 
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          updateTheme();
+          updateNav();
           ticking = false;
         });
         ticking = true;
@@ -92,11 +95,12 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
-    updateTheme(); // Initial check
+    updateNav(); // Initial check
 
     // 2. Mobile Menu Toggle
     const toggleMenu = () => {
       const isOpen = navList.classList.toggle("nav__list--open");
+      navInner.classList.toggle("nav__inner--open", isOpen);
       menuBtn.classList.toggle("nav__toggle--open", isOpen);
       menuBtn.setAttribute("aria-expanded", isOpen.toString());
     };
@@ -107,6 +111,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     navList.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => {
         navList.classList.remove("nav__list--open");
+        navInner.classList.remove("nav__inner--open");
         menuBtn.classList.remove("nav__toggle--open");
         menuBtn.setAttribute("aria-expanded", "false");
       });
@@ -120,24 +125,41 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 <style lang="scss">
   .nav {
     position: fixed;
-    top: 1rem;
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
-    width: calc(100% - 3rem);
-    max-width: 80rem;
+    width: 100%;
+    max-width: 100%;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &--scrolled {
+      top: 1rem;
+      width: calc(100% - 3rem);
+      max-width: 80rem;
+    }
 
     &__inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(249, 247, 243, 0.85);
-      backdrop-filter: blur(1.125rem);
-      -webkit-backdrop-filter: blur(1.125rem);
-      border: 0.5px solid var(--pill-border);
-      border-radius: 3.125rem;
-      padding: 0.625rem 0.75rem 0.625rem 1.75rem;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent;
+      backdrop-filter: blur(0);
+      -webkit-backdrop-filter: blur(0);
+      border: 0.5px solid transparent;
+      border-radius: 0;
+      padding: 1.5rem 3rem;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+
+      // Scrolled (Pill) Look
+      .nav--scrolled & {
+        background: rgba(242, 242, 242, 0.85);
+        backdrop-filter: blur(1.125rem);
+        -webkit-backdrop-filter: blur(1.125rem);
+        border: 0.5px solid var(--pill-border);
+        border-radius: 3.125rem;
+        padding: 0.625rem 0.75rem 0.625rem 1.75rem;
+      }
 
       // Normal mode (Light Nav)
       .btn-dark {
@@ -154,9 +176,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       }
 
       &--dark {
-        background: rgba(26, 25, 22, 0.85);
-        border-color: rgba(255, 255, 255, 0.15);
-
+        // Logo/Links transition even if bg is transparent
         .nav__logo {
           color: var(--white);
         }
@@ -169,24 +189,45 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         .nav__toggle {
           color: var(--white);
         }
-
-        // Button in Dark Nav
         .btn-dark {
           background: var(--white);
           color: var(--ink);
-
           &:hover {
             background: var(--cream);
             color: var(--ink);
           }
         }
+
+        // Only add background when scrolled
+        .nav--scrolled & {
+          background: rgba(24, 24, 24, 0.85);
+          border-color: rgba(255, 255, 255, 0.15);
+        }
       }
 
       @media (max-width: 50rem) {
-        padding: 0.75rem;
+        padding: 0.75rem 1.25rem;
         flex-direction: column;
         align-items: stretch;
-        border-radius: 1.5rem;
+        border-radius: 0;
+
+        &.nav__inner--open {
+          background: var(--cream);
+          backdrop-filter: blur(1.25rem);
+          -webkit-backdrop-filter: blur(1.25rem);
+          border: 0.5px solid var(--pill-border);
+          border-radius: 1.5rem;
+
+          &.nav__inner--dark {
+            background: rgba(26, 25, 22, 0.95);
+            border-color: rgba(255, 255, 255, 0.15);
+          }
+        }
+
+        .nav--scrolled & {
+          border-radius: 1.5rem;
+          padding: 0.75rem;
+        }
       }
     }
 
@@ -197,9 +238,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     &__logo {
-      font-family: "DM Serif Display", serif;
+      font-family: "Helvetica", "Arial", sans-serif;
       font-size: 1.0625rem;
-      font-weight: 400;
+      font-weight: 700;
       color: var(--ink);
       text-decoration: none;
       white-space: nowrap;
@@ -275,7 +316,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       &--open {
         .line-top {
-          transform: translateY(4px) rotate(45deg);
+          transform: translateY(3px) rotate(45deg);
         }
         .line-bot {
           transform: translateY(-4px) rotate(-45deg);

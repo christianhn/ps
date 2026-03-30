@@ -1,0 +1,84 @@
+/* ── CUSTOM CURSOR & HOVER STYLES ── */
+
+/* Only apply custom cursor on devices that support hover (desktop/mouse) */
+@media (hover: hover) and (pointer: fine) {
+  html, body {
+    cursor: none; /* Hide default cursor */
+  }
+
+  a, button, [role="button"], .btn-dark, .btn-ghost, .btn-light {
+    cursor: none; /* Ensure it stays hidden on interactive elements */
+  }
+
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    display: block; /* Ensure it's shown on desktop */
+  }
+
+  .cursor__dot-wrapper,
+  .cursor__circle-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    will-change: transform;
+  }
+
+  .cursor__dot {
+    width: 0.3125rem;
+    height: 0.3125rem;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center on the wrapper's position */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .cursor__circle {
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1.5px solid white;
+    border-radius: 50%;
+    opacity: 0.45;
+    transform: translate(-50%, -50%); /* Center on the wrapper's position */
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s, background 0.25s;
+  }
+
+  /* Hover state for links */
+  .cursor.cursor--hover .cursor__circle {
+    transform: translate(-50%, -50%) scale(2.2); /* Keep centering, add scale */
+    opacity: 1;
+    background: white;
+    border-color: transparent;
+  }
+
+  .cursor.cursor--hover .cursor__dot {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+
+  /* Progressive Background Spotlight Mask */
+  /* Reveals noise/texture where the mouse is */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000; /* Behind actual cursor, above content */
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.12;
+    mix-blend-mode: multiply; /* Ensures visibility on light backgrounds */
+    mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), black 0%, transparent 40%);
+    -webkit-mask-image: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), black 0%, transparent 40%);
+  }
+}
+
+/* Hide the cursor element completely on touch devices */
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none !important;
+  }
+}

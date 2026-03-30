@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import "../styles/cursor.css";
 
 export interface Props {
   title?: string;
@@ -74,21 +75,25 @@ const {
       content="https://www.mariocatena.com/hero-social.avif"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
-      rel="stylesheet"
-    />
     <link
       rel="icon"
       type="image/svg+xml"
-      href={`${import.meta.env.BASE_URL}favicon.svg`}
+      href={`${import.meta.env.BASE_URL}icon-blue.png`}
     />
   </head>
-  <body>
+  <body class="textured">
+    <div id="cursor" class="cursor">
+      <div class="cursor__dot-wrapper">
+        <div class="cursor__dot"></div>
+      </div>
+      <div class="cursor__circle-wrapper">
+        <div class="cursor__circle"></div>
+      </div>
+    </div>
     <slot />
     <script>
+      import { initCursor } from "../scripts/cursor";
+
       const setupReveal = () => {
         const revealObserver = new IntersectionObserver(
           (entries) => {
@@ -110,7 +115,10 @@ const {
           });
       };
 
-      document.addEventListener("astro:page-load", setupReveal);
+      document.addEventListener("astro:page-load", () => {
+        setupReveal();
+        initCursor();
+      });
     </script>
   </body>
 </html>

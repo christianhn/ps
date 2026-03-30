@@ -8,24 +8,41 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 <section class="hero">
   <div class="hero__intro">
-    <p class="hero__eyebrow">{data.eyebrow}</p>
-    <h1 class="hero__title" set:html={data.title} />
+    <h1 class="hero__title text-gradient-textured">
+      {
+        ["Psicología", "adaptada", "a ti."].map((part, i) => (
+          <span class={`hero__title-line ${i === 0 ? 'hero__title-break' : ''}`}>
+            <span 
+              class="hero__title-inner" 
+              set:html={part} 
+              style={`animation-delay: 0.4s`}
+            />
+          </span>
+        ))
+      }
+    </h1>
     <div class="hero__bottom">
       <p class="hero__subtitle">{data.subtitle}</p>
       <div class="hero__actions">
-        {data.actions.map(action => (
-          <a 
-            href={action.href.startsWith("#") ? `${baseUrl}${action.href}` : action.href} 
-            class={`btn-${action.variant}`}
-          >
-            {action.label}
-          </a>
-        ))}
+        {
+          data.actions.map((action) => (
+            <a
+              href={
+                action.href.startsWith("#")
+                  ? `${baseUrl}/${action.href}`
+                  : action.href
+              }
+              class={`btn-${action.variant}`}
+            >
+              {action.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
 
-  <div class="hero__visual">
+  <!-- <div class="hero__visual">
     <div class="hero__card">
       <div class="hero__image-wrapper">
         <Image
@@ -41,18 +58,22 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
         <p class="hero__caption-text">{data.caption}</p>
       </div>
     </div>
-  </div>
+  </div> -->
 </section>
 
 <style lang="scss">
   .hero {
     &__intro {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 8.75rem 3rem 4.5rem;
       max-width: 80rem;
       margin: 0 auto;
 
       @media (max-width: 64rem) {
-        padding: 8.75rem 1.75rem 4.5rem;
+        padding: 4.5rem 1.75rem;
       }
     }
 
@@ -66,38 +87,70 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       opacity: 0;
       transform: translateY(1rem);
       animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+      text-align: center;
+
+      @media (max-width: 42.5rem) {
+        text-align: left;
+      }
     }
 
     &__title {
-      font-family: 'DM Serif Display', serif;
+      font-family: "Helvetica", "Arial", sans-serif;
       font-size: clamp(3.75rem, 8.5vw, 7.375rem);
-      font-weight: 400;
-      line-height: 0.94;
+      font-weight: 700;
+      line-height: 1;
       letter-spacing: -0.025em;
-      color: var(--ink);
-      max-width: 59.375rem;
-      opacity: 0;
-      transform: translateY(1.5rem);
-      animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+      text-align: center;
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0 0.23em; /* Optimal space between blocks */
 
-      :global(em) {
-        font-style: italic;
-        color: var(--sage);
+      @extend .text-gradient-textured !optional;
+      // Fallback if extend fails
+      color: var(--sage);
+
+      @media (max-width: 42.5rem) {
+        justify-content: flex-start;
+        text-align: left;
+        max-width: 59.375rem;
       }
+    }
+
+    &__title-line {
+      display: inline-block;
+      vertical-align: bottom;
+      overflow: hidden;
+      margin-bottom: -0.15em; /* Adjust for tight leading and descenders */
+      padding-bottom: 0.15em; /* Room for descenders (g, p, y) */
+    }
+
+    &__title-break {
+      flex-basis: 100%;
+    }
+
+    &__title-inner {
+      display: block;
+      transform: translateY(105%);
+      opacity: 0;
+      animation: slideUpReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform;
     }
 
     &__bottom {
       display: flex;
       align-items: flex-end;
-      justify-content: space-between;
+      justify-content: center;
       gap: 3rem;
-      margin-top: 3.25rem;
+      margin-top: 2rem;
       opacity: 0;
       transform: translateY(1rem);
       animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.55s forwards;
 
       @media (max-width: 42.5rem) {
         flex-direction: column;
+        justify-content: space-between;
         align-items: flex-start;
         gap: 1.75rem;
       }
@@ -112,9 +165,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     }
 
     &__actions {
-      display: flex;
+      display: none;
       gap: 0.75rem;
       flex-shrink: 0;
+
+      @media (max-width: 42.5rem) {
+        display: flex;
+      }
     }
 
     &__visual {
@@ -136,7 +193,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       max-height: 42.5rem;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      background: #222B20;
+      background: #222b20;
       position: relative;
       display: flex;
       align-items: flex-end;
@@ -197,7 +254,24 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(1.5rem); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideUpReveal {
+    from {
+      opacity: 0;
+      transform: translateY(110%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
