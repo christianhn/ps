@@ -1,5 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
+import "../styles/cursor.css";
 
 export interface Props {
   title?: string;
@@ -80,9 +81,19 @@ const {
       href={`${import.meta.env.BASE_URL}icon-blue.png`}
     />
   </head>
-  <body>
+  <body class="textured">
+    <div id="cursor" class="cursor">
+      <div class="cursor__dot-wrapper">
+        <div class="cursor__dot"></div>
+      </div>
+      <div class="cursor__circle-wrapper">
+        <div class="cursor__circle"></div>
+      </div>
+    </div>
     <slot />
     <script>
+      import { initCursor } from "../scripts/cursor";
+
       const setupReveal = () => {
         const revealObserver = new IntersectionObserver(
           (entries) => {
@@ -104,7 +115,10 @@ const {
           });
       };
 
-      document.addEventListener("astro:page-load", setupReveal);
+      document.addEventListener("astro:page-load", () => {
+        setupReveal();
+        initCursor();
+      });
     </script>
   </body>
 </html>

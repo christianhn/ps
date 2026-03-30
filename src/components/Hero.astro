@@ -9,7 +9,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 <section class="hero">
   <div class="hero__intro">
     <p class="hero__eyebrow">{data.eyebrow}</p>
-    <h1 class="hero__title" set:html={data.title} />
+    <h1 class="hero__title text-gradient-textured" set:html={data.title} />
     <div class="hero__bottom">
       <p class="hero__subtitle">{data.subtitle}</p>
       <div class="hero__actions">
@@ -89,17 +89,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       font-weight: 700;
       line-height: 0.94;
       letter-spacing: -0.025em;
-      color: var(--ink);
       opacity: 0;
       transform: translateY(1.5rem);
       animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
-      color: var(--sage);
       text-align: center;
+
+      @extend .text-gradient-textured !optional;
+      // Fallback if extend fails
+      color: var(--sage);
 
       @media (max-width: 42.5rem) {
         text-align: left;
         max-width: 59.375rem;
       }
+
+      color: var(--sage);
     }
 
     &__bottom {
