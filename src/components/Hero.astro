@@ -1,7 +1,5 @@
 ---
-import { Image } from "astro:assets";
 import { heroData as data } from "../data/hero";
-import ofiImg from "../assets/img/ofi-ia.png";
 
 const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
@@ -128,6 +126,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       opacity: 0;
       animation: slideUpReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       will-change: transform;
+
+      &.typing-target {
+        display: inline-block;
+      }
     }
 
     &__subtitle {

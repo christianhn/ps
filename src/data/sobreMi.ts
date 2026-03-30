@@ -79,7 +79,7 @@ export const sobreMiData = {
         },
       ],
     },
-    footer: "Psicólogo Colegiado Nº Z-4567 <br /> Col·legi Oficial de Psicologia d'Aragó",
+    footer: "Psicólogo Colegiado Nº A-03977",
   },
   online: {
     eyebrow: "Terapia Online",

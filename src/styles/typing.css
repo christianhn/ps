@@ -1,22 +1,28 @@
-/**
- * Typing Effect Global Styles
- * Handles the blinking cursor animation and layout for any typing target.
- */
-
 .typing-target {
+  display: inline-block !important;
+  width: fit-content !important;
+  position: relative;
+  white-space: pre-wrap;
+  vertical-align: top;
+}
+
+/* The Cursor as a pseudo-element to avoid animation conflicts with entrance reveals */
+.typing-target::after {
+  content: "";
   display: inline-block;
-  border-right: 2.5px solid var(--sage);
-  padding-right: 0.1em;
-  /* blink animation: uses step-end for a mechanical, sharp feeling */
-  animation: typing-blink 1s step-end infinite;
-  white-space: pre-wrap; /* Preserve spaces if any */
+  width: 2.5px;
+  height: 0.85em; /* Slightly shorter than the text for a cleaner look */
+  background-color: var(--sage);
+  margin-left: 0.15em;
+  vertical-align: middle;
+  animation: typing-blink 0.8s step-end infinite;
 }
 
 @keyframes typing-blink {
   from, to {
-    border-color: transparent;
+    opacity: 1;
   }
   50% {
-    border-color: var(--sage);
+    opacity: 0;
   }
 }

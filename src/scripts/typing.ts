@@ -36,10 +36,12 @@ export const initTyping = (options: TypingOptions) => {
   if (!el || !phrases.length) return;
 
   let i = 0;
-  let j = el.innerText.length;
+  let j = 0;
   let isDeleting = false;
   let timeout: any;
 
+  // Clear initial text to start fresh with phrases[0]
+  // This prevents 'a ti.' from overlapping or clashing with 'a tu ritmo.'
   const type = () => {
     const currentPhrase = phrases[i];
     
@@ -65,8 +67,11 @@ export const initTyping = (options: TypingOptions) => {
     timeout = setTimeout(type, nextStepSpeed);
   };
 
-  // Start the cycle after initial delay
-  setTimeout(type, waitBeforeStart);
+  // Start the cycle after initial delay, clearing the static text right before typing
+  setTimeout(() => {
+    el.innerText = '';
+    type();
+  }, waitBeforeStart);
 
   // Return a cleanup function if needed (to prevent memory leaks on fast navigation/swaps)
   return () => clearTimeout(timeout);
