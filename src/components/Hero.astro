@@ -10,19 +10,23 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
   <div class="hero__intro">
     <div class="hero__top">
       <h1 class="hero__title text-gradient-textured">
-        {
-          ["Psicología", "adaptada", "a ti."].map((part, i) => (
-            <span
-              class={`hero__title-line ${i === 0 ? "hero__title-break" : ""}`}
-            >
-              <span
-                class="hero__title-inner"
-                set:html={part}
-                style={`animation-delay: 0.4s`}
-              />
-            </span>
-          ))
-        }
+        <span class="hero__title-line hero__title-break">
+          <span class="hero__title-inner" style="animation-delay: 0.4s"
+            >Psicología</span
+          >
+        </span>
+        <span class="hero__title-line">
+          <span class="hero__title-inner" style="animation-delay: 0.4s"
+            >adaptada</span
+          >
+        </span>
+        <span class="hero__title-line">
+          <span
+            id="hero-typing"
+            class="hero__title-inner typing-target"
+            style="animation-delay: 0.4s">a ti.</span
+          >
+        </span>
       </h1>
       <p class="hero__subtitle">{data.subtitle}</p>
     </div>
@@ -199,6 +203,8 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 </style>
 
 <script>
+  import { initTyping } from "../scripts/typing";
+
   const setupHeroParallax = () => {
     const intro = document.querySelector(".hero__intro") as HTMLElement;
     if (!intro) return;
@@ -221,5 +227,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     onScroll();
   };
 
-  document.addEventListener("astro:page-load", setupHeroParallax);
+  // Re-run on page load (support ViewTransitions)
+  document.addEventListener("astro:page-load", () => {
+    setupHeroParallax();
+    initTyping({
+      elementId: "hero-typing",
+      phrases: ["a tu ritmo.", "a tu vida.", "a ti."],
+      waitBeforeStart: 3000,
+    });
+  });
 </script>
