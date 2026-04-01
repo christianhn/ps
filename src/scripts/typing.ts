@@ -27,8 +27,8 @@ export const initTyping = (options: TypingOptions) => {
     elementId,
     phrases,
     waitBeforeStart = 3000,
-    typeSpeed = 100,
-    eraseSpeed = 50,
+    typeSpeed = 120,
+    eraseSpeed = 80,
     pauseTime = 4000
   } = options;
 
@@ -53,7 +53,10 @@ export const initTyping = (options: TypingOptions) => {
       j++;
     }
 
+    // Add organic/human variations for peaceful rhythm
     let nextStepSpeed = isDeleting ? eraseSpeed : typeSpeed;
+    const jitter = (Math.random() * 0.4 + 0.8); // 80% to 120% speed
+    nextStepSpeed = nextStepSpeed * jitter;
 
     if (!isDeleting && j === currentPhrase.length) {
       nextStepSpeed = pauseTime;
@@ -61,7 +64,7 @@ export const initTyping = (options: TypingOptions) => {
     } else if (isDeleting && j === 0) {
       isDeleting = false;
       i = (i + 1) % phrases.length;
-      nextStepSpeed = 500;
+      nextStepSpeed = 800; // Longer pause before next phrase starts
     }
 
     timeout = setTimeout(type, nextStepSpeed);

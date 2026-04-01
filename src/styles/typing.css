@@ -4,25 +4,41 @@
   position: relative;
   white-space: pre-wrap;
   vertical-align: top;
+  /* Gentle breathing animation for peace */
+  animation: typing-breath 6s ease-in-out infinite;
 }
 
-/* The Cursor as a pseudo-element to avoid animation conflicts with entrance reveals */
+/* The Cursor as a pseudo-element */
 .typing-target::after {
   content: "";
   display: inline-block;
-  width: 2.5px;
-  height: 0.85em; /* Slightly shorter than the text for a cleaner look */
+  width: 3px;
+  height: 0.7em; 
   background-color: var(--sage);
   margin-left: 0.15em;
   vertical-align: middle;
-  animation: typing-blink 0.8s step-end infinite;
+  /* Growing vertical pulse from center */
+  animation: typing-grow 1.2s ease-in-out infinite;
+  opacity: 1;
+  transform-origin: center;
 }
 
-@keyframes typing-blink {
-  from, to {
+@keyframes typing-grow {
+  0%, 100% {
     opacity: 1;
   }
   50% {
     opacity: 0;
+  }
+}
+
+@keyframes typing-breath {
+  0%, 100% {
+    opacity: 0.9;
+    transform: scale(0.998);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
