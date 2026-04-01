@@ -37,6 +37,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     border-top: 0.5px solid var(--pill-border);
     padding: 2rem 0;
 
+    @media (max-width: 42.5rem) {
+      background-color: var(--ink);
+      border-top: 1px solid var(--white-10);
+    }
+
     &__container {
       max-width: 80rem;
       margin: 0 auto;
@@ -62,6 +67,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       text-decoration: none;
       transition: opacity 0.2s ease;
 
+      @media (max-width: 42.5rem) {
+        color: var(--white);
+      }
+
       &:hover {
         opacity: 0.7;
       }
@@ -78,6 +87,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       color: var(--ink-light);
       text-decoration: none;
       transition: color 0.2s ease;
+
+      @media (max-width: 42.5rem) {
+        color: var(--white-80);
+      }
 
       &:hover {
         color: var(--ink);

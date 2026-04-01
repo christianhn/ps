@@ -15,7 +15,7 @@
   --sage-light: #66BFFF;
   --sage-pale: #E5F3FF;
   --sage-gradient: linear-gradient(135deg, #66BFFF 0%, #0084FF 50%, #004e92 100%);
-  --pill-border: rgba(26,25,22,0.14);
+  --pill-border: rgba(26,25,22,0.1);
   --radius-card: 1.75rem;
   --radius-lg: 2rem;
 
@@ -55,7 +55,7 @@ body {
 
 img { display: block; max-width: 100%; }
 a { color: inherit; }
-button { cursor: pointer; font-family: inherit; }
+button { font-family: inherit; }
 
 /* ── TYPOGRAPHY ── */
 .serif { font-family: "Helvetica", "Arial", sans-serif; }
