@@ -8,14 +8,14 @@
   --cream-dark: #E5E5E5;
   --cream-mid: #EDEDED;
   --white: #ffffff;
-  --ink: #1b1b1b;
+  --ink: #151515;
   --ink-mid: #4D4D4D;
   --ink-light: #666666;
   --sage: #0084FF;
   --sage-light: #66BFFF;
   --sage-pale: #E5F3FF;
   --sage-gradient: linear-gradient(135deg, #66BFFF 0%, #0084FF 50%, #004e92 100%);
-  --pill-border: rgba(26,25,22,0.1);
+  --pill-border: rgba(23, 23, 22, 0.1);
   --radius-card: 1.75rem;
   --radius-lg: 2rem;
 

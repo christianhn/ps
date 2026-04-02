@@ -72,7 +72,8 @@ export const initTyping = (options: TypingOptions) => {
 
   // Start the cycle after initial delay, clearing the static text right before typing
   setTimeout(() => {
-    el.innerText = '';
+    isDeleting = true;
+    j = el.innerText.length;
     type();
   }, waitBeforeStart);
 
