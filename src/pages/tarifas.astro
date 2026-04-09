@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import TarifasSection from "../components/Tarifas.astro";
+import Contacto from "../components/Contacto.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const title = "Tarifas y Sesiones · Mario Catena";
+const description = "Consulta los precios y modalidades de las sesiones de psicología en Zaragoza y online. Terapia individual y de pareja.";
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main>
+    <div class="page-header-spacer"></div>
+    <TarifasSection />
+    <Contacto />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header-spacer {
+    height: 6rem;
+    background: var(--cream);
+  }
+</style>

@@ -104,27 +104,6 @@ import { sobreMiData as data } from "../data/sobreMi";
     </footer>
   </article>
 
-  <!-- Online Split -->
-  <div class="sobre__split sobre__split--online sobre__split--reverse">
-    <div class="sobre__content reveal">
-      <p class="sobre__eyebrow">{data.online.eyebrow}</p>
-      <h2 class="sobre__title" set:html={data.online.title} />
-      {data.online.paragraphs.map((text) => <p class="sobre__body">{text}</p>)}
-      <a href={data.online.cta.href} class="text-link sobre__online-link">
-        {data.online.cta.text} →
-      </a>
-    </div>
-
-    <div class="sobre__img-wrapper sobre__img-wrapper--online">
-      <div class="sobre__img-inner">
-        <Image
-          src={data.online.image}
-          alt={data.online.alt}
-          class="sobre__portrait"
-        />
-      </div>
-      <span class="sobre__fig-label">Fig. 2 — Sesión online segura</span>
-    </div>
   </div>
 </section>
 

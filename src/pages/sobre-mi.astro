@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/Nav.astro";
+import SobreMiSection from "../components/SobreMi.astro";
+import Contacto from "../components/Contacto.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+
+const title = "Sobre Mario Catena · Psicólogo en Zaragoza";
+const description = "Conoce mi trayectoria, formación y enfoque terapéutico. Psicólogo especializado en terapia individual y de pareja en Zaragoza.";
+---
+
+<Layout title={title} description={description}>
+  <Nav />
+  <main>
+    <div class="page-header-spacer"></div>
+    <SobreMiSection />
+    <Contacto />
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .page-header-spacer {
+    height: 8rem;
+    background: var(--cream);
+  }
+</style>

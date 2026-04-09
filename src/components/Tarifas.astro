@@ -58,7 +58,7 @@ import { tarifasData as data } from "../data/tarifas";
 
 <style lang="scss">
   .tarifas {
-    background: var(--cream-mid);
+    background: var(--cream);
     padding: 6rem 0;
 
     &__container {
@@ -93,7 +93,7 @@ import { tarifasData as data } from "../data/tarifas";
     &__grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
+      gap: 1.5rem;
     }
 
     &__conditions {
@@ -104,6 +104,7 @@ import { tarifasData as data } from "../data/tarifas";
       border: 0.5px solid var(--pill-border);
       max-width: 50rem;
       margin-inline: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
 
       &-title {
         font-family: "Helvetica", "Arial", sans-serif;
@@ -146,6 +147,7 @@ import { tarifasData as data } from "../data/tarifas";
     border-radius: 1.25rem;
     padding: 2.25rem 2rem;
     border: 0.5px solid var(--pill-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     position: relative;
     overflow: hidden;
     transition:
