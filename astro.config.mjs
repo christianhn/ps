@@ -4,7 +4,7 @@ import icon from "astro-icon";
 
 import vercel from '@astrojs/vercel/serverless';
 
-const BASE_URL = process.env.BASE_URL || '/ps';
+const BASE_URL = process.env.VERCEL ? '/' : (process.env.BASE_URL || '/ps');
 
 export default defineConfig({
   site: 'https://christianhn.github.io',
