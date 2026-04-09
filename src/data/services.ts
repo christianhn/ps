@@ -4,6 +4,7 @@ import imgCrecimiento from "../assets/img/crecimiento.png";
 import imgPareja from "../assets/img/pareja.png";
 import imgFamilia from "../assets/img/familia.png";
 import imgOnline from "../assets/img/online.png";
+import imgEstudio from "../assets/img/estudio.png";
 
 export const servicesData = [
   {
@@ -53,5 +54,13 @@ export const servicesData = [
     bg: 'linear-gradient(145deg, #B4C4C0 0%, #C8D8D4 50%, #A4B4B0 100%)',
     img: imgOnline,
     svc: 'otro'
+  },
+  {
+    num: '07',
+    title: 'Técnicas de estudio',
+    body: 'Optimiza tu rendimiento académico gestionando el estrés, mejorando la concentración y aprendiendo métodos de estudio eficaces y personalizados.',
+    bg: 'linear-gradient(145deg, #B8B8C8 0%, #C8C8D8 50%, #A8A8B8 100%)',
+    img: imgEstudio,
+    svc: 'individual'
   }
 ];
