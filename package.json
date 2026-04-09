@@ -2,6 +2,9 @@
   "name": "mariocatena",
   "type": "module",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "dev:host": "astro dev --host",
@@ -18,5 +21,12 @@
   },
   "devDependencies": {
     "sass-embedded": "^1.98.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "sharp"
+    ]
   }
 }
