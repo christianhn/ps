@@ -50,6 +50,16 @@ import { Icon } from "astro-icon/components";
               placeholder="tu@email.com"
             />
           </div>
+          <div class="contact-form__group" style="display:none !important">
+            <label for="website">Si ves esto, no rellenes nada</label>
+            <input
+              type="text"
+              id="website"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            />
+          </div>
           <div class="contact-form__group">
             <label for="phone">Teléfono (opcional)</label>
             <input
@@ -86,7 +96,7 @@ import { Icon } from "astro-icon/components";
           <label for="privacy">
             He leído y acepto la{" "}
             <a
-              href={`${import.meta.env.BASE_URL}politica-privacidad/`}
+              href={`${import.meta.env.BASE_URL}/politica-privacidad/`}
               class="contact-form__link"
             >
               Política de Privacidad
@@ -95,8 +105,11 @@ import { Icon } from "astro-icon/components";
         </div>
 
         <button type="submit" class="contact-form__submit">
-          Enviar mensaje
+          <span class="btn-text">Enviar mensaje</span>
+          <span class="btn-loading" style="display: none;">Enviando...</span>
         </button>
+
+        <div id="form-feedback" class="contact-form__feedback"></div>
       </form>
     </div>
   </div>
@@ -338,14 +351,54 @@ import { Icon } from "astro-icon/components";
         color: var(--ink);
         transform: translateY(-2px);
       }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+    }
+
+    &__feedback {
+      font-size: 0.875rem;
+      padding: 0.5rem 0;
+      border-radius: 0.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      min-height: 1.5rem;
+
+      &.success {
+        color: #10b981;
+      }
+
+      &.error {
+        color: #ef4444;
+      }
     }
   }
 </style>
 
 <script>
   const handleFormLogic = () => {
-    const selectEl = document.getElementById("service") as HTMLSelectElement;
-    if (!selectEl) return;
+    const form = document.querySelector(
+      ".contact-form",
+    ) as HTMLFormElement | null;
+    const selectEl = document.getElementById(
+      "service",
+    ) as HTMLSelectElement | null;
+
+    if (!form || !selectEl) return;
+
+    const submitBtn = form.querySelector(
+      ".contact-form__submit",
+    ) as HTMLButtonElement | null;
+    const btnText = submitBtn?.querySelector(".btn-text") as HTMLElement | null;
+    const btnLoading = submitBtn?.querySelector(
+      ".btn-loading",
+    ) as HTMLElement | null;
+    const feedback = document.getElementById(
+      "form-feedback",
+    ) as HTMLElement | null;
 
     // 1. Check URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -360,16 +413,16 @@ import { Icon } from "astro-icon/components";
       }
     }
 
-    // 2. Intercept clicks on links globally
+    // 2. Intercept clicks on links globally (to handle anchor changes without reload)
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       const link = target.closest(
-        'a[href="#contacto"], a[href="/#contacto"]',
-      ) as HTMLAnchorElement;
+        'a[href="#contacto"], a[href$="/#contacto"]',
+      ) as HTMLAnchorElement | null;
 
-      if (link) {
+      if (link && selectEl) {
         const service = link.dataset.service;
-        if (service && selectEl) {
+        if (service) {
           const optionExists = Array.from(selectEl.options).some(
             (opt) => opt.value === service,
           );
@@ -381,6 +434,49 @@ import { Icon } from "astro-icon/components";
     };
 
     document.addEventListener("click", handleAnchorClick);
+
+    // 3. Handle Form Submission with Resend via API Route
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (!submitBtn || !btnText || !btnLoading || !feedback) return;
+
+      // UI State: Loading
+      submitBtn.disabled = true;
+      btnText.style.display = "none";
+      btnLoading.style.display = "inline";
+      feedback.textContent = "";
+      feedback.className = "contact-form__feedback";
+
+      try {
+        const formData = new FormData(form);
+        const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+        const response = await fetch(`${baseUrl}/contact-submit`, {
+          method: "POST",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          feedback.textContent = result.message;
+          feedback.classList.add("success");
+          form.reset();
+        } else {
+          throw new Error(result.message || "Error al enviar");
+        }
+      } catch (error) {
+        console.error("Form error:", error);
+        feedback.textContent =
+          "Hubo un error al enviar el mensaje. Inténtalo de nuevo.";
+        feedback.classList.add("error");
+      } finally {
+        submitBtn.disabled = false;
+        btnText.style.display = "inline";
+        btnLoading.style.display = "none";
+      }
+    });
   };
 
   // Run on first load and after view transitions
