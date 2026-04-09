@@ -208,7 +208,7 @@ import { sobreMiData as data } from "../data/sobreMi";
       margin: 0 auto;
       padding: 0 3rem 6rem;
       display: grid;
-      grid-template-columns: 56% 1fr;
+      grid-template-columns: 50% 1fr;
       gap: 3.75rem;
       align-items: center;
       justify-items: center;
@@ -241,7 +241,11 @@ import { sobreMiData as data } from "../data/sobreMi";
         #d4dcd0 50%,
         #b4c0ae 100%
       );
-      max-width: 40vw;
+      max-width: 30vw;
+
+      @media (max-width: 64rem) {
+        max-width: 40vw;
+      }
 
       @media (max-width: 42.5rem) {
         max-width: 100%;

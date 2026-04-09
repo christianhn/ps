@@ -1,6 +1,8 @@
 ---
 import { contactoData as data } from "../data/contacto";
 import { Icon } from "astro-icon/components";
+
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 ---
 
 <section id="contacto" class="contacto">
@@ -96,7 +98,7 @@ import { Icon } from "astro-icon/components";
           <label for="privacy">
             He leído y acepto la{" "}
             <a
-              href={`${import.meta.env.BASE_URL}/politica-privacidad/`}
+              href={`${baseUrl}/politica-privacidad/`}
               class="contact-form__link"
             >
               Política de Privacidad
