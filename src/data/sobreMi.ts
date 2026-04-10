@@ -3,11 +3,11 @@ import imgOnline from "../assets/img/online.png";
 
 export const sobreMiData = {
   statement: {
-    title: "La salud mental <span class=\"no-wrap\">no es un lujo.</span><br />Es el punto de <em>partida.</em>",
+    title: "",
   },
   bio: {
     eyebrow: "Sobre mí",
-    title: "Psicología que va a la <em>raíz.</em>",
+    title: "<em>¡Hola!</em>",
     image: profileImg,
     alt: "Mario Catena, Psicólogo",
     paragraphs: [
