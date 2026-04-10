@@ -37,6 +37,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
                 "nav__link",
                 { "btn-dark": link.variant === "primary" },
               ]}
+              data-contact-link={link.href === "#contacto" ? "true" : undefined}
             >
               {link.label}
             </a>
@@ -106,6 +107,21 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     };
 
     menuBtn.addEventListener("click", toggleMenu);
+
+    // 3. Dynamic "Pedir Cita" link
+    const contactLinks = document.querySelectorAll(
+      'a[data-contact-link="true"]',
+    );
+    const contactSection = document.getElementById("contacto");
+    const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+    contactLinks.forEach((link) => {
+      if (contactSection) {
+        link.setAttribute("href", "#contacto");
+      } else {
+        link.setAttribute("href", `${baseUrl}/#contacto`);
+      }
+    });
 
     // Close menu when clicking links
     navList.querySelectorAll("a").forEach((link) => {
