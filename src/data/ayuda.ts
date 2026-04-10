@@ -49,6 +49,7 @@ export const ayudaData = [
   {
     id: "familia",
     label: "Familia",
+    svc: "pareja",
     title: "Terapia familiar en Zaragoza",
     image: imgFamilia,
     intro: ' "En casa hay tensión constante. Un cambio o una crisis ha desestabilizado la dinámica familiar y nadie sabe cómo recomponerse."',

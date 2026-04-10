@@ -65,14 +65,14 @@ import { ayudaData as services } from "../data/ayuda";
                 <div class="ayuda-panel__actions">
                   <a
                     href="#contacto"
-                    data-service={service.id}
+                    data-service={service.svc || service.id}
                     class="btn-dark"
                   >
                     Pedir cita
                   </a>
                   <a
                     href="#contacto"
-                    data-service={service.id}
+                    data-service={service.svc || service.id}
                     class="btn-ghost ayuda-panel__ghost-btn"
                   >
                     Sesión online disponible

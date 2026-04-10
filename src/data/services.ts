@@ -61,6 +61,6 @@ export const servicesData = [
     body: 'Optimiza tu rendimiento académico gestionando el estrés, mejorando la concentración y aprendiendo métodos de estudio eficaces y personalizados.',
     bg: 'linear-gradient(145deg, #B8B8C8 0%, #C8C8D8 50%, #A8A8B8 100%)',
     img: imgEstudio,
-    svc: 'individual'
+    svc: 'estudio'
   }
 ];
