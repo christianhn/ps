@@ -1,0 +1,118 @@
+---
+import { Image } from "astro:assets";
+import ofiImg from "../assets/img/ofi-ia.png";
+---
+
+<section class="office-reveal" id="office-reveal">
+  <div class="office-reveal__sticky">
+    <div class="office-reveal__container">
+      <div class="office-reveal__wrapper">
+        <Image 
+          src={ofiImg} 
+          alt="Consulta de Mario Catena" 
+          class="office-reveal__image"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initStickyReveal() {
+    const track = document.getElementById('office-reveal');
+    const container = track?.querySelector('.office-reveal__container') as HTMLElement;
+    const wrapper = track?.querySelector('.office-reveal__wrapper') as HTMLElement;
+    const image = track?.querySelector('.office-reveal__image') as HTMLElement;
+    
+    if (!track || !container || !wrapper || !image) return;
+
+    const updateEffect = () => {
+      const rect = track.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      const totalScroll = track.offsetHeight - viewportHeight;
+      const currentScroll = -rect.top;
+      let progress = Math.min(Math.max(currentScroll / totalScroll, 0), 1);
+
+      // Expansion phase (0 to 0.7)
+      const expandProgress = Math.min(progress / 0.7, 1);
+      
+      // Calculate Width
+      const startWidth = window.innerWidth > 1024 ? 80 : 90;
+      const currentWidth = startWidth + (100 - startWidth) * expandProgress;
+      container.style.width = `${currentWidth}vw`;
+      container.style.maxWidth = '100vw';
+      
+      // Calculate Height
+      const startHeight = window.innerWidth > 1024 ? 70 : 50; 
+      const currentHeight = startHeight + (100 - startHeight) * expandProgress;
+      container.style.height = `${currentHeight}vh`;
+
+      // Calculate Border Radius
+      const startRadius = 24;
+      const currentRadius = startRadius * (1 - expandProgress);
+      container.style.borderRadius = `${currentRadius}px`;
+
+      // Movement and Image Scaling
+      const translateY = expandProgress * -40;
+      image.style.transform = `scale(${1.2 - expandProgress * 0.1}) translateY(${translateY}px)`;
+    };
+
+    window.addEventListener('scroll', updateEffect, { passive: true });
+    updateEffect();
+  }
+
+  document.addEventListener('astro:page-load', initStickyReveal);
+</script>
+
+<style lang="scss">
+  .office-reveal {
+    height: 250vh;
+    position: relative;
+    background: var(--white);
+
+    &__sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    &__container {
+      width: 80vw;
+      height: 70vh;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      will-change: width, height, border-radius;
+
+      @media (max-width: 64rem) {
+        width: 90vw;
+        height: 50vh;
+      }
+    }
+
+    &__wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    &__image {
+      width: 100%;
+      height: 115%;
+      position: absolute;
+      top: -7.5%;
+      left: 0;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.2);
+      will-change: transform;
+    }
+  }
+</style>
