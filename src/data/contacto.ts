@@ -39,3 +39,7 @@ export const contactoData = {
     ],
   },
 };
+
+export const discounts: Record<string, { pct: number; label: string }> = {
+  CPMZ: { pct: 15, label: "Colegiado CPMZ (15%)" },
+};

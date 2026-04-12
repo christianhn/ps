@@ -19,15 +19,15 @@ import { tarifasData as data } from "../data/tarifas";
             <h3 class="tarifa-card__name">{plan.nombre}</h3>
             <div class="tarifa-card__price">
               <span class="tarifa-card__currency">€</span>
-              <span class="tarifa-card__amount">{plan.precio}</span>
+              <span class="tarifa-card__amount js-price" data-base-price={plan.precio}>{plan.precio}</span>
             </div>
+            <div class="tarifa-card__discount-info js-discount-label" style="display: none;"></div>
             <p class="tarifa-card__duration">{plan.duracion}</p>
             <hr class="tarifa-card__divider" />
             <ul class="tarifa-card__features">
               {plan.features.map((feature) => (
                 <li class="tarifa-card__feature">
-                  <strong>{feature.label}:</strong> {feature.price} (
-                  {feature.saving})
+                  <strong>{feature.label}:</strong> {feature.price}
                 </li>
               ))}
             </ul>
@@ -247,6 +247,18 @@ import { tarifasData as data } from "../data/tarifas";
       border: none;
       border-top: 0.5px solid var(--pill-border);
       margin: 0 0 1.5rem;
+    }
+
+    &__discount-info {
+      font-size: 0.75rem;
+      color: var(--sage);
+      font-weight: 500;
+      margin-top: -0.5rem;
+      margin-bottom: 1rem;
+      background: var(--cream);
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      display: inline-block;
     }
 
     &__features {

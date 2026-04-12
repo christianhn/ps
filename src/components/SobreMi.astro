@@ -122,10 +122,10 @@ import { sobreMiData as data } from "../data/sobreMi";
       color: var(--ink-light);
 
       &--institution {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         color: var(--sage);
-        overflow-wrap: break-word;
-        word-break: break-word;
+        font-size: 0.625rem;
+        opacity: 0.8;
       }
     }
 
@@ -148,6 +148,7 @@ import { sobreMiData as data } from "../data/sobreMi";
         display: flex;
         flex-direction: column;
         align-items: center;
+        opacity: 0.7; // Subtler heading
       }
     }
 
@@ -276,12 +277,12 @@ import { sobreMiData as data } from "../data/sobreMi";
 
       &-header {
         text-align: center;
-        margin-bottom: 4.5rem;
+        margin-bottom: 3rem;
       }
       &-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 3.5rem 4rem;
+        gap: 2.5rem 3.5rem;
         text-align: left;
 
         @media (max-width: 75rem) {
@@ -314,11 +315,11 @@ import { sobreMiData as data } from "../data/sobreMi";
     &__card-title,
     &__list-title,
     &__subcard-title {
-      font-size: 1.3rem;
-      font-weight: 400;
-      line-height: 1.2;
-      letter-spacing: -0.015em;
-      margin: 1rem 0 0.75rem;
+      font-size: 1.1rem; // Reduced from 1.3rem
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin: 0.5rem 0 0.5rem;
       color: var(--ink);
     }
 
@@ -330,9 +331,9 @@ import { sobreMiData as data } from "../data/sobreMi";
     &__card-description,
     &__list-description,
     &__subcard-description {
-      font-size: 0.95rem;
-      color: var(--ink-mid);
-      line-height: 1.7;
+      font-size: 0.875rem; // Reduced from 0.95rem
+      color: var(--ink-light);
+      line-height: 1.6;
       font-weight: 300;
     }
 

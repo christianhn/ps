@@ -313,6 +313,17 @@ import { ayudaData as services } from "../data/ayuda";
         tab.addEventListener("click", () => this.switchTab(tab));
         tab.addEventListener("keydown", (e) => this.handleKeyDown(e));
       });
+
+      // 1. Check URL parameters for auto-selection
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam) {
+        const targetTab = this.tabs.find((t) => t.dataset.tab === tabParam);
+        if (targetTab) {
+          // Add a small delay to ensure everything is rendered
+          setTimeout(() => this.switchTab(targetTab), 100);
+        }
+      }
     }
 
     private switchTab(newTab: HTMLButtonElement) {

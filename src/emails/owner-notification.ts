@@ -4,9 +4,13 @@ interface OwnerNotificationParams {
   phone?: string;
   serviceLabel: string;
   message: string;
+  discount?: string;
+  referral?: string;
 }
 
-export const ownerNotificationTemplate = ({ name, email, phone, serviceLabel, message }: OwnerNotificationParams) => `
+export const ownerNotificationTemplate = ({ 
+  name, email, phone, serviceLabel, message, discount, referral 
+}: OwnerNotificationParams) => `
 <!DOCTYPE html>
 <html>
   <head>
@@ -18,7 +22,7 @@ export const ownerNotificationTemplate = ({ name, email, phone, serviceLabel, me
       .content { padding: 30px; line-height: 1.6; }
       .data-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
       .data-table td { padding: 12px 0; border-bottom: 1px solid #EDEDED; vertical-align: top; }
-      .label { font-weight: 700; color: #4D4D4D; width: 100px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
+      .label { font-weight: 700; color: #4D4D4D; width: 150px; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; }
       .value { color: #1b1b1b; font-size: 16px; }
       .message-box { background-color: #fbfbfb; border-radius: 8px; padding: 20px; border-left: 4px solid #0084FF; margin-top: 20px; }
       .footer { background-color: #EDEDED; padding: 20px; text-align: center; color: #666666; font-size: 12px; }
@@ -47,6 +51,18 @@ export const ownerNotificationTemplate = ({ name, email, phone, serviceLabel, me
             <td class="label">Servicio</td>
             <td class="value">${serviceLabel}</td>
           </tr>
+          ${discount ? `
+          <tr>
+            <td class="label">Descuento / Convenio</td>
+            <td class="value"><strong>${discount}</strong></td>
+          </tr>
+          ` : ''}
+          ${referral ? `
+          <tr>
+            <td class="label">Origen</td>
+            <td class="value">${referral}</td>
+          </tr>
+          ` : ''}
         </table>
         
         <h3 style="color: #4D4D4D; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">Mensaje:</h3>

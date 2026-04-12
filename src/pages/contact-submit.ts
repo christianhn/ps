@@ -19,6 +19,8 @@ export const POST: APIRoute = async ({ request }) => {
   const phone = data.get("phone")?.toString();
   const serviceId = data.get("service")?.toString();
   const message = data.get("message")?.toString();
+  const discount = data.get("discount")?.toString();
+  const referral = data.get("referral")?.toString();
   const honeypot = data.get("website")?.toString();
 
   if (honeypot) {
@@ -48,7 +50,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: `Mario Catena Web <${fromEmail}>`,
       to: [ownerEmail],
       subject: `Nueva consulta: ${serviceLabel} - ${name}`,
-      html: ownerNotificationTemplate({ name, email, phone, serviceLabel, message }),
+      html: ownerNotificationTemplate({ name, email, phone, serviceLabel, message, discount, referral }),
     });
 
     // 2. CONFIRMACIÓN AL CLIENTE
