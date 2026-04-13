@@ -186,6 +186,8 @@ import { servicesData as services } from "../data/services";
         &::-webkit-scrollbar {
           display: none;
         }
+
+        position: relative;
       }
     }
 
@@ -338,6 +340,7 @@ import { servicesData as services } from "../data/services";
       const tabs = this.querySelectorAll(".services__item");
       const panels = this.querySelectorAll(".services__panel");
       const images = this.querySelectorAll(".services__image-panel");
+      const list = this.querySelector(".services__list") as HTMLElement;
 
       tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => {
@@ -354,6 +357,18 @@ import { servicesData as services } from "../data/services";
           tab.setAttribute("aria-selected", "true");
           panels[index].classList.add("services__panel--active");
           images[index].classList.add("services__image-panel--active");
+
+          // Auto-scroll on mobile
+          if (list && window.innerWidth <= 1024) {
+            const tabEl = tab as HTMLElement;
+            // Subtracting a small amount (24px) to account for the fade/padding
+            // and ensure the tab isn't cut off by the container edge.
+            const scrollOffset = tabEl.offsetLeft - 24;
+            list.scrollTo({
+              left: scrollOffset,
+              behavior: "smooth",
+            });
+          }
         });
 
         tab.addEventListener("keydown", (e: any) => {

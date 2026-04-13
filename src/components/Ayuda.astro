@@ -304,6 +304,7 @@ import { ayudaData as services } from "../data/ayuda";
         display: none;
       }
 
+      position: relative;
       mask-image: linear-gradient(to right, 
         transparent, 
         black 5%, 
@@ -324,11 +325,13 @@ import { ayudaData as services } from "../data/ayuda";
   class AyudaTabs extends HTMLElement {
     private tabs: HTMLButtonElement[];
     private panels: HTMLElement[];
+    private list: HTMLElement | null;
 
     constructor() {
       super();
       this.tabs = Array.from(this.querySelectorAll('[role="tab"]'));
       this.panels = Array.from(this.querySelectorAll('[role="tabpanel"]'));
+      this.list = this.querySelector(".ayuda-tabs__list");
     }
 
     connectedCallback() {
@@ -366,7 +369,17 @@ import { ayudaData as services } from "../data/ayuda";
       newTab.classList.add("is-active");
       newTab.setAttribute("aria-selected", "true");
       newTab.setAttribute("tabindex", "0");
-      newTab.focus();
+      newTab.focus({ preventScroll: true });
+
+      // Auto-scroll on mobile
+      if (this.list && window.innerWidth <= 1024) {
+        // Subtracting a bit of offset (28px) for better visibility (mask/padding)
+        const scrollOffset = newTab.offsetLeft - 28;
+        this.list.scrollTo({
+          left: scrollOffset,
+          behavior: "smooth",
+        });
+      }
 
       const panel = this.querySelector(`#${targetPanelId}`) as HTMLElement;
       if (panel) {
