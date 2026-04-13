@@ -160,13 +160,32 @@ import { servicesData as services } from "../data/services";
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.5rem;
 
       @media (max-width: 64rem) {
         flex-direction: row;
         overflow-x: auto;
-        padding-bottom: 1rem;
+        padding: 0 1rem 1rem;
+        margin: 0 -1rem;
         scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+
+        // Horizontal scroll indicator (fade)
+        mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 5%,
+          black 90%,
+          transparent 100%
+        );
+        -webkit-mask-image: linear-gradient(
+          to right,
+          transparent,
+          black 5%,
+          black 90%,
+          transparent 100%
+        );
+
         &::-webkit-scrollbar {
           display: none;
         }
