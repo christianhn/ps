@@ -49,9 +49,6 @@ import { servicesData as services } from "../data/services";
                     class="services__image"
                     loading={i === 0 ? "eager" : "lazy"}
                   />
-                  <span class="services__fig-label">
-                    Fig. {i + 1} — {s.title}
-                  </span>
                 </div>
               ))
             }
@@ -280,16 +277,6 @@ import { servicesData as services } from "../data/services";
       height: 100%;
       object-fit: cover;
       opacity: 0.94;
-    }
-
-    &__fig-label {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      font-size: 0.6875rem;
-      color: var(--ink-light);
-      font-weight: 300;
-      letter-spacing: 0.04em;
     }
 
     &__panel {
