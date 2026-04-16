@@ -183,24 +183,27 @@ import { ayudaData as services } from "../data/ayuda";
     &.is-active {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
+      justify-items: center;
+      gap: 4rem;
+      align-items: flex-start;
       opacity: 1;
       transform: translateY(0);
     }
 
     &__image {
-      max-height: 70vh;
+      max-width: 28rem;
+      max-height: 80vh;
+      position: sticky;
+      top: 6rem;
       border-radius: var(--radius-card);
       overflow: hidden;
       aspect-ratio: 4 / 5;
       background: var(--cream-mid);
-      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 3rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+      margin: 1.5rem 0;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 
       @media (max-width: 64rem) {
         margin: 1rem 8rem;
@@ -220,7 +223,7 @@ import { ayudaData as services } from "../data/ayuda";
     }
 
     &__content {
-      padding: 0.5rem 0;
+      margin: 1.5rem 0;
     }
 
     &__intro {
@@ -289,6 +292,9 @@ import { ayudaData as services } from "../data/ayuda";
     }
 
     .ayuda-panel__image {
+      position: static;
+      max-height: 50vh;
+      margin: 0;
       aspect-ratio: 16 / 10;
     }
 
