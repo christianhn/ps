@@ -190,6 +190,7 @@ import { ayudaData as services } from "../data/ayuda";
     }
 
     &__image {
+      max-height: 70vh;
       border-radius: var(--radius-card);
       overflow: hidden;
       aspect-ratio: 4 / 5;
@@ -299,22 +300,24 @@ import { ayudaData as services } from "../data/ayuda";
       padding: 0 1.5rem 0.5rem;
       scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
-      
+
       &::-webkit-scrollbar {
         display: none;
       }
 
       position: relative;
-      mask-image: linear-gradient(to right, 
-        transparent, 
-        black 5%, 
-        black 90%, 
+      mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 5%,
+        black 90%,
         transparent 100%
       );
-      -webkit-mask-image: linear-gradient(to right, 
-        transparent, 
-        black 5%, 
-        black 90%, 
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent,
+        black 5%,
+        black 90%,
         transparent 100%
       );
     }
