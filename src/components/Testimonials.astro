@@ -35,12 +35,14 @@ const testimonials = [
         Confidencialidad y resultados<br />que transforman vidas.
       </p>
     </div>
-    
+
     <div class="testi-container" id="testi-container">
       <div class="testi-grid" id="testi-grid">
         {
           testimonials.map((t, i) => (
-            <div class={`testi-card reveal reveal-delay-${i % 3} ${i >= 3 ? "testi-card--extra" : ""}`}>
+            <div
+              class={`testi-card reveal reveal-delay-${i % 3} ${i >= 3 ? "testi-card--extra" : ""}`}
+            >
               <span class="stars">★★★★★</span>
               <p class="testi-quote">"{t.quote}"</p>
               <span class="testi-author">
@@ -51,12 +53,26 @@ const testimonials = [
         }
       </div>
 
-      {testimonials.length > 3 && (
-        <button id="testi-load-more" class="testi-load-more">
-          <span>Ver más testimonios</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-      )}
+      {
+        testimonials.length > 3 && (
+          <button id="testi-load-more" class="testi-load-more">
+            <span>Ver más testimonios</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+        )
+      }
     </div>
   </div>
 </section>
@@ -150,7 +166,7 @@ const testimonials = [
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    
+
     &::-webkit-scrollbar {
       display: none;
     }
@@ -215,12 +231,6 @@ const testimonials = [
     cursor: pointer;
     transition: all 0.3s ease;
 
-    &:hover {
-      background: var(--white);
-      border-color: var(--sage);
-      color: var(--sage);
-    }
-
     svg {
       transition: transform 0.3s ease;
     }
@@ -238,7 +248,7 @@ const testimonials = [
       overflow-x: visible;
       padding-bottom: 0;
     }
-    
+
     .testi-card--extra {
       display: none;
       &.is-visible {
@@ -275,47 +285,52 @@ const testimonials = [
 
 <script>
   const setupTestimonials = () => {
-    const container = document.getElementById('testi-container');
-    const grid = document.getElementById('testi-grid');
-    const loadMoreBtn = document.getElementById('testi-load-more');
-    const extraCards = document.querySelectorAll('.testi-card--extra');
-    
+    const container = document.getElementById("testi-container");
+    const grid = document.getElementById("testi-grid");
+    const loadMoreBtn = document.getElementById("testi-load-more");
+    const extraCards = document.querySelectorAll(".testi-card--extra");
+
     if (grid && container) {
       const updateScrollShadows = () => {
         const scrollLeft = grid.scrollLeft;
         const maxScrollLeft = grid.scrollWidth - grid.clientWidth;
-        
-        container.classList.toggle('has-scroll-left', scrollLeft > 10);
-        container.classList.toggle('has-scroll-right', scrollLeft < maxScrollLeft - 10);
+
+        container.classList.toggle("has-scroll-left", scrollLeft > 10);
+        container.classList.toggle(
+          "has-scroll-right",
+          scrollLeft < maxScrollLeft - 10,
+        );
       };
 
-      grid.addEventListener('scroll', updateScrollShadows);
-      window.addEventListener('resize', updateScrollShadows);
-      
+      grid.addEventListener("scroll", updateScrollShadows);
+      window.addEventListener("resize", updateScrollShadows);
+
       // Initial check after a small delay to ensure rendering
       setTimeout(updateScrollShadows, 100);
     }
 
     if (loadMoreBtn && extraCards.length > 0) {
-      loadMoreBtn.addEventListener('click', () => {
-        const isExpanded = loadMoreBtn.classList.contains('is-active');
-        
-        extraCards.forEach(card => {
+      loadMoreBtn.addEventListener("click", () => {
+        const isExpanded = loadMoreBtn.classList.contains("is-active");
+
+        extraCards.forEach((card) => {
           if (isExpanded) {
-            card.classList.remove('is-visible');
+            card.classList.remove("is-visible");
           } else {
-            card.classList.add('is-visible');
+            card.classList.add("is-visible");
           }
         });
 
-        loadMoreBtn.classList.toggle('is-active');
-        const btnText = loadMoreBtn.querySelector('span');
+        loadMoreBtn.classList.toggle("is-active");
+        const btnText = loadMoreBtn.querySelector("span");
         if (btnText) {
-          btnText.textContent = isExpanded ? 'Ver más testimonios' : 'Ver menos';
+          btnText.textContent = isExpanded
+            ? "Ver más testimonios"
+            : "Ver menos";
         }
       });
     }
   };
 
-  document.addEventListener('astro:page-load', setupTestimonials);
+  document.addEventListener("astro:page-load", setupTestimonials);
 </script>

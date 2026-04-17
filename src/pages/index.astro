@@ -23,7 +23,20 @@ import "../styles/global.css";
     <Testimonials />
     <TeEscucho />
     <OfficeVisual />
-    <Contacto />
+    <div class="contact-home-wrapper">
+      <Contacto />
+    </div>
   </main>
   <Footer />
 </Layout>
+
+<style>
+  .contact-home-wrapper {
+    margin-top: 6rem;
+  }
+  @media (max-width: 48rem) {
+    .contact-home-wrapper {
+      margin-top: 2rem;
+    }
+  }
+</style>

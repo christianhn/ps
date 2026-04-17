@@ -233,15 +233,10 @@ import { sobreMiData as data } from "../data/sobreMi";
     &__img-wrapper {
       border-radius: var(--radius-card);
       overflow: hidden;
-      aspect-ratio: 4/5;
+      aspect-ratio: 4 / 5;
       position: relative;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-      background: linear-gradient(
-        145deg,
-        #c4ccbe 0%,
-        #d4dcd0 50%,
-        #b4c0ae 100%
-      );
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      background: var(--cream-mid); // Neutral placeholder
       max-width: 30rem;
       width: 100%;
 
@@ -260,12 +255,7 @@ import { sobreMiData as data } from "../data/sobreMi";
       }
 
       &--online {
-        background: linear-gradient(
-          145deg,
-          #b4c4c8 0%,
-          #c8d8dc 50%,
-          #a4b4b8 100%
-        );
+        background: var(--ash);
       }
     }
 
