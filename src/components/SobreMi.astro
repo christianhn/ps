@@ -84,7 +84,7 @@ import { sobreMiData as data } from "../data/sobreMi";
           {data.formacion.aeps.institution}
         </p>
         <ul class="sobre__list-grid">
-          {data.formacion.aeps.list.map((item) => <li>{item}</li>)}
+          {data.formacion.aeps.list.map((item) => <li class="sobre__list-item">{item}</li>)}
         </ul>
       </div>
 
@@ -364,14 +364,8 @@ import { sobreMiData as data } from "../data/sobreMi";
     }
     &__list-grid {
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 16.25rem), 1fr));
-      gap: 1rem 2rem;
-      li {
-        font-size: 0.95rem;
-        color: var(--ink-mid);
-        font-weight: 300;
-        position: relative;
-        line-height: 1.85;
-      }
+      gap: 0.5rem 2rem;
+      margin-top: 0.75rem;
     }
 
     &__online-link {
