@@ -27,7 +27,10 @@ import { tarifasData as data } from "../data/tarifas";
             <ul class="tarifa-card__features">
               {plan.features.map((feature) => (
                 <li class="tarifa-card__feature">
-                  <strong>{feature.label}:</strong> {feature.price}
+                  <div>
+                    <strong>{feature.label}:</strong> {feature.price}
+                    {feature.saving && <span class="tarifa-card__saving">{feature.saving}</span>}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -259,6 +262,18 @@ import { tarifasData as data } from "../data/tarifas";
       padding: 0.25rem 0.75rem;
       border-radius: 1rem;
       display: inline-block;
+    }
+
+    &__saving {
+      display: inline-block;
+      font-size: 0.6875rem;
+      color: var(--white);
+      background: var(--sage);
+      padding: 0.125rem 0.5rem;
+      border-radius: 0.25rem;
+      margin-left: 0.5rem;
+      font-weight: 500;
+      vertical-align: middle;
     }
 
     &__features {

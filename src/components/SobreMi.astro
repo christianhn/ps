@@ -11,20 +11,33 @@ import { sobreMiData as data } from "../data/sobreMi";
 
   <!-- Bio Section -->
   <div class="sobre__split sobre__split--bio">
-    <div class="sobre__img-wrapper">
-      <div class="sobre__img-inner">
-        <Image
-          src={data.bio.image}
-          alt={data.bio.alt}
-          class="sobre__portrait"
-        />
+    <div class="sobre__img-col">
+      <div class="sobre__img-wrapper">
+        <div class="sobre__img-inner">
+          <Image
+            src={data.bio.image}
+            alt={data.bio.alt}
+            class="sobre__portrait"
+          />
+        </div>
       </div>
+      <p class="sobre__collegiate">{data.formacion.footer}</p>
     </div>
 
     <div class="sobre__content reveal">
       <p class="sobre__eyebrow">{data.bio.eyebrow}</p>
       <h2 class="sobre__title" set:html={data.bio.title} />
-      {data.bio.paragraphs.map((text) => <p class="sobre__body">{text}</p>)}
+      {
+        data.bio.paragraphs.map((text) => (
+          <p
+            class="sobre__body"
+            set:html={text.replace(
+              "psicólogo general sanitario",
+              "<span class='text-highlight'>psicólogo general sanitario</span>",
+            )}
+          />
+        ))
+      }
     </div>
   </div>
 
@@ -59,10 +72,7 @@ import { sobreMiData as data } from "../data/sobreMi";
         <ul class="sobre__list-vertical">
           {
             data.formacion.isias.items.map((item) => (
-              <li class="sobre__list-item">
-                <h3 class="sobre__list-title">{item.title}</h3>
-                <p class="sobre__list-description">{item.description}</p>
-              </li>
+              <li class="sobre__list-item">{item}</li>
             ))
           }
         </ul>
@@ -95,13 +105,6 @@ import { sobreMiData as data } from "../data/sobreMi";
         </div>
       </div>
     </div>
-
-    <footer class="sobre__experience-footer reveal">
-      <p
-        class="sobre__experience-footer-text"
-        set:html={data.formacion.footer}
-      />
-    </footer>
   </article>
 </section>
 
@@ -152,14 +155,35 @@ import { sobreMiData as data } from "../data/sobreMi";
       }
     }
 
+    :global(.text-highlight) {
+      color: var(--sage);
+      font-weight: 500;
+    }
+
     &__body {
-      font-size: 0.875rem;
+      font-size: 1.0625rem; // Increased for closeness
       font-weight: 300;
       color: var(--ink-mid);
       line-height: 1.85;
       & + & {
         margin-top: 0.875rem;
       }
+    }
+
+    &__collegiate {
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      margin-top: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      opacity: 0.7;
+    }
+
+    &__img-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     // --- Layout Patterns ---
@@ -255,7 +279,6 @@ import { sobreMiData as data } from "../data/sobreMi";
       object-position: 50% 35%;
     }
 
-
     &__content {
       padding: 1rem 0;
     }
@@ -306,7 +329,7 @@ import { sobreMiData as data } from "../data/sobreMi";
     &__card-title,
     &__list-title,
     &__subcard-title {
-      font-size: 1.1rem; // Reduced from 1.3rem
+      font-size: 1.1rem;
       font-weight: 500;
       line-height: 1.3;
       letter-spacing: -0.01em;
@@ -314,18 +337,26 @@ import { sobreMiData as data } from "../data/sobreMi";
       color: var(--ink);
     }
 
-    &__list-title,
-    &__subcard-title {
-      margin: 0 0 0.5rem;
+    &__list-title {
+      font-weight: 400; // Less prominent for experts
+      font-size: 1.05rem;
+      color: var(--ink-mid);
     }
 
     &__card-description,
-    &__list-description,
+    &__list-item,
     &__subcard-description {
-      font-size: 0.875rem; // Reduced from 0.95rem
+      font-size: 0.875rem;
       color: var(--ink-light);
       line-height: 1.6;
       font-weight: 300;
+    }
+
+    &__list-item {
+      position: relative;
+      &:first-child {
+        margin-top: 0.75rem;
+      }
     }
 
     &__list-vertical,
@@ -335,7 +366,7 @@ import { sobreMiData as data } from "../data/sobreMi";
       display: grid;
     }
     &__list-vertical {
-      gap: 2.25rem;
+      gap: 0.75rem;
     }
     &__otras-grid {
       grid-template-columns: repeat(auto-fit, minmax(min(100%, 18.75rem), 1fr));
@@ -349,14 +380,7 @@ import { sobreMiData as data } from "../data/sobreMi";
         color: var(--ink-mid);
         font-weight: 300;
         position: relative;
-        padding-left: 1rem;
         line-height: 1.85;
-        &::before {
-          content: "•";
-          position: absolute;
-          left: 0;
-          color: var(--sage);
-        }
       }
     }
 

@@ -68,12 +68,13 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
             />
           </div>
           <div class="contact-form__group">
-            <label for="phone">Teléfono (opcional)</label>
+            <label for="phone">Teléfono</label>
             <input
               type="tel"
               id="phone"
               name="phone"
-              placeholder="Por si prefieres que te llame"
+              required
+              placeholder="+34 600 000 000"
             />
           </div>
         </div>
@@ -105,7 +106,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
               type="text"
               id="referral"
               name="referral"
-              placeholder="Instagram, Google..."
+              placeholder="Recomendado por X, Google..."
             />
           </div>
         </div>

@@ -2,6 +2,12 @@
 const testimonials = [
   {
     quote:
+      "Trato muy cercano y que invita a abrirse con facilidad. Los ejercicios/actividades que realiza me permiten ya no sólo poder expresarme mejor, sino darme cuenta de muchos elementos a trabajar. Muy satisfecho y con ganas de continuar.",
+    author: "A.M.",
+    type: "Reseña verificada en Doctoralia",
+  },
+  {
+    quote:
       "Increíble profesional y mejor persona. Compartir parte del recorrido vital con Mario, teniendo su orientación, guía y apoyo es una gran experiencia y oportunidad de autoconocimiento. Gracias Mario, por ser referente, brújula y mano amiga.",
     author: "Inma G.",
     type: "Reseña en Google",
@@ -29,35 +35,47 @@ const testimonials = [
         Confidencialidad y resultados<br />que transforman vidas.
       </p>
     </div>
-    <div class="testi-grid">
-      {
-        testimonials.map((t, i) => (
-          <div class={`testi-card reveal reveal-delay-${i}`}>
-            <span class="stars">★★★★★</span>
-            <p class="testi-quote">"{t.quote}"</p>
-            <span class="testi-author">
-              — {t.author} · {t.type}
-            </span>
-          </div>
-        ))
-      }
+    
+    <div class="testi-container" id="testi-container">
+      <div class="testi-grid" id="testi-grid">
+        {
+          testimonials.map((t, i) => (
+            <div class={`testi-card reveal reveal-delay-${i % 3} ${i >= 3 ? "testi-card--extra" : ""}`}>
+              <span class="stars">★★★★★</span>
+              <p class="testi-quote">"{t.quote}"</p>
+              <span class="testi-author">
+                — {t.author} · {t.type}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+
+      {testimonials.length > 3 && (
+        <button id="testi-load-more" class="testi-load-more">
+          <span>Ver más testimonios</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+      )}
     </div>
   </div>
 </section>
 
-<style>
+<style lang="scss">
   /* ── TESTIMONIALS ── */
   .testi-section {
     background: var(--cream-mid);
-    padding: 6rem 3rem;
-
-    @media (max-width: 64rem) {
-      padding: 6rem 1.75rem;
-    }
+    padding: 6rem 0;
+    overflow: hidden;
   }
   .testi-inner {
     max-width: 80rem;
     margin: 0 auto;
+    padding: 0 3rem;
+
+    @media (max-width: 64rem) {
+      padding: 0 1.75rem;
+    }
   }
 
   .testi-top {
@@ -70,7 +88,7 @@ const testimonials = [
   }
 
   .testi-top-title {
-    font-family: "Helvetica", "Arial", sans-serif;
+    font-family: inherit;
     font-size: clamp(2rem, 3.8vw, 3.125rem);
     font-weight: 400;
     letter-spacing: -0.015em;
@@ -85,49 +103,154 @@ const testimonials = [
     line-height: 1.6;
   }
 
+  .testi-container {
+    position: relative;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 2.5rem;
+      width: 8rem;
+      pointer-events: none;
+      z-index: 10;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+
+      @media (max-width: 64rem) {
+        display: none;
+      }
+    }
+
+    &::before {
+      left: -1px;
+      background: linear-gradient(to right, var(--cream-mid) 10%, transparent);
+    }
+
+    &::after {
+      right: -1px;
+      background: linear-gradient(to left, var(--cream-mid) 10%, transparent);
+    }
+
+    &.has-scroll-left::before {
+      opacity: 1;
+    }
+
+    &.has-scroll-right::after {
+      opacity: 1;
+    }
+  }
+
   .testi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 2.5rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .testi-card {
-    background: var(--cream);
+    background: var(--white);
     border-radius: 1.25rem;
-    padding: 2rem;
+    padding: 2.5rem;
     border: 0.5px solid var(--pill-border);
+    flex: 0 0 28rem;
+    scroll-snap-align: start;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 64rem) {
+      flex: 0 0 auto;
+      width: 100%;
+    }
   }
 
   .stars {
     font-size: 0.75rem;
     letter-spacing: 0.1875rem;
     color: var(--sage);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     display: block;
   }
 
   .testi-quote {
-    font-family: "Helvetica", "Arial", sans-serif;
-    font-size: 1rem;
+    font-family: inherit;
+    font-size: 1.0625rem;
     font-style: italic;
     font-weight: 400;
     color: var(--ink);
     line-height: 1.65;
+    flex-grow: 1;
   }
 
   .testi-author {
     font-size: 0.75rem;
     color: var(--ink-light);
-    margin-top: 1.25rem;
+    margin-top: 1.5rem;
     font-weight: 300;
     letter-spacing: 0.05em;
     display: block;
   }
 
+  .testi-load-more {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 2rem auto 0;
+    background: transparent;
+    border: 1px solid var(--pill-border);
+    padding: 0.75rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    color: var(--ink-mid);
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: var(--white);
+      border-color: var(--sage);
+      color: var(--sage);
+    }
+
+    svg {
+      transition: transform 0.3s ease;
+    }
+
+    &.is-active {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
   @media (max-width: 64rem) {
     .testi-grid {
-      grid-template-columns: 1fr;
+      flex-direction: column;
+      overflow-x: visible;
+      padding-bottom: 0;
     }
+    
+    .testi-card--extra {
+      display: none;
+      &.is-visible {
+        display: flex;
+        animation: cardFadeIn 0.5s ease forwards;
+      }
+    }
+
+    .testi-load-more {
+      display: flex;
+    }
+
     .testi-top {
       flex-direction: column;
       align-items: flex-start;
@@ -137,4 +260,62 @@ const testimonials = [
       text-align: left;
     }
   }
+
+  @keyframes cardFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(1rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 </style>
+
+<script>
+  const setupTestimonials = () => {
+    const container = document.getElementById('testi-container');
+    const grid = document.getElementById('testi-grid');
+    const loadMoreBtn = document.getElementById('testi-load-more');
+    const extraCards = document.querySelectorAll('.testi-card--extra');
+    
+    if (grid && container) {
+      const updateScrollShadows = () => {
+        const scrollLeft = grid.scrollLeft;
+        const maxScrollLeft = grid.scrollWidth - grid.clientWidth;
+        
+        container.classList.toggle('has-scroll-left', scrollLeft > 10);
+        container.classList.toggle('has-scroll-right', scrollLeft < maxScrollLeft - 10);
+      };
+
+      grid.addEventListener('scroll', updateScrollShadows);
+      window.addEventListener('resize', updateScrollShadows);
+      
+      // Initial check after a small delay to ensure rendering
+      setTimeout(updateScrollShadows, 100);
+    }
+
+    if (loadMoreBtn && extraCards.length > 0) {
+      loadMoreBtn.addEventListener('click', () => {
+        const isExpanded = loadMoreBtn.classList.contains('is-active');
+        
+        extraCards.forEach(card => {
+          if (isExpanded) {
+            card.classList.remove('is-visible');
+          } else {
+            card.classList.add('is-visible');
+          }
+        });
+
+        loadMoreBtn.classList.toggle('is-active');
+        const btnText = loadMoreBtn.querySelector('span');
+        if (btnText) {
+          btnText.textContent = isExpanded ? 'Ver más testimonios' : 'Ver menos';
+        }
+      });
+    }
+  };
+
+  document.addEventListener('astro:page-load', setupTestimonials);
+</script>

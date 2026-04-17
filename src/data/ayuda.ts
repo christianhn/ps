@@ -1,7 +1,7 @@
 import imgIndividual from "../assets/img/individual.jpg";
 import imgPareja from "../assets/img/pareja.png";
 import imgFamilia from "../assets/img/familia.png";
-import imgAdolescentes from "../assets/img/crecimiento.png";
+import imgAdolescentes from "../assets/img/adolescente.png";
 
 export const ayudaData = [
   {

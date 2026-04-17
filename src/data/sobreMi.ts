@@ -35,18 +35,10 @@ export const sobreMiData = {
     isias: {
       institution: "Instituto Superior de Intervención y Acción Social",
       items: [
-        {
-          title: "Experto en Psicoterapia",
-          description: "En Infancia y Adolescencia.",
-        },
-        {
-          title: "Experto en T.E.A",
-          description: "Diagnóstico, intervención e inclusión social del Trastorno del Espectro Autista.",
-        },
-        {
-          title: "Educación y Gestión Emocional",
-          description: "Formación en Educación Emocional y Gestión Emocional en la Infancia.",
-        },
+        "Experto en Psicoterapia en Infancia y Adolescencia.",
+        "Experto en Trastornos del Espectro Autista: Diagnóstico, intervención e inclusión social.",
+        "Educación Emocional.",
+        "Gestión Emocional en la Infancia.",
       ],
     },
     aeps: {
