@@ -2,7 +2,7 @@ import imgAnsiedad from "../assets/img/ansiedad.png";
 import imgDepresion from "../assets/img/depresion.png";
 import imgAutoestima from "../assets/img/autoestima.png";
 import imgCrecimiento from "../assets/img/crecimiento.png";
-import imgMusicos from "../assets/img/musicos.png";
+import imgMusicos from "../assets/img/musicos.jpg";
 import imgPareja from "../assets/img/pareja.png";
 import imgFamilia from "../assets/img/familia.png";
 import imgOnline from "../assets/img/online.png";
