@@ -20,9 +20,17 @@ import { tarifasData as data } from "../data/tarifas";
             <div class="tarifa-card__price js-price-container">
               <div class="tarifa-card__price-main">
                 <span class="tarifa-card__currency">€</span>
-                <span class="tarifa-card__amount js-price" data-base-price={plan.precio}>{plan.precio}</span>
+                <span
+                  class="tarifa-card__amount js-price"
+                  data-base-price={plan.precio}
+                >
+                  {plan.precio}
+                </span>
               </div>
-              <div class="tarifa-card__discount-info js-discount-label" style="display: none;"></div>
+              <div
+                class="tarifa-card__discount-info js-discount-label"
+                style="display: none;"
+              />
             </div>
             <p class="tarifa-card__duration">{plan.duracion}</p>
             <hr class="tarifa-card__divider" />
@@ -30,10 +38,16 @@ import { tarifasData as data } from "../data/tarifas";
               {plan.features.map((feature) => (
                 <li class="tarifa-card__feature">
                   <div class="tarifa-card__feature-text">
-                    <span class="tarifa-card__feature-label">{feature.label}:</span>
-                    <span class="tarifa-card__feature-price">{feature.price}</span>
+                    <span class="tarifa-card__feature-label">
+                      {feature.label}:
+                    </span>
+                    <span class="tarifa-card__feature-price">
+                      {feature.price}
+                    </span>
                   </div>
-                  {feature.saving && <span class="tarifa-card__saving">{feature.saving}</span>}
+                  {feature.saving && (
+                    <span class="tarifa-card__saving">{feature.saving}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -276,7 +290,6 @@ import { tarifasData as data } from "../data/tarifas";
       background: var(--sage-pale);
       padding: 0.5rem 1rem;
       border-radius: 1rem;
-      display: inline-flex;
       flex-wrap: wrap;
       gap: 0 0.375rem;
       align-self: flex-start;
@@ -380,7 +393,6 @@ import { tarifasData as data } from "../data/tarifas";
       transform: translateY(0);
     }
   }
-
 
   @media (max-width: 64rem) {
     .tarifas {
