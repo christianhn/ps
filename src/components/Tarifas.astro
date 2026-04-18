@@ -17,20 +17,22 @@ import { tarifasData as data } from "../data/tarifas";
           >
             <div class="tarifa-card__type">{plan.tipo}</div>
             <h3 class="tarifa-card__name">{plan.nombre}</h3>
-            <div class="tarifa-card__price">
-              <span class="tarifa-card__currency">€</span>
-              <span class="tarifa-card__amount js-price" data-base-price={plan.precio}>{plan.precio}</span>
+            <div class="tarifa-card__price js-price-container">
+              <div class="tarifa-card__price-main">
+                <span class="tarifa-card__currency">€</span>
+                <span class="tarifa-card__amount js-price" data-base-price={plan.precio}>{plan.precio}</span>
+              </div>
+              <div class="tarifa-card__discount-info js-discount-label" style="display: none;"></div>
             </div>
-            <div class="tarifa-card__discount-info js-discount-label" style="display: none;"></div>
             <p class="tarifa-card__duration">{plan.duracion}</p>
             <hr class="tarifa-card__divider" />
             <ul class="tarifa-card__features">
               {plan.features.map((feature) => (
                 <li class="tarifa-card__feature">
-                  <div>
+                  <span class="tarifa-card__feature-text">
                     <strong>{feature.label}:</strong> {feature.price}
-                    {feature.saving && <span class="tarifa-card__saving">{feature.saving}</span>}
-                  </div>
+                  </span>
+                  {feature.saving && <span class="tarifa-card__saving">{feature.saving}</span>}
                 </li>
               ))}
             </ul>
@@ -148,11 +150,13 @@ import { tarifasData as data } from "../data/tarifas";
   .tarifa-card {
     background: var(--white);
     border-radius: 1.25rem;
-    padding: 2.25rem 2rem;
+    padding: 2.5rem 2.25rem;
     border: 0.5px solid var(--pill-border);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     transition:
       transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 0.4s ease;
@@ -176,7 +180,7 @@ import { tarifasData as data } from "../data/tarifas";
       }
 
       .tarifa-card__name,
-      .tarifa-card__price {
+      .tarifa-card__price-main {
         color: var(--white);
       }
 
@@ -201,6 +205,12 @@ import { tarifasData as data } from "../data/tarifas";
           opacity: 0.88;
         }
       }
+
+      .tarifa-card__discount-info {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--white-90);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
     }
 
     &__type {
@@ -214,37 +224,42 @@ import { tarifasData as data } from "../data/tarifas";
 
     &__name {
       font-family: "Helvetica", "Arial", sans-serif;
-      font-weight: 700;
       font-size: 1.375rem;
       font-weight: 400;
       color: var(--ink);
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       line-height: 1.2;
     }
 
     &__price {
-      font-family: "Helvetica", "Arial", sans-serif;
-      font-weight: 700;
-      font-size: 3.25rem;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-      line-height: 1;
       display: flex;
-      align-items: flex-start;
-      gap: 0.25rem;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+
+      &-main {
+        font-family: "Helvetica", "Arial", sans-serif;
+        font-size: 3.5rem;
+        font-weight: 400;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        line-height: 1;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.25rem;
+      }
     }
 
     &__currency {
-      font-size: 1.375rem;
-      padding-top: 0.5rem;
+      font-size: 1.5rem;
+      padding-top: 0.625rem;
     }
 
     &__duration {
       font-size: 0.8125rem;
       color: var(--ink-light);
       font-weight: 300;
-      margin: 0.625rem 0 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     &__divider {
@@ -257,46 +272,59 @@ import { tarifasData as data } from "../data/tarifas";
       font-size: 0.75rem;
       color: var(--sage);
       font-weight: 500;
-      margin-top: -0.5rem;
-      margin-bottom: 1rem;
-      background: var(--cream);
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      display: inline-block;
+      background: var(--sage-pale);
+      padding: 0.375rem 0.875rem;
+      border-radius: 2rem;
+      display: inline-flex;
+      align-self: flex-start;
+      border: 1px solid rgba(0, 132, 255, 0.1);
+      animation: slideIn 0.3s ease-out;
     }
 
     &__saving {
-      display: inline-block;
       font-size: 0.6875rem;
       color: var(--white);
       background: var(--sage);
-      padding: 0.125rem 0.5rem;
-      border-radius: 0.25rem;
-      margin-left: 0.5rem;
+      padding: 0.25rem 0.625rem;
+      border-radius: 0.5rem;
       font-weight: 500;
-      vertical-align: middle;
+      flex-shrink: 0;
     }
 
     &__features {
       list-style: none;
       padding: 0;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
+      flex-grow: 1;
     }
 
     &__feature {
       font-size: 0.8125rem;
       font-weight: 300;
       color: var(--ink-mid);
-      padding: 0.5rem 0;
+      padding: 0.625rem 0;
       display: flex;
-      gap: 0.625rem;
-      align-items: flex-start;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 0.5px solid rgba(21, 21, 21, 0.03);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &-text {
+        strong {
+          font-weight: 500;
+          color: var(--ink);
+        }
+      }
     }
 
     &__button {
       display: block;
       width: 100%;
-      padding: 0.8125rem;
+      padding: 1rem;
       border-radius: 3.125rem;
       font-size: 0.875rem;
       font-weight: 500;
@@ -304,7 +332,7 @@ import { tarifasData as data } from "../data/tarifas";
       border: 0.5px solid var(--pill-border);
       background: var(--white);
       color: var(--ink);
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: center;
       text-decoration: none;
 
@@ -312,9 +340,22 @@ import { tarifasData as data } from "../data/tarifas";
         background: var(--ink);
         color: var(--white);
         border-color: var(--ink);
+        transform: translateY(-2px);
       }
     }
   }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
 
   @media (max-width: 64rem) {
     .tarifas {
