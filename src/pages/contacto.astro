@@ -1,0 +1,13 @@
+---
+/**
+ * Este archivo maneja la redirección de /contacto a la sección de contacto en la home.
+ * Preserva los parámetros de búsqueda (como ?convenio=...) para que el formulario
+ * pueda aplicar los descuentos correspondientes.
+ */
+const search = Astro.url.search;
+const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
+// Redirigimos a la raíz con los parámetros antes del hash para que window.location.search sea accesible
+const destination = (baseUrl || "/") + search + "#contacto";
+
+return Astro.redirect(destination, 301);
+---

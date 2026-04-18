@@ -26,6 +26,10 @@ export const clientConfirmationTemplate = ({ name, serviceLabel }: ClientConfirm
         <p>Muchas gracias por contactar conmigo. He recibido correctamente tu solicitud de información sobre <span class="highlight">${serviceLabel}</span>.</p>
         <p>Te escribo para confirmarte que he leído tu mensaje y que <strong>me pondré en contacto contigo lo antes posible</strong> a través del email o teléfono que me has facilitado para hablar con más detalle.</p>
         <p>Espero que podamos conocernos pronto y empezar a trabajar juntos.</p>
+
+        <div style="margin-top: 32px; padding: 16px; background-color: #f8f9fa; border-radius: 12px; font-size: 14px; color: #666; line-height: 1.6;">
+          <strong>Nota importante:</strong> Por favor, evita enviar correos a <a style="color: #666; text-decoration: none;">hola@mariocatena.com</a> ya que no está operativa. Para cualquier duda, puedes responder al email <a href="mailto:mcatena@cop.es">mcatena@cop.es</a>.
+        </div>
         
         <div class="signature">
           Mario Catena

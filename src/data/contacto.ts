@@ -40,6 +40,12 @@ export const contactoData = {
   },
 };
 
+//[18/4/26, 12:04:22] Mario Catena: https://www.mariocatena.com/contacto?convenio=Tus+Caprichos+Arreglos
+//[18/4/26, 12:04:46] Mario Catena: https://www.mariocatena.com/contacto?convenio=CPA%20Salduie
 export const discounts: Record<string, { pct: number; label: string }> = {
-  CPMZ: { pct: 15, label: "Colegiado CPMZ (15%)" },
+  CPMZ: { pct: 15, label: "CPMZ (15%)" },
+  RESISDANCE: { pct: 10, label: "Resisdance (10%)" },
+  LOLANIETO: { pct: 10, label: "Lola Nieto (10%)" },
+  TUSCAPRICHOSARREGLOS: { pct: 10, label: "Tus Caprichos Arreglos (10%)" },
+  CPASALDUYE: { pct: 10, label: "CPA Salduie (10%)" },
 };

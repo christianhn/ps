@@ -30,9 +30,9 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     </div>
 
     <div class="contacto__right">
-      <form 
-        class="contact-form" 
-        action={data.form.action} 
+      <form
+        class="contact-form"
+        action={data.form.action}
         method="POST"
         data-discounts={JSON.stringify(discounts)}
       >
@@ -89,7 +89,10 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           </select>
         </div>
 
-        <div class="contact-form__row contact-form__row--dynamic" id="dynamic-row">
+        <div
+          class="contact-form__row contact-form__row--dynamic"
+          id="dynamic-row"
+        >
           <div class="contact-form__group" id="discount-group">
             <label for="discount">Código de Descuento / Convenio</label>
             <input
@@ -253,16 +256,15 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
 
       &--dynamic {
         grid-template-columns: 1fr; // Single column by default (Referral takes 100%)
-        
+
         &.has-discount {
           grid-template-columns: 1fr 1fr; // Split when discount appears
-          
+
           @media (max-width: 42.5rem) {
             grid-template-columns: 1fr;
           }
         }
       }
-
     }
 
     &__group {
@@ -441,33 +443,38 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
   const handleFormLogic = () => {
     const form = document.querySelector(".contact-form") as HTMLFormElement;
     const selectEl = document.getElementById("service") as HTMLSelectElement;
-    const discountInput = document.getElementById("discount") as HTMLInputElement;
+    const discountInput = document.getElementById(
+      "discount",
+    ) as HTMLInputElement;
     const referralGroup = document.getElementById("referral-group");
     const dynamicRow = document.getElementById("dynamic-row");
 
     if (!form || !selectEl || !discountInput) return;
 
     // Get discounts from data attribute
-    let DISCOUNTS: Record<string, { pct: number, label: string }> = {};
+
+    let DISCOUNTS: Record<string, { pct: number; label: string }> = {};
     try {
-      DISCOUNTS = JSON.parse(form.dataset.discounts || '{}');
-    } catch(e) {
+      DISCOUNTS = JSON.parse(form.dataset.discounts || "{}");
+    } catch (e) {
       console.error("Error parsing discounts:", e);
     }
 
-    const submitBtn = form.querySelector(".contact-form__submit") as HTMLButtonElement;
+    const submitBtn = form.querySelector(
+      ".contact-form__submit",
+    ) as HTMLButtonElement;
     const btnText = submitBtn?.querySelector(".btn-text") as HTMLElement;
     const btnLoading = submitBtn?.querySelector(".btn-loading") as HTMLElement;
     const feedback = document.getElementById("form-feedback") as HTMLElement;
 
     const updatePrices = (pct: number, label: string) => {
-      const priceElements = document.querySelectorAll('.js-price');
-      const discountLabels = document.querySelectorAll('.js-discount-label');
+      const priceElements = document.querySelectorAll(".js-price");
+      const discountLabels = document.querySelectorAll(".js-discount-label");
 
       priceElements.forEach((el: any) => {
         const base = parseFloat(el.dataset.basePrice);
         if (isNaN(base)) return;
-        
+
         if (pct > 0) {
           const newPrice = Math.floor(base * (1 - pct / 100));
           el.textContent = newPrice.toString();
@@ -479,74 +486,94 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
       discountLabels.forEach((el: any) => {
         if (pct > 0) {
           el.innerHTML = `<span>Descuento aplicado:</span> <span>${label}</span>`;
-          el.style.display = ''; // Let CSS handle the display type (flex)
+          el.style.display = ""; // Let CSS handle the display type (flex)
         } else {
-          el.style.display = 'none';
+          el.style.display = "none";
         }
       });
     };
 
     const onDiscountUpdate = (code: string, fromUrl = false) => {
-      const normalizedCode = code.toUpperCase().trim();
+      const normalizedCode = code
+        .toUpperCase()
+        .trim()
+        .replace(/\s+/g, "")
+        .replace(/\+/g, "");
       const discount = DISCOUNTS[normalizedCode];
+
       const discountGroup = document.getElementById("discount-group");
-      
+
       if (discount) {
-        if (dynamicRow) dynamicRow.classList.add('has-discount');
-        if (discountGroup) discountGroup.classList.add('is-visible');
+        if (dynamicRow) dynamicRow.classList.add("has-discount");
+        if (discountGroup) discountGroup.classList.add("is-visible");
 
         if (fromUrl) {
           discountInput.readOnly = true;
-          discountInput.classList.add('is-readonly');
+          discountInput.classList.add("is-readonly");
         }
 
         updatePrices(discount.pct, discount.label);
-        sessionStorage.setItem('activeDiscount', JSON.stringify({ pct: discount.pct, label: discount.label, code: normalizedCode, fromUrl }));
+        sessionStorage.setItem(
+          "activeDiscount",
+          JSON.stringify({
+            pct: discount.pct,
+            label: discount.label,
+            code: normalizedCode,
+            fromUrl,
+          }),
+        );
       } else {
-        if (dynamicRow) dynamicRow.classList.remove('has-discount');
-        if (discountGroup) discountGroup.classList.remove('is-visible');
-        
+        if (dynamicRow) dynamicRow.classList.remove("has-discount");
+        if (discountGroup) discountGroup.classList.remove("is-visible");
+
         discountInput.readOnly = false;
-        discountInput.classList.remove('is-readonly');
-        
-        updatePrices(0, '');
-        sessionStorage.removeItem('activeDiscount');
+        discountInput.classList.remove("is-readonly");
+
+        updatePrices(0, "");
+        sessionStorage.removeItem("activeDiscount");
       }
     };
 
     // --- Interaction with other components ---
     const urlParams = new URLSearchParams(window.location.search);
-    
+
     // Service Param
     const serviceParam = urlParams.get("service");
     if (serviceParam) {
-      const opt = Array.from(selectEl.options).find(o => o.value === serviceParam);
+      const opt = Array.from(selectEl.options).find(
+        (o) => o.value === serviceParam,
+      );
       if (opt) selectEl.value = serviceParam;
     }
 
     // Convenio Param (QR)
     const convenioParam = urlParams.get("convenio");
+
     if (convenioParam) {
       discountInput.value = convenioParam;
       onDiscountUpdate(convenioParam, true);
     } else {
-      const stored = sessionStorage.getItem('activeDiscount');
+      const stored = sessionStorage.getItem("activeDiscount");
       if (stored) {
         try {
           const { code, fromUrl } = JSON.parse(stored);
           discountInput.value = code;
           onDiscountUpdate(code, fromUrl);
-        } catch(e) {}
+        } catch (e) {}
       }
     }
 
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const link = target.closest('a[href="#contacto"], a[href$="/#contacto"]') as HTMLAnchorElement;
+      const link = target.closest(
+        'a[href="#contacto"], a[href$="/#contacto"]',
+      ) as HTMLAnchorElement;
       if (link && selectEl) {
         const service = link.dataset.service;
         if (service) {
-          const opt = Array.from(selectEl.options).find(o => o.value === service);
+          const opt = Array.from(selectEl.options).find(
+            (o) => o.value === service,
+          );
           if (opt) selectEl.value = service;
         }
       }
@@ -556,7 +583,7 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!submitBtn || !btnText || !btnLoading || !feedback) return;
-      
+
       submitBtn.disabled = true;
       btnText.style.display = "none";
       btnLoading.style.display = "inline";
@@ -575,11 +602,11 @@ const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, "");
           feedback.textContent = result.message;
           feedback.className = "contact-form__feedback success";
           form.reset();
-          onDiscountUpdate('', false); 
-          
+          onDiscountUpdate("", false);
+
           // Clear URL parameters
           const cleanUrl = window.location.pathname;
-          window.history.replaceState({}, '', cleanUrl);
+          window.history.replaceState({}, "", cleanUrl);
         } else {
           throw new Error(result.message || "Error al enviar");
         }
